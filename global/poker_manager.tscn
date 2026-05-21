@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://cv4gv5b4u1a08"]
-
-[ext_resource type="Script" uid="uid://c8fou0r3b8lb0" path="res://scripts/system/poker/PokerSystem.cs" id="1_x56kv"]
-
-[node name="PokerSystem" type="Node" unique_id=308528269]
-script = ExtResource("1_x56kv")

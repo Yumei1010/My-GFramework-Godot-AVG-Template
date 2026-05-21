@@ -18,7 +18,8 @@ permissions:
 # 定义环境变量供后续步骤使用
 env:
   GODOT_VERSION: 4.6               # 指定使用的 Godot 版本
-  EXPORT_NAME: MyGFrameworkGodotTemplate   # 导出项目名称前缀
+  SOLN: My-GFramework-Godot-Template
+  EXPORT_NAME: MyGFrameworkGodotTemplate
 
 # 工作流中的任务定义部分
 jobs:
@@ -44,8 +45,8 @@ jobs:
       # 步骤三：还原 NuGet 包（如果存在解决方案文件）
       - name: Restore NuGet packages
         run: |
-          if [ -f "${{ env.EXPORT_NAME }}.sln" ]; then
-            dotnet restore "${{ env.EXPORT_NAME }}.sln"
+          if [ -f "${{ env.SOLN }}.sln" ]; then
+            dotnet restore "${{ env.SOLN }}.sln"
           else
             echo "Solution file not found, skipping dotnet restore"
           fi
@@ -117,8 +118,8 @@ jobs:
       # 还原 NuGet 包（如适用）
       - name: Restore NuGet packages
         run: |
-          if [ -f "${{ env.EXPORT_NAME }}.sln" ]; then
-            dotnet restore "${{ env.EXPORT_NAME }}.sln"
+          if [ -f "${{ env.SOLN }}.sln" ]; then
+            dotnet restore "${{ env.SOLN }}.sln"
           else
             echo "Solution file not found, skipping dotnet restore"
           fi

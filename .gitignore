@@ -22,7 +22,7 @@ mono_crash.*.json
 .vscode/
 
 # .Net
-Time-To-Twenty-four.sln.DotSettings.user
+My-GFramework-Godot-Template.sln.DotSettings.user
 bin/
 obj/
 addons/*
