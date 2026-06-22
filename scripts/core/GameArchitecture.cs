@@ -19,12 +19,12 @@ public sealed class GameArchitecture(IArchitectureConfiguration configuration, I
     /// </summary>
     protected override void InstallModules()
     {
-        // 安装数据模型相关的Godot模块
-        InstallModule(new ModelModule());
+        // 安装工具类相关的Godot模块（必须最先安装，ModelModule 依赖 ISettingsDataRepository）
+        InstallModule(new UtilityModule());
         // 安装系统相关的Godot模块
         InstallModule(new SystemModule());
-        // 安装工具类相关的Godot模块
-        InstallModule(new UtilityModule());
+        // 安装数据模型相关的Godot模块
+        InstallModule(new ModelModule());
         // 安装状态相关的Godot模块
         InstallModule(new StateModule());
     }

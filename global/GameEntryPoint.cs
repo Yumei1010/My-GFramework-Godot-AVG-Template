@@ -51,7 +51,7 @@ public partial class GameEntryPoint : Node
     {
         Tree = GetTree();
 
-        Architecture = new GameArchitecture(new ArchitectureConfiguration
+        var arch = new GameArchitecture(new ArchitectureConfiguration
         {
             LoggerProperties = new LoggerProperties
             {
@@ -61,7 +61,10 @@ public partial class GameEntryPoint : Node
                 }
             }
         }, IsDev ? new GameDevEnvironment() : new GameMainEnvironment());
-        Architecture.Initialize();
+        Architecture = arch;
+        arch.Initialize();
+        try { GameContext.Bind(typeof(GameArchitecture), arch.Context); }
+        catch (InvalidOperationException) { /* 上下文已绑定 */ }
         _settingsModel = this.GetModel<ISettingsModel>()!;
         _ = _settingsModel.InitializeAsync();
 
