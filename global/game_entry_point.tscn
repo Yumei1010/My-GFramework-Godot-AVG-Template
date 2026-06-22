@@ -1,149 +1,16 @@
 [gd_scene format=3 uid="uid://xrpqu75op8i6"]
 
 [ext_resource type="Script" uid="uid://7tmuhvthtrnh" path="res://global/GameEntryPoint.cs" id="1_a14y6"]
-[ext_resource type="PackedScene" uid="uid://4xqosh5cpa8o" path="res://scenes/menu/main_menu/main_menu.tscn" id="2_l8ju5"]
-[ext_resource type="Script" uid="uid://cowpnmhamgtd3" path="res://scripts/core/resource/UiPageConfig.cs" id="3_x37g7"]
-[ext_resource type="PackedScene" uid="uid://dngneq20rrrn4" path="res://scenes/menu/options_menu/options_menu.tscn" id="4_3xsct"]
-[ext_resource type="PackedScene" uid="uid://6s2urcdmkpbt" path="res://scenes/main.tscn" id="4_pn3ws"]
-[ext_resource type="PackedScene" uid="uid://b3oc5caltregr" path="res://scenes/menu/credits/credits.tscn" id="5_7mti7"]
-[ext_resource type="Script" uid="uid://5mfgbvaive07" path="res://scripts/core/resource/SceneConfig.cs" id="7_iiepj"]
-[ext_resource type="PackedScene" uid="uid://fm27d2slodic" path="res://scenes/menu/calculate_menu/calculate_menu.tscn" id="9_fgqit"]
-[ext_resource type="Texture2D" uid="uid://b2omrygf3f37" path="res://assets/textures/poker/spade_mask_texture.png" id="12_iumd8"]
-[ext_resource type="Texture2D" uid="uid://bq8e5q4wdtjbj" path="res://assets/textures/poker/shadow_texture.png" id="14_d4hg6"]
-[ext_resource type="Texture2D" uid="uid://chf4gp4w7j2u5" path="res://assets/textures/poker/club_mask_texture.png" id="14_fgqit"]
-[ext_resource type="Script" uid="uid://ls8nkxn3gipd" path="res://scripts/core/resource/TextureConfig.cs" id="14_hjx06"]
-[ext_resource type="Texture2D" uid="uid://dkgyscpa6f15" path="res://assets/textures/time_bar/progress_blank_texture.png" id="15_d4hg6"]
-[ext_resource type="Texture2D" uid="uid://bno6chga3mr4n" path="res://assets/textures/poker/heart_mask_texture.png" id="15_hjx06"]
-[ext_resource type="Texture2D" uid="uid://cseuaypinj2s0" path="res://assets/textures/poker/diamond_mask_texture.png" id="16_d4hg6"]
-[ext_resource type="Texture2D" uid="uid://dwg8e2aurpr6o" path="res://assets/textures/mode_button/add.png" id="16_k055p"]
-[ext_resource type="Texture2D" uid="uid://jck0m0v21wsh" path="res://assets/textures/mode_button/subtract.png" id="17_k055p"]
-[ext_resource type="Texture2D" uid="uid://cqe132fuf7kgx" path="res://assets/textures/mode_button/multiply.png" id="18_qdo7l"]
-[ext_resource type="Texture2D" uid="uid://5j06mkqew4mr" path="res://assets/textures/mode_button/divide.png" id="19_1y7ah"]
-[ext_resource type="Texture2D" uid="uid://bx6ma0njm6jol" path="res://assets/textures/annotation_tool/annotation_tool_freehand_icon_texture.png" id="20_gktnk"]
-[ext_resource type="Texture2D" uid="uid://leep5f5mdium" path="res://assets/textures/annotation_tool/annotation_tool_line_icon_texture.png" id="21_cia4t"]
-[ext_resource type="Texture2D" uid="uid://c3olm6ormnx3b" path="res://assets/textures/annotation_tool/annotation_tool_rect_icon_texture.png" id="22_t3o0b"]
-[ext_resource type="Texture2D" uid="uid://c50j0vcid4twm" path="res://assets/textures/annotation_tool/annotation_tool_circle_icon_texture.png" id="23_iygyk"]
-[ext_resource type="Texture2D" uid="uid://cyp5wjr4scyor" path="res://assets/textures/annotation_tool/annotation_tool_eraser_icon_texture.png" id="24_8pd7l"]
+[ext_resource type="PackedScene" uid="uid://6s2urcdmkpbt" path="res://scenes/main.tscn" id="2_main"]
+[ext_resource type="Script" uid="uid://5mfgbvaive07" path="res://scripts/core/resource/SceneConfig.cs" id="3_scfg"]
 
-[sub_resource type="Resource" id="Resource_pn3ws"]
-script = ExtResource("3_x37g7")
-Scene = ExtResource("2_l8ju5")
-metadata/_custom_type_script = "uid://cowpnmhamgtd3"
-
-[sub_resource type="Resource" id="Resource_f22d5"]
-script = ExtResource("3_x37g7")
-UiKey = 1
-Scene = ExtResource("4_3xsct")
-metadata/_custom_type_script = "uid://cowpnmhamgtd3"
-
-[sub_resource type="Resource" id="Resource_inr81"]
-script = ExtResource("3_x37g7")
-UiKey = 2
-Scene = ExtResource("5_7mti7")
-metadata/_custom_type_script = "uid://cowpnmhamgtd3"
-
-[sub_resource type="Resource" id="Resource_1yddw"]
-script = ExtResource("3_x37g7")
-UiKey = 3
-Scene = ExtResource("9_fgqit")
-metadata/_custom_type_script = "uid://cowpnmhamgtd3"
-
-[sub_resource type="Resource" id="Resource_iumd8"]
-script = ExtResource("7_iiepj")
-Scene = ExtResource("4_pn3ws")
+[sub_resource type="Resource" id="Resource_main_scene"]
+script = ExtResource("3_scfg")
+Scene = ExtResource("2_main")
 metadata/_custom_type_script = "uid://5mfgbvaive07"
-
-[sub_resource type="Resource" id="Resource_gktnk"]
-script = ExtResource("14_hjx06")
-Texture = ExtResource("15_hjx06")
-metadata/_custom_type_script = "uid://ls8nkxn3gipd"
-
-[sub_resource type="Resource" id="Resource_cia4t"]
-script = ExtResource("14_hjx06")
-TextureKey = 1
-Texture = ExtResource("16_d4hg6")
-metadata/_custom_type_script = "uid://ls8nkxn3gipd"
-
-[sub_resource type="Resource" id="Resource_fgqit"]
-script = ExtResource("14_hjx06")
-TextureKey = 2
-Texture = ExtResource("12_iumd8")
-metadata/_custom_type_script = "uid://ls8nkxn3gipd"
-
-[sub_resource type="Resource" id="Resource_d4hg6"]
-script = ExtResource("14_hjx06")
-TextureKey = 3
-Texture = ExtResource("14_fgqit")
-metadata/_custom_type_script = "uid://ls8nkxn3gipd"
-
-[sub_resource type="Resource" id="Resource_k055p"]
-script = ExtResource("14_hjx06")
-TextureKey = 4
-Texture = ExtResource("14_d4hg6")
-metadata/_custom_type_script = "uid://ls8nkxn3gipd"
-
-[sub_resource type="Resource" id="Resource_qdo7l"]
-script = ExtResource("14_hjx06")
-TextureKey = 5
-Texture = ExtResource("15_d4hg6")
-metadata/_custom_type_script = "uid://ls8nkxn3gipd"
-
-[sub_resource type="Resource" id="Resource_1y7ah"]
-script = ExtResource("14_hjx06")
-TextureKey = 6
-Texture = ExtResource("16_k055p")
-metadata/_custom_type_script = "uid://ls8nkxn3gipd"
-
-[sub_resource type="Resource" id="Resource_nxcnk"]
-script = ExtResource("14_hjx06")
-TextureKey = 7
-Texture = ExtResource("17_k055p")
-metadata/_custom_type_script = "uid://ls8nkxn3gipd"
-
-[sub_resource type="Resource" id="Resource_ncbsq"]
-script = ExtResource("14_hjx06")
-TextureKey = 8
-Texture = ExtResource("18_qdo7l")
-metadata/_custom_type_script = "uid://ls8nkxn3gipd"
-
-[sub_resource type="Resource" id="Resource_t3o0b"]
-script = ExtResource("14_hjx06")
-TextureKey = 9
-Texture = ExtResource("19_1y7ah")
-metadata/_custom_type_script = "uid://ls8nkxn3gipd"
-
-[sub_resource type="Resource" id="Resource_iygyk"]
-script = ExtResource("14_hjx06")
-TextureKey = 10
-Texture = ExtResource("20_gktnk")
-metadata/_custom_type_script = "uid://ls8nkxn3gipd"
-
-[sub_resource type="Resource" id="Resource_8pd7l"]
-script = ExtResource("14_hjx06")
-TextureKey = 11
-Texture = ExtResource("21_cia4t")
-metadata/_custom_type_script = "uid://ls8nkxn3gipd"
-
-[sub_resource type="Resource" id="Resource_cqeab"]
-script = ExtResource("14_hjx06")
-TextureKey = 12
-Texture = ExtResource("22_t3o0b")
-metadata/_custom_type_script = "uid://ls8nkxn3gipd"
-
-[sub_resource type="Resource" id="Resource_kcrt4"]
-script = ExtResource("14_hjx06")
-TextureKey = 13
-Texture = ExtResource("23_iygyk")
-metadata/_custom_type_script = "uid://ls8nkxn3gipd"
-
-[sub_resource type="Resource" id="Resource_3tdmm"]
-script = ExtResource("14_hjx06")
-TextureKey = 14
-Texture = ExtResource("24_8pd7l")
-metadata/_custom_type_script = "uid://ls8nkxn3gipd"
 
 [node name="GameEntryPoint" type="Node" unique_id=729277825]
 script = ExtResource("1_a14y6")
-UiPageConfigs = Array[Object]([SubResource("Resource_pn3ws"), SubResource("Resource_f22d5"), SubResource("Resource_inr81"), SubResource("Resource_1yddw")])
-GameSceneConfigs = Array[Object]([SubResource("Resource_iumd8")])
-TextureConfigs = Array[Object]([SubResource("Resource_gktnk"), SubResource("Resource_cia4t"), SubResource("Resource_fgqit"), SubResource("Resource_d4hg6"), SubResource("Resource_k055p"), SubResource("Resource_qdo7l"), SubResource("Resource_1y7ah"), SubResource("Resource_nxcnk"), SubResource("Resource_ncbsq"), SubResource("Resource_t3o0b"), SubResource("Resource_iygyk"), SubResource("Resource_8pd7l"), SubResource("Resource_cqeab"), SubResource("Resource_kcrt4"), SubResource("Resource_3tdmm")])
+UiPageConfigs = Array[Object]([])
+GameSceneConfigs = Array[Object]([SubResource("Resource_main_scene")])
+TextureConfigs = Array[Object]([])
