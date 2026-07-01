@@ -1,4 +1,4 @@
-namespace GFrameworkTemplate.scripts.cqrs.visualnovel.command;
+namespace GFrameworkTemplate.scripts.enums.visualnovel;
 
 /// <summary>
 ///     立绘操作类型

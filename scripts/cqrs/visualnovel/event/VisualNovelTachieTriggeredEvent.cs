@@ -1,4 +1,4 @@
-using GFrameworkTemplate.scripts.cqrs.visualnovel.command;
+using GFrameworkTemplate.scripts.cqrs.visualnovel.command.input;
 
 namespace GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 

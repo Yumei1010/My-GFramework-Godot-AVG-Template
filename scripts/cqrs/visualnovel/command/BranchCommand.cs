@@ -1,6 +1,7 @@
 using System.Text.Json;
-
 using GFrameworkTemplate.scripts.core.story;
+using GFrameworkTemplate.scripts.cqrs.visualnovel.command.input;
+
 namespace GFrameworkTemplate.scripts.cqrs.visualnovel.command;
 
 /// <summary>

@@ -1,4 +1,6 @@
-namespace GFrameworkTemplate.scripts.cqrs.visualnovel.command;
+using GFrameworkTemplate.scripts.enums.visualnovel;
+
+namespace GFrameworkTemplate.scripts.cqrs.visualnovel.command.input;
 
 /// <summary>
 ///     单个立绘槽位配置

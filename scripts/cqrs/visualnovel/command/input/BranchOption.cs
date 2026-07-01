@@ -1,4 +1,4 @@
-namespace GFrameworkTemplate.scripts.cqrs.visualnovel.command;
+namespace GFrameworkTemplate.scripts.cqrs.visualnovel.command.input;
 
 /// <summary>
 ///     分支选项
