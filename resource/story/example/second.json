@@ -1,0 +1,193 @@
+{
+  "content": [
+    {
+      "type": "background",
+      "file_path": "bg_hallway",
+      "wait_tween_end": "1",
+      "delay": "0.5"
+    },
+    {
+      "type": "tachie",
+      "tachies": {
+        "heroine": {
+          "file_path": "heroine_normal",
+          "type": "change"
+        }
+      }
+    },
+    {
+      "type": "talk",
+      "talker": "小夜",
+      "talk_content": "对了，你知道这所学校有个传说吗？",
+      "avatar_path": "heroine"
+    },
+    {
+      "type": "tachie",
+      "tachies": {
+        "friend": {
+          "file_path": "friend_normal",
+          "type": "show"
+        }
+      }
+    },
+    {
+      "type": "talk",
+      "talker": "健太",
+      "talk_content": "喂！你们在聊什么有趣的话题？",
+      "avatar_path": "friend"
+    },
+    {
+      "type": "talk",
+      "is_center": "1",
+      "talk_content": "（健太突然从背后冒了出来，似乎对传说很感兴趣。）"
+    },
+    {
+      "type": "tachie",
+      "tachies": {
+        "friend": {
+          "file_path": "friend_excited",
+          "type": "change"
+        }
+      }
+    },
+    {
+      "type": "talk",
+      "talker": "健太",
+      "talk_content": "我知道！是不是那个——'在满月之夜，图书馆的第七个书架会通向另一个世界'？",
+      "avatar_path": "friend"
+    },
+    {
+      "type": "talk",
+      "talker": "小夜",
+      "talk_content": "没错。据说只有'被选中的人'才能看到那条路。",
+      "avatar_path": "heroine"
+    },
+    {
+      "type": "branch",
+      "options": {
+        "2A": {
+          "text": "「我想去看看！」",
+          "wait": "1.0"
+        },
+        "2B": {
+          "text": "「听起来很危险，算了吧。」"
+        }
+      }
+    },
+    {
+      "type": "talk",
+      "branch": "2A",
+      "talker": "我",
+      "talk_content": "我想去看看！今晚就是满月吧？"
+    },
+    {
+      "type": "talk",
+      "branch": "2B",
+      "talker": "我",
+      "talk_content": "听起来很危险，算了吧。而且图书馆晚上应该锁门了。"
+    },
+    {
+      "type": "tachie",
+      "tachies": {
+        "heroine": {
+          "file_path": "heroine_serious",
+          "type": "change"
+        }
+      }
+    },
+    {
+      "type": "talk",
+      "talker": "小夜",
+      "talk_content": "……我有钥匙。",
+      "avatar_path": "heroine"
+    },
+    {
+      "type": "tachie",
+      "tachies": {
+        "friend": {
+          "file_path": "friend_surprised",
+          "type": "change"
+        }
+      }
+    },
+    {
+      "type": "talk",
+      "talker": "健太",
+      "talk_content": "什么？！你怎么会有图书馆的钥匙？",
+      "avatar_path": "friend"
+    },
+    {
+      "type": "talk",
+      "talker": "小夜",
+      "talk_content": "因为我是图书管理员。而且——",
+      "avatar_path": "heroine"
+    },
+    {
+      "type": "sound",
+      "sound_type": "oneSound",
+      "file_path": "door_creak"
+    },
+    {
+      "type": "talk",
+      "is_center": "1",
+      "talk_content": "（走廊尽头的门突然吱呀一声打开了。一阵冷风从黑暗中涌出。）"
+    },
+    {
+      "type": "background",
+      "file_path": "bg_library_night",
+      "wait_tween_end": "1",
+      "delay": "0.3"
+    },
+    {
+      "type": "talk",
+      "talker": "小夜",
+      "talk_content": "看来，它已经在等我们了。",
+      "avatar_path": "heroine"
+    },
+    {
+      "type": "branch",
+      "options": {
+        "3A": {
+          "text": "牵住小夜的手，一起走进去"
+        },
+        "3B": {
+          "text": "独自走在前面"
+        },
+        "3C": {
+          "text": "让健太先去探路"
+        }
+      }
+    },
+    {
+      "type": "talk",
+      "branch": "3A",
+      "talker": "我",
+      "talk_content": "走吧。我们一起。"
+    },
+    {
+      "type": "talk",
+      "branch": "3B",
+      "talker": "我",
+      "talk_content": "让我先去看看。你们在这里等我。"
+    },
+    {
+      "type": "talk",
+      "branch": "3C",
+      "talker": "我",
+      "talk_content": "健太，你不是一直想去吗？你先请。"
+    },
+    {
+      "type": "event",
+      "event_name": "chapter_end"
+    },
+    {
+      "type": "talk",
+      "is_center": "1",
+      "talk_content": "（三人踏入黑暗的图书馆。身后的门缓缓关闭——第二章·完）"
+    },
+    {
+      "type": "goto",
+      "file_path": "Chapter3_Prologue"
+    }
+  ]
+}
