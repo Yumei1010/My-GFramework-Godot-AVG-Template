@@ -1,0 +1,56 @@
+using GFramework.Core.extensions;
+using GFramework.Godot.extensions;
+using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
+using Godot;
+
+namespace GFrameworkTemplate.scripts.menu;
+
+public partial class VisualNovelTalkPage
+{
+    private void RegisterEvents()
+    {
+        this.RegisterEvent<VisualNovelTalkTriggeredEvent>(e =>
+        {
+            TalkerName.Text = e.Talker ?? "";
+            TalkerName.Visible = !e.IsCenter;
+            Avatar.Visible = !e.IsCenter;
+            CenterContent.Visible = e.IsCenter;
+
+            if (e.IsCenter)
+                PlayTypewriter(CenterContent, e.Content);
+            else
+                PlayTypewriter(TalkContent, e.Content);
+        }).UnRegisterWhenNodeExitTree(this);
+
+        this.RegisterEvent<VisualNovelBackgroundTriggeredEvent>(e =>
+            _log.Debug($"背景切换: {e.FilePath}")
+        ).UnRegisterWhenNodeExitTree(this);
+
+        this.RegisterEvent<VisualNovelBranchTriggeredEvent>(e =>
+            _log.Debug($"分支选项: {e.Options.Count} 个选项")
+        ).UnRegisterWhenNodeExitTree(this);
+
+        this.RegisterEvent<VisualNovelAdvanceRequestedEvent>(_ =>
+        {
+            if (_typewriterTween?.IsRunning() == true)
+                SkipTypewriter();
+        }).UnRegisterWhenNodeExitTree(this);
+    }
+
+    private void PlayTypewriter(Label label, string content)
+    {
+        _typewriterTween?.Kill();
+        label.Text = content;
+        label.VisibleRatio = 0f;
+        _typewriterTween = CreateTween();
+        _typewriterTween.TweenProperty(label, "visible_ratio", 1.0f, content.Length * 0.02f);
+    }
+
+    private void SkipTypewriter()
+    {
+        _typewriterTween?.Kill();
+        _typewriterTween = null;
+        TalkContent.VisibleRatio = 1f;
+        CenterContent.VisibleRatio = 1f;
+    }
+}

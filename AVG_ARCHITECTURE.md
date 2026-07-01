@@ -77,7 +77,7 @@ command_parser (通用引擎)
 
 在 GFramework 中映射为 CQRS 事件订阅：
 ```csharp
-this.RegisterEvent<VnCustomEvent>(e => { /* 章节特定处理 */ });
+this.RegisterEvent<VisualNovelCustomEventTriggeredEvent>(e => { /* 章节特定处理 */ });
 ```
 
 ## 存档系统
@@ -111,9 +111,9 @@ this.RegisterEvent<VnCustomEvent>(e => { /* 章节特定处理 */ });
 
 | yrdk.ymzc 组件 | GFramework C# 映射 |
 |----------------|-------------------|
-| `command_parser.gd` (CanvasLayer) | `StoryEngineSystem` (注册到 SystemModule) + `VnTalkPage` (UI 页面) |
+| `command_parser.gd` (CanvasLayer) | `StoryEngineSystem` (注册到 SystemModule) + `VisualNovelTalkPage` (UI 页面) |
 | `StoryCommand` Resource 子类 | `sealed class` 数据模型 + JSON 反序列化 |
 | 7 个 parser_woker | StoryEngineSystem 内部的 dispatch 方法 |
 | 6 个 autoload | GFramework DI（System/Utility 注册） |
 | 章场景 `call_me()` | CQRS 事件订阅 |
-| `inPerformance` Resource | `VnSaveModel` + JSON 序列化 |
+| `inPerformance` Resource | `VisualNovelSaveModel` + JSON 序列化 |

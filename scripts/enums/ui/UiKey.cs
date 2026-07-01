@@ -11,7 +11,7 @@ public enum UiKey
     TemplatePage,
 
     /// <summary>
-    ///     AVG 对话主页面
+    ///     Visual Novel 对话主页面
     /// </summary>
-    VnTalkPage,
+    VisualNovelTalkPage,
 }
