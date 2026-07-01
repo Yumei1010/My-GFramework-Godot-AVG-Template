@@ -8,7 +8,7 @@ using GFrameworkTemplate.scripts.data.story;
 using GFrameworkTemplate.scripts.enums.visualnovel;
 using Godot;
 
-namespace GFrameworkTemplate.scripts.component.tachie_bar;
+namespace GFrameworkTemplate.global;
 
 /// <summary>
 ///     立绘栏全局单例——自动加载，管理角色 Sprite 的显示/切换/隐藏

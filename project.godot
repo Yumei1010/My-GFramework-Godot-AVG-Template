@@ -34,9 +34,9 @@ SceneRoot="*uid://bxquqjahyr8v2"
 UiRoot="*res://global/ui_root.tscn"
 GlobalInputController="*res://global/GlobalInputController.cs"
 SceneTransitionManager="*uid://c5sxf7tcun6yq"
-TalkBar="*res://scenes/talk_bar/talk_bar.tscn"
-TachieBar="*res://scenes/tachie_bar/tachie_bar.tscn"
-BranchBar="*res://scenes/branch_bar/branch_bar.tscn"
+TalkBar="*res://global/talk_bar.tscn"
+TachieBar="*res://global/tachie_bar.tscn"
+BranchBar="*res://global/branch_bar.tscn"
 
 [display]
 

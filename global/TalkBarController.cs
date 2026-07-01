@@ -5,7 +5,7 @@ using GFramework.SourceGenerators.Abstractions.rule;
 using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 using Godot;
 
-namespace GFrameworkTemplate.scripts.component.talk_bar;
+namespace GFrameworkTemplate.global;
 
 /// <summary>
 ///     对话栏全局单例——自动加载，响应 VN 对话事件

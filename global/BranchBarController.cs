@@ -7,7 +7,7 @@ using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 using GFrameworkTemplate.scripts.system.visualnovel;
 using Godot;
 
-namespace GFrameworkTemplate.scripts.component.branch_bar;
+namespace GFrameworkTemplate.global;
 
 /// <summary>
 ///     分支栏全局单例——自动加载，显示选项按钮并提交选择
