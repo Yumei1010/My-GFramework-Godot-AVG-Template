@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://dhrs2ccni4va"]
 
-[ext_resource type="Script" uid="uid://bvne38kt7p0x1" path="res://scripts/component/vn_test/VnTestController.cs" id="1_ctrl"]
+[ext_resource type="Script" uid="uid://bnkeicomr0ihu" path="res://scripts/component/vn_test/VnTestController.cs" id="1_ctrl"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_talker"]
+font_size = 24
+font_color = Color(0.4, 0.8, 1, 1)
 
 [node name="VnTest" type="Node"]
 script = ExtResource("1_ctrl")
@@ -41,7 +45,3 @@ offset_top = 960.0
 offset_right = 1860.0
 offset_bottom = 1000.0
 text = "就绪"
-
-[sub_resource type="LabelSettings" id="LabelSettings_talker"]
-font_size = 24
-font_color = Color(0.4, 0.8, 1, 1)
