@@ -1,72 +1,20 @@
 [gd_scene format=3 uid="uid://ddihmwmfs7734"]
 
 [ext_resource type="Script" uid="uid://bnkeicomr0ihu" path="res://scripts/component/vn_test/VnTestController.cs" id="1_ctrl"]
+[ext_resource type="PackedScene" path="res://scenes/talk_bar/talk_bar.tscn" id="2_talk"]
+[ext_resource type="PackedScene" path="res://scenes/branch_bar/branch_bar.tscn" id="3_branch"]
+[ext_resource type="PackedScene" path="res://scenes/tachie_bar/tachie_bar.tscn" id="4_tachie"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_talker"]
-font_size = 24
-font_color = Color(0.4, 0.8, 1, 1)
-
-[node name="VnTest" type="Node" unique_id=1758812221]
+[node name="VnTest" type="Node"]
 script = ExtResource("1_ctrl")
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1365363615]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 384
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 24
+[node name="TachieBar" parent="." instance=ExtResource("4_tachie")]
 
-[node name="ContentContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1589428079]
-layout_mode = 2
-alignment = 1
+[node name="TalkBar" parent="." instance=ExtResource("2_talk")]
 
-[node name="TalkerName" type="Label" parent="MarginContainer/ContentContainer" unique_id=1851152137]
-unique_name_in_owner = true
-layout_mode = 2
-label_settings = SubResource("LabelSettings_talker")
+[node name="BranchBar" parent="." instance=ExtResource("3_branch")]
 
-[node name="TalkContent" type="Label" parent="MarginContainer/ContentContainer" unique_id=57274148]
-unique_name_in_owner = true
-layout_mode = 2
-autowrap_mode = 3
-
-[node name="CenterContent" type="Label" parent="MarginContainer/ContentContainer" unique_id=1475363696]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-horizontal_alignment = 1
-autowrap_mode = 3
-
-[node name="BranchContainer" type="VBoxContainer" parent="MarginContainer" unique_id=41036218]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-
-[node name="BranchBtn1" type="Button" parent="MarginContainer/BranchContainer" unique_id=1487878074]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-
-[node name="BranchBtn2" type="Button" parent="MarginContainer/BranchContainer" unique_id=1176591154]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-
-[node name="BranchBtn3" type="Button" parent="MarginContainer/BranchContainer" unique_id=1739453365]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-
-[node name="BranchBtn4" type="Button" parent="MarginContainer/BranchContainer" unique_id=1510044445]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-
-[node name="StatusLabel" type="Label" parent="." unique_id=886808095]
+[node name="StatusLabel" type="Label" parent="."]
 unique_name_in_owner = true
 offset_left = 24.0
 offset_top = 24.0

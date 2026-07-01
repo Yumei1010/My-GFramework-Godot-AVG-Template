@@ -1,0 +1,125 @@
+[gd_scene format=3 uid="uid://8bnqdblg3myu"]
+
+[ext_resource type="Script" path="res://scripts/component/branch_bar/BranchBarController.cs" id="1_ctrl"]
+
+[node name="BranchBar" type="CanvasLayer"]
+script = ExtResource("1_ctrl")
+
+[node name="BranchBarContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_right = 128
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BranchBarContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="BranchOption" type="Control" parent="BranchBarContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="BranchOptionTextureRect" type="TextureRect" parent="BranchBarContainer/VBoxContainer/BranchOption"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BranchContentLabel" type="RichTextLabel" parent="BranchBarContainer/VBoxContainer/BranchOption"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BranchOptionButton" type="Button" parent="BranchBarContainer/VBoxContainer/BranchOption"]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BranchOption2" type="Control" parent="BranchBarContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="BranchOptionTextureRect" type="TextureRect" parent="BranchBarContainer/VBoxContainer/BranchOption2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BranchContentLabel" type="RichTextLabel" parent="BranchBarContainer/VBoxContainer/BranchOption2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BranchOptionButton" type="Button" parent="BranchBarContainer/VBoxContainer/BranchOption2"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BranchOption3" type="Control" parent="BranchBarContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="BranchOptionTextureRect" type="TextureRect" parent="BranchBarContainer/VBoxContainer/BranchOption3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BranchContentLabel" type="RichTextLabel" parent="BranchBarContainer/VBoxContainer/BranchOption3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BranchOptionButton" type="Button" parent="BranchBarContainer/VBoxContainer/BranchOption3"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
