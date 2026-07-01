@@ -10,7 +10,7 @@ using Godot;
 namespace GFrameworkTemplate.scripts.component.branch_bar;
 
 /// <summary>
-///     分支栏控制器——响应 VN 分支事件，显示选项按钮并提交选择
+///     分支栏全局单例——自动加载，显示选项按钮并提交选择
 /// </summary>
 [Log]
 [ContextAware]
@@ -35,7 +35,7 @@ public partial class BranchBarController : CanvasLayer
     public override void _Ready()
     {
         _engine = this.GetUtility<StoryEngineSystem>()!;
-        Visible = false;
+        Hide();
 
         this.RegisterEvent<VisualNovelBranchTriggeredEvent>(OnBranch).UnRegisterWhenNodeExitTree(this);
     }
@@ -51,12 +51,7 @@ public partial class BranchBarController : CanvasLayer
 
         foreach (var (ctrl, label, btn, id) in slots)
         {
-            if (id == null)
-            {
-                ctrl.Visible = false;
-                continue;
-            }
-
+            if (id == null) { ctrl.Visible = false; continue; }
             ctrl.Visible = true;
             label.Text = $"[center]{e.Options[id].Text}[/center]";
             btn.Pressed += OnOptionPressed;
@@ -64,12 +59,11 @@ public partial class BranchBarController : CanvasLayer
         }
 
         (_id1, _id2, _id3) = (slots[0].Item4, slots[1].Item4, slots[2].Item4);
-        Visible = true;
+        Show();
     }
 
     private void OnOptionPressed()
     {
-        // 找到被按下的按钮对应的选项 ID
         if (Button1.ButtonPressed) { Choose(_id1); return; }
         if (Button2.ButtonPressed) { Choose(_id2); return; }
         if (Button3.ButtonPressed) { Choose(_id3); return; }
@@ -79,7 +73,7 @@ public partial class BranchBarController : CanvasLayer
     {
         if (id == null) return;
         Unbind();
-        Visible = false;
+        Hide();
         _engine.ChooseBranch(id);
     }
 

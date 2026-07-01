@@ -8,7 +8,7 @@ using Godot;
 namespace GFrameworkTemplate.scripts.component.talk_bar;
 
 /// <summary>
-///     对话栏控制器——响应 VN 对话事件，驱动说话人、内容、居中旁白的显示
+///     对话栏全局单例——自动加载，响应 VN 对话事件
 /// </summary>
 [Log]
 [ContextAware]
@@ -20,17 +20,15 @@ public partial class TalkBarController : CanvasLayer
     private RichTextLabel CenterTextContentLabel => GetNode<RichTextLabel>("%CenterTextContentLabel");
     private TextureRect TalkNameBackgroundTextureRect => GetNode<TextureRect>("%TalkNameBackgroundTextureRect");
 
-    private Tween? _typewriterTween;
-
     public override void _Ready()
     {
+        Hide();
         this.RegisterEvent<VisualNovelTalkTriggeredEvent>(OnTalk).UnRegisterWhenNodeExitTree(this);
-        CenterTextContainer.Visible = false;
     }
 
     private void OnTalk(VisualNovelTalkTriggeredEvent e)
     {
-        _typewriterTween?.Kill();
+        Show();
 
         if (e.IsCenter)
         {
@@ -49,5 +47,11 @@ public partial class TalkBarController : CanvasLayer
             TalkerNameLabel.Text = $"[center]{e.Talker ?? ""}[/center]";
             TalkContentLabel.Text = e.Content;
         }
+    }
+
+    public new void Hide()
+    {
+        base.Hide();
+        CenterTextContainer.Visible = false;
     }
 }
