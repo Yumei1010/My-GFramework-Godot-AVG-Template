@@ -19,6 +19,7 @@ using GFrameworkTemplate.scripts.core.state.impls;
 using GFrameworkTemplate.scripts.enums.scene;
 using GFrameworkTemplate.scripts.utility;
 using GFrameworkTemplate.scripts.cqrs.setting.command;
+using GFrameworkTemplate.scripts.system.visualnovel;
 using Godot;
 using Godot.Collections;
 
@@ -82,6 +83,9 @@ public partial class GameEntryPoint : Node
         foreach (var gameSceneConfig in GameSceneConfigs) _sceneRegistry.Registry(gameSceneConfig);
         foreach (var uiPageConfig in UiPageConfigs) _uiRegistry.Registry(uiPageConfig);
         foreach (var textureConfig in TextureConfigs) _textureRegistry.Registry(textureConfig);
+
+        // 注册 VN 故事脚本路径
+        StoryEngineSystem.RegisterJson("FirstDay", "res://resource/story/example/FirstDay.json");
 
         if (ShouldEnterAppState())
             this.RegisterEvent<UiRoot.UiRootReadyEvent>(_ =>

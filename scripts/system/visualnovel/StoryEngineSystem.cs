@@ -1,3 +1,4 @@
+using GFramework.Core.Abstractions.utility;
 using GFramework.Core.extensions;
 using GFramework.SourceGenerators.Abstractions.logging;
 using GFramework.SourceGenerators.Abstractions.rule;
@@ -10,7 +11,7 @@ namespace GFrameworkTemplate.scripts.system.visualnovel;
 
 [Log]
 [ContextAware]
-public sealed partial class StoryEngineSystem
+public sealed partial class StoryEngineSystem : IUtility
 {
     private List<StoryCommand> _commands = new();
     private int _currentIndex;

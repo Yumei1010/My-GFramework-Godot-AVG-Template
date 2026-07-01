@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://dhrs2ccni4va"]
+
+[ext_resource type="Script" uid="uid://bvne38kt7p0x1" path="res://scripts/component/vn_test/VnTestController.cs" id="1_ctrl"]
+
+[node name="VnTest" type="Node"]
+script = ExtResource("1_ctrl")
+
+[node name="TalkerName" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 60.0
+offset_top = 780.0
+offset_right = 400.0
+offset_bottom = 820.0
+text = ""
+label_settings = SubResource("LabelSettings_talker")
+
+[node name="TalkContent" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 60.0
+offset_top = 830.0
+offset_right = 1860.0
+offset_bottom = 950.0
+text = ""
+autowrap_mode = 3
+
+[node name="CenterContent" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+offset_left = 400.0
+offset_top = 450.0
+offset_right = 1520.0
+offset_bottom = 550.0
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="StatusLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 60.0
+offset_top = 960.0
+offset_right = 1860.0
+offset_bottom = 1000.0
+text = "就绪"
+
+[sub_resource type="LabelSettings" id="LabelSettings_talker"]
+font_size = 24
+font_color = Color(0.4, 0.8, 1, 1)
