@@ -12,7 +12,7 @@ namespace GFrameworkTemplate.global;
 /// </summary>
 [Log]
 [ContextAware]
-public partial class TalkBarController : CanvasLayer
+public partial class TalkManager : CanvasLayer
 {
     private RichTextLabel TalkerNameLabel => GetNode<RichTextLabel>("%TalkerNameLabel");
     private RichTextLabel TalkContentLabel => GetNode<RichTextLabel>("%TalkContentLabel");

@@ -9,7 +9,7 @@ using Godot;
 namespace GFrameworkTemplate.scripts.component.vn_test;
 
 /// <summary>
-///     VN 引擎测试控制器——组装 TalkBar + BranchBar + TachieBar，驱动故事播放
+///     VN 引擎测试控制器——TalkManager/TachieManager/BranchManager 全局单例自动响应事件
 /// </summary>
 [Log]
 [ContextAware]

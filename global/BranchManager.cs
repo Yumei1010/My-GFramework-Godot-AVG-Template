@@ -14,7 +14,7 @@ namespace GFrameworkTemplate.global;
 /// </summary>
 [Log]
 [ContextAware]
-public partial class BranchBarController : CanvasLayer
+public partial class BranchManager : CanvasLayer
 {
     private Control BranchOption1 => GetNode<Control>("BranchBarContainer/VBoxContainer/BranchOption");
     private Control BranchOption2 => GetNode<Control>("BranchBarContainer/VBoxContainer/BranchOption2");

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d8d61e522lfd"]
 
-[ext_resource type="Script" path="res://global/TachieBarController.cs" id="1_ctrl"]
+[ext_resource type="Script" path="res://global/TachieManager.cs" id="1_ctrl"]
 
 [node name="TachieBar" type="CanvasLayer"]
 script = ExtResource("1_ctrl")

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://8bnqdblg3myu"]
 
-[ext_resource type="Script" path="res://global/BranchBarController.cs" id="1_ctrl"]
+[ext_resource type="Script" path="res://global/BranchManager.cs" id="1_ctrl"]
 
 [node name="BranchBar" type="CanvasLayer"]
 script = ExtResource("1_ctrl")

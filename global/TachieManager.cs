@@ -15,7 +15,7 @@ namespace GFrameworkTemplate.global;
 /// </summary>
 [Log]
 [ContextAware]
-public partial class TachieBarController : CanvasLayer
+public partial class TachieManager : CanvasLayer
 {
     private readonly Dictionary<string, Sprite2D> _slots = new();
     private readonly List<Sprite2D> _pool = new();
