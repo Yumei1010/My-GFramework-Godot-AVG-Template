@@ -44,7 +44,7 @@ public partial class TalkManager : CanvasLayer
             TalkContentLabel.Visible = true;
             TalkerNameLabel.Visible = true;
             TalkNameBackgroundTextureRect.Visible = true;
-            TalkerNameLabel.Text = $"[center]{e.Talker ?? ""}[/center]";
+            TalkerNameLabel.Text = e.Talker ?? "";
             TalkContentLabel.Text = e.Content;
         }
     }
