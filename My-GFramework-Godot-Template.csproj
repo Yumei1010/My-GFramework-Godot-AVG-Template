@@ -7,7 +7,7 @@
         <Nullable>enable</Nullable>
         <LangVersion>preview</LangVersion>
         <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
-        <NoWarn>CS0628;CS8785;CS8601;CS8602;CS0169;MA0002;MA0004;MA0006;MA0011;MA0016</NoWarn>
+        <NoWarn>CS0628;CS0103;CS1929;CS8785;CS8601;CS8602;CS0169;MA0002;MA0004;MA0006;MA0011;MA0016</NoWarn>
     </PropertyGroup>
     <ItemGroup>
         <Compile Remove="script_templates\**" />
