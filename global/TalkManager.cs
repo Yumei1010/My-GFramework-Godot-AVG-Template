@@ -16,8 +16,6 @@ public partial class TalkManager : CanvasLayer
 {
     private RichTextLabel TalkerNameLabel => GetNode<RichTextLabel>("%TalkerNameLabel");
     private RichTextLabel TalkContentLabel => GetNode<RichTextLabel>("%TalkContentLabel");
-    private Control CenterTextContainer => GetNode<Control>("%CenterTextContainer");
-    private RichTextLabel CenterTextContentLabel => GetNode<RichTextLabel>("%CenterTextContentLabel");
     private TextureRect TalkNameBackgroundTextureRect => GetNode<TextureRect>("%TalkNameBackgroundTextureRect");
 
     public override void _Ready()
@@ -29,29 +27,20 @@ public partial class TalkManager : CanvasLayer
     private void OnTalk(VisualNovelTalkTriggeredEvent e)
     {
         Show();
+        TalkContentLabel.Visible = true;
 
         if (e.IsCenter)
         {
-            TalkContentLabel.Visible = false;
             TalkerNameLabel.Visible = false;
             TalkNameBackgroundTextureRect.Visible = false;
-            CenterTextContainer.Visible = true;
-            CenterTextContentLabel.Text = e.Content;
+            TalkContentLabel.Text = $"[center]{e.Content}[/center]";
         }
         else
         {
-            CenterTextContainer.Visible = false;
-            TalkContentLabel.Visible = true;
             TalkerNameLabel.Visible = true;
             TalkNameBackgroundTextureRect.Visible = true;
             TalkerNameLabel.Text = e.Talker ?? "";
             TalkContentLabel.Text = e.Content;
         }
-    }
-
-    public new void Hide()
-    {
-        base.Hide();
-        CenterTextContainer.Visible = false;
     }
 }
