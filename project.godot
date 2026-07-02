@@ -37,6 +37,7 @@ SceneTransitionManager="*uid://c5sxf7tcun6yq"
 TalkManager="*res://global/talk_manager.tscn"
 TachieManager="*res://global/tachie_manager.tscn"
 BranchManager="*res://global/branch_manager.tscn"
+CameraManager="*res://global/camera_manager.tscn"
 
 [display]
 
