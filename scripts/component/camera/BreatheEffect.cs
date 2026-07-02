@@ -1,6 +1,6 @@
 using Godot;
 
-namespace GFrameworkTemplate.scripts.core.camera;
+namespace GFrameworkTemplate.scripts.component.camera;
 
 /// <summary>
 ///     呼吸感效果——极慢的缩放浮动

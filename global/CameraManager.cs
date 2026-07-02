@@ -1,6 +1,6 @@
 using GFramework.SourceGenerators.Abstractions.logging;
 using GFramework.SourceGenerators.Abstractions.rule;
-using GFrameworkTemplate.scripts.core.camera;
+using GFrameworkTemplate.scripts.component.camera;
 using Godot;
 
 namespace GFrameworkTemplate.global;

@@ -1,6 +1,6 @@
 using Godot;
 
-namespace GFrameworkTemplate.scripts.core.camera;
+namespace GFrameworkTemplate.scripts.component.camera;
 
 /// <summary>
 ///     特写聚焦效果——缓动到目标位置 + 缩放，高优先级

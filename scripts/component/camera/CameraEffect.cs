@@ -1,6 +1,6 @@
 using Godot;
 
-namespace GFrameworkTemplate.scripts.core.camera;
+namespace GFrameworkTemplate.scripts.component.camera;
 
 /// <summary>
 ///     相机效果策略基类——每个子类定义一种镜头效果

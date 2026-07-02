@@ -1,6 +1,6 @@
 using Godot;
 
-namespace GFrameworkTemplate.scripts.core.camera;
+namespace GFrameworkTemplate.scripts.component.camera;
 
 /// <summary>
 ///     地震震动效果——随机衰减振荡，高优先级覆盖一切

@@ -1,6 +1,6 @@
 using Godot;
 
-namespace GFrameworkTemplate.scripts.core.camera;
+namespace GFrameworkTemplate.scripts.component.camera;
 
 /// <summary>
 ///     走路摇晃效果——周期性正弦振动，低优先级
