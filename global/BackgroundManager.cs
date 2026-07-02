@@ -79,7 +79,8 @@ public partial class BackgroundManager : CanvasLayer
             ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize,
             StretchMode = TextureRect.StretchModeEnum.Scale,
             MouseFilter = Control.MouseFilterEnum.Ignore,
-            AnchorsPreset = (int)LayoutPreset.FullRect
+            AnchorRight = 1f,
+            AnchorBottom = 1f
         };
     }
 }
