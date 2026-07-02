@@ -11,7 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_top = 368
+theme_override_constants/margin_top = 872
 
 [node name="TalkBarBackgroundTextureRect" type="TextureRect" parent="TalkBarContainer" unique_id=793925008]
 unique_name_in_owner = true

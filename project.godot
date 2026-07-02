@@ -38,12 +38,12 @@ TalkManager="*res://global/talk_manager.tscn"
 TachieManager="*res://global/tachie_manager.tscn"
 BranchManager="*res://global/branch_manager.tscn"
 CameraManager="*res://global/camera_manager.tscn"
-BackgroundManager="*res://global/background_manager.tscn"
 
 [display]
 
-window/size/viewport_width=960
-window/size/viewport_height=540
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=3
 window/stretch/mode="canvas_items"
 
 [dotnet]

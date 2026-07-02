@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://d3uw5klk43a24" path="res://global/BranchManager.cs" id="1_ctrl"]
 
-[node name="BranchManager" type="CanvasLayer"]
+[node name="BranchManager" type="CanvasLayer" unique_id=206957926]
 layer = 100
 script = ExtResource("1_ctrl")
 
-[node name="BranchBarContainer" type="MarginContainer" parent="."]
+[node name="BranchBarContainer" type="MarginContainer" parent="." unique_id=1269604963]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -15,7 +15,7 @@ grow_vertical = 2
 theme_override_constants/margin_left = 128
 theme_override_constants/margin_right = 128
 
-[node name="ButtonList" type="VBoxContainer" parent="BranchBarContainer"]
+[node name="ButtonList" type="VBoxContainer" parent="BranchBarContainer" unique_id=1199927417]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 12
