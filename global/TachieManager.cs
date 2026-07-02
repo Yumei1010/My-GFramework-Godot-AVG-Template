@@ -42,8 +42,7 @@ public partial class TachieManager : CanvasLayer
                 case TachieOperation.Show:  ShowChar(charName, slot.FilePath); break;
                 case TachieOperation.Change: ChangeChar(charName, slot.FilePath); break;
                 case TachieOperation.Close:  CloseChar(charName); break;
-                case TachieOperation.Spotlight: SpotlightChar(charName, slot.FilePath); break;
-                case TachieOperation.Unspotlight: UnspotlightChar(); break;
+                case TachieOperation.OnlyShow: OnlyShowChar(charName, slot.FilePath); break;
             }
         }
     }
@@ -68,10 +67,21 @@ public partial class TachieManager : CanvasLayer
         }
 
         _chars[name] = path;
+
+        if (name == _spotlightChar)
+        {
+            await CrossfadeSlot(CenterSlot, path);
+            return;
+        }
+
         var slotName = _slotToChar.FirstOrDefault(kv => kv.Value == name).Key;
         if (slotName == null) return;
 
-        var rect = GetSlotRect(slotName);
+        await CrossfadeSlot(GetSlotRect(slotName), path);
+    }
+
+    private async Task CrossfadeSlot(TextureRect rect, string path)
+    {
         var newTex = LoadTexture(path);
         if (newTex == null) return;
 
@@ -94,35 +104,29 @@ public partial class TachieManager : CanvasLayer
     private void CloseChar(string name)
     {
         if (!_chars.Remove(name)) return;
+        if (name == _spotlightChar)
+            _spotlightChar = null;
         var slotName = _slotToChar.FirstOrDefault(kv => kv.Value == name).Key;
         if (slotName != null) _slotToChar.Remove(slotName);
         RepositionAll();
     }
 
-    private void SpotlightChar(string name, string path)
+    private async void OnlyShowChar(string name, string path)
     {
-        if (!_chars.ContainsKey(name))
+        if (_spotlightChar == name)
         {
-            _chars[name] = path;
+            // 已在聚光灯下 → 交叉淡入淡出换贴图
+            await CrossfadeSlot(CenterSlot, path);
         }
         else
         {
-            _chars[name] = path; // 切换贴图
+            _chars[name] = path;
+            _spotlightChar = name;
+            LeftSlot.Visible = false;
+            RightSlot.Visible = false;
+            _slotToChar.Clear();
+            AssignSlot("Center", name, path);
         }
-
-        _spotlightChar = name;
-
-        // 隐藏全部，只显示 Center 槽位
-        LeftSlot.Visible = false;
-        RightSlot.Visible = false;
-        _slotToChar.Clear();
-        AssignSlot("Center", name, path);
-    }
-
-    private void UnspotlightChar()
-    {
-        _spotlightChar = null;
-        RepositionAll();
     }
 
     /// <summary>
