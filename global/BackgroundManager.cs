@@ -27,9 +27,7 @@ public partial class BackgroundManager : CanvasLayer
         AddChild(_helperBg);
         _helperBg.Modulate = Colors.Transparent;
 
-        this.RegisterEvent<VisualNovelBackgroundTriggeredEvent>(OnBackground)
-            .UnRegisterWhenNodeExitTree(this);
-
+        this.RegisterEvent<VisualNovelBackgroundTriggeredEvent>(OnBackground).UnRegisterWhenNodeExitTree(this);
         _log.Debug("BackgroundManager 就绪");
     }
 
