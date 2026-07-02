@@ -21,12 +21,10 @@ public partial class TachieManager : CanvasLayer
     private TextureRect RightSlot => GetNode<TextureRect>("%RightSlot");
     private TextureRect HelperSlot => GetNode<TextureRect>("%HelperSlot");
 
-    /// <summary>角色名 → 槽位名</summary>
-    private readonly Dictionary<string, string> _charToSlot = new();
-    /// <summary>槽位名 → 当前角色名</summary>
+    /// <summary>角色名 → 文件路径（在场角色）</summary>
+    private readonly Dictionary<string, string> _chars = new();
+    /// <summary>当前槽位分配：槽位名 → 角色名</summary>
     private readonly Dictionary<string, string> _slotToChar = new();
-
-    private static readonly string[] SlotOrder = { "Left", "Center", "Right" };
 
     public override void _Ready()
     {
@@ -48,37 +46,31 @@ public partial class TachieManager : CanvasLayer
 
     private void ShowChar(string name, string path)
     {
-        if (_charToSlot.ContainsKey(name)) return; // 已在场
+        if (_chars.ContainsKey(name)) return;
 
-        var slotName = AllocSlot();
-        if (slotName == null) { _log.Warn($"立绘槽位已满，无法显示: {name}"); return; }
-
-        var rect = GetSlotRect(slotName);
         var tex = LoadTexture(path);
         if (tex == null) return;
 
-        rect.Texture = tex;
-        rect.Visible = true;
-        rect.Modulate = Colors.White;
-
-        _charToSlot[name] = slotName;
-        _slotToChar[slotName] = name;
+        _chars[name] = path; // 暂存，Reposition 后正式分配槽位
+        RepositionAll();
     }
 
     private async void ChangeChar(string name, string path)
     {
-        if (!_charToSlot.TryGetValue(name, out var slotName))
+        if (!_chars.ContainsKey(name))
         {
-            // 不在场则自动 show
             ShowChar(name, path);
             return;
         }
+
+        _chars[name] = path;
+        var slotName = _slotToChar.FirstOrDefault(kv => kv.Value == name).Key;
+        if (slotName == null) return;
 
         var rect = GetSlotRect(slotName);
         var newTex = LoadTexture(path);
         if (newTex == null) return;
 
-        // 用 HelperSlot 交叉淡入淡出
         HelperSlot.Texture = newTex;
         HelperSlot.Position = rect.Position;
         HelperSlot.Size = rect.Size;
@@ -97,17 +89,48 @@ public partial class TachieManager : CanvasLayer
 
     private void CloseChar(string name)
     {
-        if (!_charToSlot.Remove(name, out var slotName)) return;
-        _slotToChar.Remove(slotName);
-        GetSlotRect(slotName).Visible = false;
+        if (!_chars.Remove(name)) return;
+        var slotName = _slotToChar.FirstOrDefault(kv => kv.Value == name).Key;
+        if (slotName != null) _slotToChar.Remove(slotName);
+        RepositionAll();
     }
 
-    private string? AllocSlot()
+    /// <summary>
+    ///     重新分配槽位：1 人→居中，2 人→左右，移除→重排
+    /// </summary>
+    private void RepositionAll()
     {
-        foreach (var s in SlotOrder)
-            if (!_slotToChar.ContainsKey(s))
-                return s;
-        return null;
+        // 隐藏所有槽位
+        foreach (var r in new[] { LeftSlot, CenterSlot, RightSlot })
+            r.Visible = false;
+        _slotToChar.Clear();
+
+        var charList = _chars.ToList();
+        var count = charList.Count;
+
+        if (count == 1)
+        {
+            AssignSlot("Center", charList[0].Key, charList[0].Value);
+        }
+        else if (count >= 2)
+        {
+            AssignSlot("Left", charList[0].Key, charList[0].Value);
+            AssignSlot("Right", charList[1].Key, charList[1].Value);
+            if (count >= 3)
+                AssignSlot("Center", charList[2].Key, charList[2].Value);
+        }
+    }
+
+    private void AssignSlot(string slotName, string charName, string filePath)
+    {
+        var rect = GetSlotRect(slotName);
+        var tex = LoadTexture(filePath);
+        if (tex == null) return;
+
+        rect.Texture = tex;
+        rect.Visible = true;
+        rect.Modulate = Colors.White;
+        _slotToChar[slotName] = charName;
     }
 
     private TextureRect GetSlotRect(string slotName) => slotName switch
