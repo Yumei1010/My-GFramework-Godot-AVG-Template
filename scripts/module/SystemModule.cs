@@ -3,6 +3,8 @@ using GFramework.Game.architecture;
 using GFramework.Game.setting;
 using GFrameworkTemplate.scripts.core.scene;
 using GFrameworkTemplate.scripts.core.ui;
+using GFrameworkTemplate.global;
+using GFrameworkTemplate.scripts.system.visualnovel;
 
 namespace GFrameworkTemplate.scripts.module;
 
@@ -16,5 +18,7 @@ public class SystemModule : AbstractModule
         architecture.RegisterSystem(new UiRouter());
         architecture.RegisterSystem(new SceneRouter());
         architecture.RegisterSystem(new SettingsSystem());
+        architecture.RegisterSystem(new StoryEngineSystem());
+        architecture.RegisterSystem(new SaveManager());
     }
 }

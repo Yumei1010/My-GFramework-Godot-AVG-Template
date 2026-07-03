@@ -1,3 +1,5 @@
+using GFramework.Core.Abstractions.enums;
+using GFramework.Core.Abstractions.system;
 using GFramework.Core.extensions;
 using GFramework.Godot.extensions;
 using GFramework.SourceGenerators.Abstractions.logging;
@@ -10,20 +12,24 @@ using Godot;
 namespace GFrameworkTemplate.global;
 
 /// <summary>
-///     分支栏全局单例——根据选项数量动态实例化 branch_option.tscn
+///     分支栏——动态实例化 branch_option.tscn，通过 ISystem 注册到 GF 框架
 /// </summary>
 [Log]
 [ContextAware]
-public partial class BranchManager : CanvasLayer
+public partial class BranchManager : CanvasLayer, ISystem
 {
     private VBoxContainer _buttonList = null!;
     private StoryEngineSystem _engine = null!;
     private PackedScene _optionScene = null!;
     private readonly List<Node> _activeOptions = new();
 
+    public void OnArchitecturePhase(ArchitecturePhase phase) { }
+    public void Init() { }
+    public void Destroy() { }
+
     public override void _Ready()
     {
-        _engine = this.GetUtility<StoryEngineSystem>()!;
+        _engine = this.GetSystem<StoryEngineSystem>()!;
         _optionScene = GD.Load<PackedScene>("res://scenes/component/branch_option/branch_option.tscn");
 
         _buttonList = GetNode<VBoxContainer>("%ButtonList");

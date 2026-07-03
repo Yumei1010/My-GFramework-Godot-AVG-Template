@@ -1,4 +1,6 @@
 using System.Text.Json;
+using GFramework.Core.Abstractions.enums;
+using GFramework.Core.Abstractions.system;
 using GFramework.Core.extensions;
 using GFramework.SourceGenerators.Abstractions.logging;
 using GFramework.SourceGenerators.Abstractions.rule;
@@ -8,22 +10,24 @@ using Godot;
 namespace GFrameworkTemplate.global;
 
 /// <summary>
-///     存档管理器全局单例——5 槽位 JSON 持久化引擎状态
+///     存档管理器——5 槽位 JSON 持久化引擎状态，通过 ISystem 注册到 DI
 /// </summary>
 [Log]
 [ContextAware]
-public partial class SaveManager : Node
+public sealed partial class SaveManager : ISystem
 {
     private StoryEngineSystem _engine = null!;
     private const string SaveDir = "user://saves";
     private const int MaxSlots = 5;
 
-    public override void _Ready()
+    public void OnArchitecturePhase(ArchitecturePhase phase) { }
+    public void Init()
     {
-        _engine = this.GetUtility<StoryEngineSystem>()!;
+        _engine = this.GetSystem<StoryEngineSystem>()!;
         DirAccess.MakeDirAbsolute(SaveDir);
-        _log.Debug("SaveManager 就绪");
+        _log.Debug("SaveManager 初始化");
     }
+    public void Destroy() { }
 
     /// <summary>存档到指定槽位</summary>
     public void Save(int slot)

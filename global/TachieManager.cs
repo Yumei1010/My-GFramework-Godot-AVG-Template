@@ -1,3 +1,5 @@
+using GFramework.Core.Abstractions.enums;
+using GFramework.Core.Abstractions.system;
 using GFramework.Core.extensions;
 using GFramework.Godot.extensions;
 using GFramework.SourceGenerators.Abstractions.logging;
@@ -14,8 +16,12 @@ namespace GFrameworkTemplate.global;
 /// </summary>
 [Log]
 [ContextAware]
-public partial class TachieManager : CanvasLayer
+public partial class TachieManager : CanvasLayer, ISystem
 {
+    public void OnArchitecturePhase(ArchitecturePhase phase) { }
+    public void Init() { }
+    public void Destroy() { }
+
     private TextureRect LeftSlot => GetNode<TextureRect>("%LeftSlot");
     private TextureRect CenterSlot => GetNode<TextureRect>("%CenterSlot");
     private TextureRect RightSlot => GetNode<TextureRect>("%RightSlot");

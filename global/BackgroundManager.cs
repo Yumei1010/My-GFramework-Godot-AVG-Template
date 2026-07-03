@@ -1,3 +1,5 @@
+using GFramework.Core.Abstractions.enums;
+using GFramework.Core.Abstractions.system;
 using GFramework.Core.extensions;
 using GFramework.Godot.extensions;
 using GFramework.SourceGenerators.Abstractions.logging;
@@ -13,8 +15,11 @@ namespace GFrameworkTemplate.global;
 /// </summary>
 [Log]
 [ContextAware]
-public partial class BackgroundManager : CanvasLayer
+public partial class BackgroundManager : CanvasLayer, ISystem
 {
+    public void OnArchitecturePhase(ArchitecturePhase phase) { }
+    public void Init() { }
+    public void Destroy() { }
     private TextureRect MainBg => GetNode<TextureRect>("%MainBg");
     private TextureRect HelperBg => GetNode<TextureRect>("%HelperBg");
     private Tween? _tween;

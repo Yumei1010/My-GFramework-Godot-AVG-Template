@@ -1,3 +1,5 @@
+using GFramework.Core.Abstractions.enums;
+using GFramework.Core.Abstractions.system;
 using GFramework.Core.extensions;
 using GFramework.Godot.extensions;
 using GFramework.SourceGenerators.Abstractions.logging;
@@ -13,8 +15,12 @@ namespace GFrameworkTemplate.global;
 /// </summary>
 [Log]
 [ContextAware]
-public partial class SoundManager : CanvasLayer
+public partial class SoundManager : CanvasLayer, ISystem
 {
+    public void OnArchitecturePhase(ArchitecturePhase phase) { }
+    public void Init() { }
+    public void Destroy() { }
+
     private AudioStreamPlayer BgmPlayer => GetNode<AudioStreamPlayer>("%BgmPlayer");
     private AudioStreamPlayer BgmHelper => GetNode<AudioStreamPlayer>("%BgmHelper");
     private Tween? _bgmTween;

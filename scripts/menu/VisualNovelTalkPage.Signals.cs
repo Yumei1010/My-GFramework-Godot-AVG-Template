@@ -12,7 +12,7 @@ public partial class VisualNovelTalkPage
         {
             if (args is InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left })
             {
-                this.GetUtility<StoryEngineSystem>()?.Advance();
+                this.GetSystem<StoryEngineSystem>()?.Advance();
             }
         };
     }

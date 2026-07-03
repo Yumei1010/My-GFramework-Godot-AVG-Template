@@ -1,3 +1,5 @@
+using GFramework.Core.Abstractions.enums;
+using GFramework.Core.Abstractions.system;
 using GFramework.SourceGenerators.Abstractions.logging;
 using GFramework.SourceGenerators.Abstractions.rule;
 using GFrameworkTemplate.scripts.component.camera;
@@ -7,12 +9,16 @@ namespace GFrameworkTemplate.global;
 
 /// <summary>
 ///     相机管理器全局单例——优先级叠加式镜头效果系统
-///     用法: CameraManager.Instance.Play(new EarthquakeEffect { Duration = 1.5f, Intensity = 25f });
+///     用法: this.GetSystem&lt;CameraManager&gt;().Play(new EarthquakeEffect { Duration = 1.5f, Intensity = 25f });
 /// </summary>
 [Log]
 [ContextAware]
-public partial class CameraManager : CanvasLayer
+public partial class CameraManager : CanvasLayer, ISystem
 {
+    public void OnArchitecturePhase(ArchitecturePhase phase) { }
+    public void Init() { }
+    public void Destroy() { }
+
     private Camera2D? _camera;
     private Vector2 _basePosition;
     private float _baseZoom = 1f;

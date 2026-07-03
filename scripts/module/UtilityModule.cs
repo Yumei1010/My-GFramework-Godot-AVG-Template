@@ -6,7 +6,6 @@ using GFramework.Game.serializer;
 using GFramework.Godot.scene;
 using GFramework.Godot.storage;
 using GFramework.Godot.ui;
-using GFrameworkTemplate.scripts.system.visualnovel;
 using GFrameworkTemplate.scripts.utility;
 using Godot;
 
@@ -36,7 +35,5 @@ public class UtilityModule : AbstractModule
                 BasePath = ProjectSettings.GetSetting("application/config/save/setting_path").AsString(),
                 AutoBackup = true
             }));
-
-        architecture.RegisterUtility(new StoryEngineSystem());
     }
 }

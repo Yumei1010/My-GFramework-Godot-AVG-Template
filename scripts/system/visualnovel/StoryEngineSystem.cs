@@ -1,4 +1,5 @@
-using GFramework.Core.Abstractions.utility;
+using GFramework.Core.Abstractions.enums;
+using GFramework.Core.Abstractions.system;
 using GFramework.Core.extensions;
 using GFramework.SourceGenerators.Abstractions.logging;
 using GFramework.SourceGenerators.Abstractions.rule;
@@ -9,10 +10,16 @@ using GFrameworkTemplate.scripts.entities.story_command_worker;
 
 namespace GFrameworkTemplate.scripts.system.visualnovel;
 
+/// <summary>
+///     故事引擎系统——JSON 驱动视觉小说解释器，通过 ISystem 注册到 DI
+/// </summary>
 [Log]
 [ContextAware]
-public sealed partial class StoryEngineSystem : IUtility
+public sealed partial class StoryEngineSystem : ISystem
 {
+    public void OnArchitecturePhase(ArchitecturePhase phase) { }
+    public void Init() { }
+    public void Destroy() { }
     private List<StoryCommand> _commands = new();
     private int _currentIndex;
     private readonly EngineContext _ctx;
