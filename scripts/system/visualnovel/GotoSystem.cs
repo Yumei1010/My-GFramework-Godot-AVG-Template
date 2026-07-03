@@ -18,7 +18,7 @@ public sealed partial class GotoSystem : ISystem, IStoryExecutionSystem
         var g = (GotoCommand)cmd;
         if (!string.IsNullOrEmpty(g.FilePath))
         {
-            ctx.SendEvent(new VisualNovelGotoTriggeredEvent { TargetFilePath = g.FilePath });
+            ctx.SendEvent(new VisualNovelGotoNavigatedEvent { TargetFilePath = g.FilePath });
             ctx.IsPlaying = false;
             ctx.PendingGoto = g.FilePath;
         }

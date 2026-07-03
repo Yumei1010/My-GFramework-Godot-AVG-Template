@@ -17,10 +17,10 @@ public partial class BackgroundController : CanvasLayer
     public override void _Ready()
     {
         HelperBg.Modulate = Colors.Transparent;
-        this.RegisterEvent<VisualNovelBackgroundTriggeredEvent>(OnBackground).UnRegisterWhenNodeExitTree(this);
+        this.RegisterEvent<VisualNovelBackgroundChangedEvent>(OnBackground).UnRegisterWhenNodeExitTree(this);
     }
 
-    private async void OnBackground(VisualNovelBackgroundTriggeredEvent e)
+    private async void OnBackground(VisualNovelBackgroundChangedEvent e)
     {
         var path = StoryResourceMapper.ResolveTexturePath(e.FilePath);
         if (string.IsNullOrEmpty(path)) return;

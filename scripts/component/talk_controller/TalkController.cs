@@ -20,7 +20,7 @@ public partial class TalkController : CanvasLayer
     {
         TalkBarContainer.Visible = false;
 
-        this.RegisterEvent<VisualNovelTalkTriggeredEvent>(OnTalk).UnRegisterWhenNodeExitTree(this);
+        this.RegisterEvent<VisualNovelTalkPlayedEvent>(OnTalk).UnRegisterWhenNodeExitTree(this);
     }
 
     public override void _Process(double delta)
@@ -28,7 +28,7 @@ public partial class TalkController : CanvasLayer
         TalkBarContainer.Visible = this.SendQuery(new GetTalkVisibleQuery()).Visible;
     }
 
-    private void OnTalk(VisualNovelTalkTriggeredEvent e)
+    private void OnTalk(VisualNovelTalkPlayedEvent e)
     {
         this.SendCommand(new SetTalkVisibleCommand { Visible = true });
         TalkContentLabel.Visible = true;

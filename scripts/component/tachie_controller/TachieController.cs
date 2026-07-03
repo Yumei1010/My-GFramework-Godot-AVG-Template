@@ -19,7 +19,7 @@ public partial class TachieController : CanvasLayer
     private TextureRect HelperSlot => GetNode<TextureRect>("%HelperSlot");
     public override void _Ready()
     {
-        this.RegisterEvent<VisualNovelTachieTriggeredEvent>(e =>
+        this.RegisterEvent<VisualNovelTachieUpdatedEvent>(e =>
         {
             foreach (var (name, slot) in e.Tachies)
                 this.SendCommand(new UpdateTachieCommand { Type = slot.Type, CharName = name, FilePath = slot.FilePath });

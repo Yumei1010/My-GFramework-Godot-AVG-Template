@@ -1,6 +1,6 @@
 namespace GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 
-public sealed class VisualNovelTalkTriggeredEvent
+public sealed class VisualNovelTalkPlayedEvent
 {
     public string? Talker { get; init; }
     public required string Content { get; init; }

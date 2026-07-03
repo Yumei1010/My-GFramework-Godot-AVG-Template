@@ -20,11 +20,11 @@ public partial class BranchController : CanvasLayer
         _optionScene = GD.Load<PackedScene>("res://scenes/component/branch_option/branch_option.tscn");
         _buttonList = GetNode<VBoxContainer>("%ButtonList");
         Hide();
-        this.RegisterEvent<VisualNovelBranchTriggeredEvent>(OnBranch).UnRegisterWhenNodeExitTree(this);
+        this.RegisterEvent<VisualNovelBranchShownEvent>(OnBranch).UnRegisterWhenNodeExitTree(this);
     }
 
 
-    private void OnBranch(VisualNovelBranchTriggeredEvent e)
+    private void OnBranch(VisualNovelBranchShownEvent e)
     {
         ClearOptions();
 

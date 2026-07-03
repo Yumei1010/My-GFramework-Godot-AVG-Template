@@ -24,6 +24,6 @@ public sealed partial class SoundSystem : ISystem, IStoryExecutionSystem
     async Task IStoryExecutionSystem.ExecuteAsync(StoryCommand cmd, EngineContext ctx)
     {
         var s = (SoundCommand)cmd;
-        ctx.SendEvent(new VisualNovelSoundTriggeredEvent { SoundType = s.SoundType, FilePath = s.FilePath ?? "" });
+        ctx.SendEvent(new VisualNovelSoundPlayedEvent { SoundType = s.SoundType, FilePath = s.FilePath ?? "" });
     }
 }

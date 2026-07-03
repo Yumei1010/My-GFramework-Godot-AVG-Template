@@ -23,7 +23,7 @@ public sealed partial class BranchSystem : ISystem, IStoryExecutionSystem
     async Task IStoryExecutionSystem.ExecuteAsync(StoryCommand cmd, EngineContext ctx)
     {
         var b = (BranchCommand)cmd;
-        ctx.SendEvent(new VisualNovelBranchTriggeredEvent { Options = b.Options });
+        ctx.SendEvent(new VisualNovelBranchShownEvent { Options = b.Options });
         var tcs = new TaskCompletionSource<string?>();
         var sub = ctx.RegisterEvent<VisualNovelBranchChosenEvent>(e => tcs.TrySetResult(e.OptionId));
         var chosenId = await tcs.Task;

@@ -21,7 +21,7 @@ public partial class SoundController : CanvasLayer
 
         BgmHelper.VolumeDb = -80f;
 
-        this.RegisterEvent<VisualNovelSoundTriggeredEvent>(e =>
+        this.RegisterEvent<VisualNovelSoundPlayedEvent>(e =>
         {
             if (e.SoundType == "bgm") OnBgmRequested(e.FilePath);
             else OnSfxRequested(e.FilePath);

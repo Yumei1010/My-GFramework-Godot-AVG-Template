@@ -31,7 +31,7 @@ public sealed partial class TalkSystem : ISystem, IStoryExecutionSystem
     async Task IStoryExecutionSystem.ExecuteAsync(StoryCommand cmd, EngineContext ctx)
     {
         var t = (TalkCommand)cmd;
-        ctx.SendEvent(new VisualNovelTalkTriggeredEvent { Talker = t.Talker, Content = t.TalkContent, IsCenter = t.IsCenter, AvatarPath = t.AvatarPath });
+        ctx.SendEvent(new VisualNovelTalkPlayedEvent { Talker = t.Talker, Content = t.TalkContent, IsCenter = t.IsCenter, AvatarPath = t.AvatarPath });
         await ctx.AdvanceAsync(t.TalkContent.Length * ctx.WordSpeed);
     }
 }

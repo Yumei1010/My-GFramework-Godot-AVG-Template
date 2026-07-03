@@ -1,6 +1,6 @@
 namespace GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 
-public sealed class VisualNovelTextRevealProgressEvent
+public sealed class VisualNovelTextRevealedEvent
 {
     public required int RevealedChars { get; init; }
     public required int TotalChars { get; init; }

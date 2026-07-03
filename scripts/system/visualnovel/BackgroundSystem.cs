@@ -23,7 +23,7 @@ public sealed partial class BackgroundSystem : ISystem, IStoryExecutionSystem
     {
         var b = (BackgroundCommand)cmd;
         if (b.Delay > 0) await Task.Delay(TimeSpan.FromSeconds(b.Delay));
-        ctx.SendEvent(new VisualNovelBackgroundTriggeredEvent { FilePath = b.FilePath ?? "", WaitTweenEnd = b.WaitTweenEnd, Delay = b.Delay });
+        ctx.SendEvent(new VisualNovelBackgroundChangedEvent { FilePath = b.FilePath ?? "", WaitTweenEnd = b.WaitTweenEnd, Delay = b.Delay });
         if (b.WaitTweenEnd) await Task.Delay(TimeSpan.FromSeconds(0.5f));
     }
 }

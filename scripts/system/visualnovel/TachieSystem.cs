@@ -27,6 +27,6 @@ public sealed partial class TachieSystem : ISystem, IStoryExecutionSystem
     async Task IStoryExecutionSystem.ExecuteAsync(StoryCommand cmd, EngineContext ctx)
     {
         var t = (TachieCommand)cmd;
-        ctx.SendEvent(new VisualNovelTachieTriggeredEvent { Tachies = t.Tachies });
+        ctx.SendEvent(new VisualNovelTachieUpdatedEvent { Tachies = t.Tachies });
     }
 }
