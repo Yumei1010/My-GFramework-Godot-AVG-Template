@@ -1,4 +1,3 @@
-using GFramework.Core.Abstractions.architecture;
 using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 using GFrameworkTemplate.scripts.data.story;
 
