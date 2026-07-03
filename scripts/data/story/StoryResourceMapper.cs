@@ -1,4 +1,3 @@
-using Godot;
 
 namespace GFrameworkTemplate.scripts.data.story;
 

@@ -1,5 +1,4 @@
 ﻿using GFrameworkTemplate.global;
-using Godot;
 
 namespace GFrameworkTemplate.scripts.utility;
 

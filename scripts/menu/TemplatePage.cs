@@ -2,10 +2,7 @@ using GFramework.Core.Abstractions.controller;
 using GFramework.Game.Abstractions.enums;
 using GFramework.Game.Abstractions.ui;
 using GFramework.Godot.ui;
-using GFramework.SourceGenerators.Abstractions.logging;
-using GFramework.SourceGenerators.Abstractions.rule;
 using GFrameworkTemplate.scripts.core.ui;
-using Godot;
 
 namespace GFrameworkTemplate.scripts.menu;
 

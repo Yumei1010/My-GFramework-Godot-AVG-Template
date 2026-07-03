@@ -1,7 +1,4 @@
-using GFramework.Core.extensions;
-using GFramework.Godot.extensions;
 using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
-using Godot;
 
 namespace GFrameworkTemplate.scripts.menu;
 
@@ -9,7 +6,7 @@ public partial class VisualNovelTalkPage
 {
     private void RegisterEvents()
     {
-        this.RegisterEvent<VisualNovelTalkTriggeredEvent>(e =>
+        this.RegisterEvent<VisualNovelTalkPlayedEvent>(e =>
         {
             TalkerName.Text = e.Talker ?? "";
             TalkerName.Visible = !e.IsCenter;
@@ -22,11 +19,11 @@ public partial class VisualNovelTalkPage
                 PlayTypewriter(TalkContent, e.Content);
         }).UnRegisterWhenNodeExitTree(this);
 
-        this.RegisterEvent<VisualNovelBackgroundTriggeredEvent>(e =>
+        this.RegisterEvent<VisualNovelBackgroundChangedEvent>(e =>
             _log.Debug($"背景切换: {e.FilePath}")
         ).UnRegisterWhenNodeExitTree(this);
 
-        this.RegisterEvent<VisualNovelBranchTriggeredEvent>(e =>
+        this.RegisterEvent<VisualNovelBranchShownEvent>(e =>
             _log.Debug($"分支选项: {e.Options.Count} 个选项")
         ).UnRegisterWhenNodeExitTree(this);
 

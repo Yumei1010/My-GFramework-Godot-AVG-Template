@@ -1,5 +1,4 @@
 ﻿using GFramework.Game.scene;
-using Godot;
 
 namespace GFrameworkTemplate.scripts.core.scene;
 

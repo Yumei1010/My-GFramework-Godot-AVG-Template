@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cxwbsuw3654vr"]
+
+[ext_resource type="Script" uid="uid://ci3sa4f41ss27" path="res://scripts/component/camera_controller/CameraController.cs" id="1_ctrl"]
+
+[node name="CameraSystem" type="CanvasLayer" unique_id=661028571]
+script = ExtResource("1_ctrl")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=933701657]
+position = Vector2(960, 540)
+metadata/_edit_lock_ = true

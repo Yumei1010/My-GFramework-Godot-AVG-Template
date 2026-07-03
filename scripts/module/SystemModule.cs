@@ -3,12 +3,10 @@ using GFramework.Game.architecture;
 using GFramework.Game.setting;
 using GFrameworkTemplate.scripts.core.scene;
 using GFrameworkTemplate.scripts.core.ui;
+using GFrameworkTemplate.scripts.system.visualnovel;
 
 namespace GFrameworkTemplate.scripts.module;
 
-/// <summary>
-///     系统模块类，负责安装和注册框架所需的各种系统组件
-/// </summary>
 public class SystemModule : AbstractModule
 {
     public override void Install(IArchitecture architecture)
@@ -16,5 +14,15 @@ public class SystemModule : AbstractModule
         architecture.RegisterSystem(new UiRouter());
         architecture.RegisterSystem(new SceneRouter());
         architecture.RegisterSystem(new SettingsSystem());
+        architecture.RegisterSystem(new BackgroundSystem());
+        architecture.RegisterSystem(new BranchSystem());
+        architecture.RegisterSystem(new CameraSystem());
+        architecture.RegisterSystem(new SaveSystem());
+        architecture.RegisterSystem(new SoundSystem());
+        architecture.RegisterSystem(new TachieSystem());
+        architecture.RegisterSystem(new TalkSystem());
+        architecture.RegisterSystem(new StoryEngineSystem());
+        architecture.RegisterSystem(new GotoSystem());
+        architecture.RegisterSystem(new EventSystem());
     }
 }

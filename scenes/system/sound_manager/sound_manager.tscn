@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://d2qdgy0sn4824"]
+
+[ext_resource type="Script" uid="uid://dj4hotlfyeosx" path="res://scripts/component/sound_controller/SoundController.cs" id="1_ctrl"]
+
+[node name="SoundSystem" type="CanvasLayer" unique_id=317858591]
+script = ExtResource("1_ctrl")
+
+[node name="BgmPlayer" type="AudioStreamPlayer" parent="." unique_id=1525004268]
+unique_name_in_owner = true
+
+[node name="BgmHelper" type="AudioStreamPlayer" parent="." unique_id=333836032]
+unique_name_in_owner = true
+volume_db = -80.0
+
+[node name="SfxPlayer_0" type="AudioStreamPlayer" parent="." unique_id=715832754]
+unique_name_in_owner = true
+bus = &"SFX"
+
+[node name="SfxPlayer_1" type="AudioStreamPlayer" parent="." unique_id=558205827]
+unique_name_in_owner = true
+bus = &"SFX"
+
+[node name="SfxPlayer_2" type="AudioStreamPlayer" parent="." unique_id=1663143377]
+unique_name_in_owner = true
+bus = &"SFX"
+
+[node name="SfxPlayer_3" type="AudioStreamPlayer" parent="." unique_id=1342253348]
+unique_name_in_owner = true
+bus = &"SFX"
+
+[node name="SfxPlayer_4" type="AudioStreamPlayer" parent="." unique_id=315623110]
+unique_name_in_owner = true
+bus = &"SFX"
+
+[node name="SfxPlayer_5" type="AudioStreamPlayer" parent="." unique_id=747417378]
+unique_name_in_owner = true
+bus = &"SFX"
+
+[node name="SfxPlayer_6" type="AudioStreamPlayer" parent="." unique_id=912714553]
+unique_name_in_owner = true
+bus = &"SFX"
+
+[node name="SfxPlayer_7" type="AudioStreamPlayer" parent="." unique_id=697290861]
+unique_name_in_owner = true
+bus = &"SFX"
