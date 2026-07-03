@@ -8,7 +8,7 @@ using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 using GFrameworkTemplate.scripts.data.story;
 using Godot;
 
-namespace GFrameworkTemplate.global;
+namespace GFrameworkTemplate.scripts.system.background_manager;
 
 /// <summary>
 ///     背景管理器全局单例——双 TextureRect 交叉淡入淡出切换背景

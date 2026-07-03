@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d06i0d82dnuj8"]
 
-[ext_resource type="Script" uid="uid://ckq3l0m0rad4e" path="res://global/BackgroundManager.cs" id="1_ctrl"]
+[ext_resource type="Script" uid="uid://ckq3l0m0rad4e" path="res://scripts/system/backgroundmanager/backgroundmanager.cs" id="1_ctrl"]
 
 [node name="BackgroundManager" type="CanvasLayer" unique_id=2085531883]
 layer = -10

@@ -7,7 +7,7 @@ using GFramework.SourceGenerators.Abstractions.rule;
 using GFrameworkTemplate.scripts.system.visualnovel;
 using Godot;
 
-namespace GFrameworkTemplate.global;
+namespace GFrameworkTemplate.scripts.system.save_manager;
 
 /// <summary>
 ///     存档管理器——5 槽位 JSON 持久化引擎状态，通过 ISystem 注册到 DI
