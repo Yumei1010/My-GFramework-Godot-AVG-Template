@@ -1,15 +1,8 @@
-using GFrameworkTemplate.global;
 using GFrameworkTemplate.scripts.component.camera;
 using GFrameworkTemplate.scripts.cqrs.camera.command;
 using GFrameworkTemplate.scripts.cqrs.story.command;
 using GFrameworkTemplate.scripts.cqrs.talk.command;
 using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
-using GFrameworkTemplate.scripts.system.background;
-using GFrameworkTemplate.scripts.system.branch;
-using GFrameworkTemplate.scripts.system.camera;
-using GFrameworkTemplate.scripts.system.sound;
-using GFrameworkTemplate.scripts.system.tachie;
-using GFrameworkTemplate.scripts.system.talk;
 using GFrameworkTemplate.scripts.system.visualnovel;
 
 namespace GFrameworkTemplate.scripts.component.vn_test;
@@ -52,14 +45,6 @@ public partial class VnTestController : Node
                     break;
             }
         }).UnRegisterWhenNodeExitTree(this);
-
-        // 将子 Manager 注册到架构 DI（替代 autoload 的自动注册）
-        try { GameEntryPoint.Architecture.RegisterSystem(GetNode<TalkSystem>("TalkManager")); } catch { }
-        try { GameEntryPoint.Architecture.RegisterSystem(GetNode<TachieSystem>("TachieManager")); } catch { }
-        try { GameEntryPoint.Architecture.RegisterSystem(GetNode<BranchSystem>("BranchManager")); } catch { }
-        try { GameEntryPoint.Architecture.RegisterSystem(GetNode<BackgroundSystem>("BackgroundManager")); } catch { }
-        try { GameEntryPoint.Architecture.RegisterSystem(GetNode<CameraSystem>("CameraManager")); } catch { }
-        try { GameEntryPoint.Architecture.RegisterSystem(GetNode<SoundSystem>("SoundManager")); } catch { }
 
         StatusLabel.Text = "点击开始 | 1-5: 相机效果 | H: 对话框 | R: 重置";
         _log.Debug("VnTestController 就绪");
