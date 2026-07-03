@@ -1,5 +1,6 @@
 [gd_scene format=3]
 
+[ext_resource type="Script" path="res://scripts/component/vn_game/VnGameSceneController.cs" id="0_ctrl"]
 [ext_resource type="PackedScene" path="res://global/talk_manager.tscn" id="1_talk"]
 [ext_resource type="PackedScene" path="res://global/tachie_manager.tscn" id="2_tachie"]
 [ext_resource type="PackedScene" path="res://global/branch_manager.tscn" id="3_branch"]
@@ -8,6 +9,7 @@
 [ext_resource type="PackedScene" path="res://global/sound_manager.tscn" id="6_sfx"]
 
 [node name="VnGameScene" type="Node"]
+script = ExtResource("0_ctrl")
 
 [node name="BackgroundManager" parent="." instance=ExtResource("4_bg")]
 

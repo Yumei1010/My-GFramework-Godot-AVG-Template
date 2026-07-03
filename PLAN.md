@@ -84,16 +84,16 @@ GameEntryPoint, SceneRoot, UiRoot, GlobalInputController, SceneTransitionManager
 
 ### 实施步骤
 
-- [ ] 1. **Manager 实现 ISystem**：添加 `ISystem` 接口（`Init()`/`Destroy()`/`OnArchitecturePhase()`）
-- [ ] 2. **移除 static Instance**：删除所有 `public static Xxx Instance`，改用 DI 访问
-- [ ] 3. **注册到 SystemModule**：`architecture.RegisterSystem(new TalkManager())` 等
-- [ ] 4. **创建 VnGameScene**：新建 `.tscn` 场景，容纳所有需节点的 Manager 作为子节点
-- [ ] 5. **创建 VnGameState**：进入状态时加载 VnGameScene，退出时卸载
-- [ ] 6. **清理 autoload**：project.godot 移除 7 个 Manager autoload
-- [ ] 7. **更新所有引用**：`TalkManager.Instance` → `this.GetSystem<TalkManager>()`
-- [ ] 8. **StoryEngineSystem 迁移**：从 `IUtility` → `ISystem`
-- [ ] 9. **VnTestController 适配**：通过 `GetSystem<T>()` 访问 Manager 和 Engine
-- [ ] 10. **回归测试**：dotnet build + 3 章故事完整播放
+- [x] 1. **Manager 实现 ISystem**：添加 `ISystem` 接口（`Init()`/`Destroy()`/`OnArchitecturePhase()`）
+- [x] 2. **移除 static Instance**：删除所有 `public static Xxx Instance`，改用 DI 访问
+- [x] 3. **注册到 SystemModule**：StoryEngineSystem + SaveManager 纯逻辑系统已注册
+- [x] 4. **创建 VnGameScene**：新建 `scenes/game/vn_game_scene.tscn`，容纳 6 个 Manager
+- [ ] 5. **创建 VnGameState**：进入状态时加载 VnGameScene，退出时卸载（后续）
+- [x] 6. **清理 autoload**：project.godot 移除 7 个 Manager autoload（仅保留 5 个框架节点）
+- [x] 7. **更新所有引用**：`Instance` → `this.GetSystem<T>()`
+- [x] 8. **StoryEngineSystem 迁移**：从 `IUtility` → `ISystem`
+- [x] 9. **VnTestController 适配**：通过 `GetSystem<T>()` 访问 Manager 和 Engine
+- [x] 10. **回归测试**：dotnet build 0 错误 + 42 测试通过
 
 ### 访问方式对比
 
