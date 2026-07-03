@@ -7,9 +7,10 @@ namespace GFrameworkTemplate.scripts.system.talk;
 /// </summary>
 [Log]
 [ContextAware]
-public partial class TalkSystem : CanvasLayer, ISystem
-    public static TalkSystem? Instance { get; private set; }
+public partial class TalkSystem : CanvasLayer
 {
+    public static TalkSystem? Instance { get; private set; }
+
     private RichTextLabel TalkerNameLabel => GetNode<RichTextLabel>("%TalkerNameLabel");
     private RichTextLabel TalkContentLabel => GetNode<RichTextLabel>("%TalkContentLabel");
     private TextureRect TalkNameBackgroundTextureRect => GetNode<TextureRect>("%TalkNameBackgroundTextureRect");
@@ -17,13 +18,9 @@ public partial class TalkSystem : CanvasLayer, ISystem
 
     public bool IsVisible => TalkBarContainer.Visible;
 
-    public void OnArchitecturePhase(ArchitecturePhase phase) { }
-    public void Init() { }
-    public void Destroy() { }
-
     public override void _Ready()
-        Instance = this;
     {
+        Instance = this;
         Hide();
         this.RegisterEvent<VisualNovelTalkTriggeredEvent>(OnTalk).UnRegisterWhenNodeExitTree(this);
     }

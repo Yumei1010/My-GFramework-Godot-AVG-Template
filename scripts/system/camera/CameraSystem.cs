@@ -8,11 +8,8 @@ namespace GFrameworkTemplate.scripts.system.camera;
 /// </summary>
 [Log]
 [ContextAware]
-public partial class CameraSystem : CanvasLayer, ISystem
+public partial class CameraSystem : CanvasLayer
 {
-    public void OnArchitecturePhase(ArchitecturePhase phase) { }
-    public void Init() { }
-    public void Destroy() { }
 
     private Camera2D? _camera;
     private Vector2 _basePosition;

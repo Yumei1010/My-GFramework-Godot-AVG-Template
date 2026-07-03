@@ -1,3 +1,4 @@
+using GFramework.Core.Abstractions.architecture;
 using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 using GFrameworkTemplate.scripts.data.story;
 
@@ -8,18 +9,14 @@ namespace GFrameworkTemplate.scripts.system.background;
 /// </summary>
 [Log]
 [ContextAware]
-public partial class BackgroundSystem : CanvasLayer, ISystem
-    public static BackgroundSystem? Instance { get; private set; }
+public partial class BackgroundSystem : CanvasLayer
 {
-    public void OnArchitecturePhase(ArchitecturePhase phase) { }
-    public void Init() { }
-    public void Destroy() { }
+    public static BackgroundSystem? Instance { get; private set; }
     private TextureRect MainBg => GetNode<TextureRect>("%MainBg");
     private TextureRect HelperBg => GetNode<TextureRect>("%HelperBg");
     private Tween? _tween;
 
     public override void _Ready()
-        Instance = this;
     {
         HelperBg.Modulate = Colors.Transparent;
         this.RegisterEvent<VisualNovelBackgroundTriggeredEvent>(OnBackground).UnRegisterWhenNodeExitTree(this);

@@ -8,20 +8,16 @@ namespace GFrameworkTemplate.scripts.system.branch;
 /// </summary>
 [Log]
 [ContextAware]
-public partial class BranchSystem : CanvasLayer, ISystem
-    public static BranchSystem? Instance { get; private set; }
+public partial class BranchSystem : CanvasLayer
 {
+    public static BranchSystem? Instance { get; private set; }
     private VBoxContainer _buttonList = null!;
     private StoryEngineSystem _engine = null!;
     private PackedScene _optionScene = null!;
     private readonly List<Node> _activeOptions = new();
 
-    public void OnArchitecturePhase(ArchitecturePhase phase) { }
-    public void Init() { }
-    public void Destroy() { }
 
     public override void _Ready()
-        Instance = this;
     {
         _engine = this.GetSystem<StoryEngineSystem>()!;
         _optionScene = GD.Load<PackedScene>("res://scenes/component/branch_option/branch_option.tscn");

@@ -8,12 +8,9 @@ namespace GFrameworkTemplate.scripts.system.sound;
 /// </summary>
 [Log]
 [ContextAware]
-public partial class SoundSystem : CanvasLayer, ISystem
-    public static SoundSystem? Instance { get; private set; }
+public partial class SoundSystem : CanvasLayer
 {
-    public void OnArchitecturePhase(ArchitecturePhase phase) { }
-    public void Init() { }
-    public void Destroy() { }
+    public static SoundSystem? Instance { get; private set; }
 
     private AudioStreamPlayer BgmPlayer => GetNode<AudioStreamPlayer>("%BgmPlayer");
     private AudioStreamPlayer BgmHelper => GetNode<AudioStreamPlayer>("%BgmHelper");
@@ -23,7 +20,6 @@ public partial class SoundSystem : CanvasLayer, ISystem
     private readonly AudioStreamPlayer[] _sfxPool = new AudioStreamPlayer[8];
 
     public override void _Ready()
-        Instance = this;
     {
         for (var i = 0; i < 8; i++)
             _sfxPool[i] = GetNode<AudioStreamPlayer>($"%SfxPlayer_{i}");

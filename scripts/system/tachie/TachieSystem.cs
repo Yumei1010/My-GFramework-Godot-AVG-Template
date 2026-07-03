@@ -9,12 +9,9 @@ namespace GFrameworkTemplate.scripts.system.tachie;
 /// </summary>
 [Log]
 [ContextAware]
-public partial class TachieSystem : CanvasLayer, ISystem
-    public static TachieSystem? Instance { get; private set; }
+public partial class TachieSystem : CanvasLayer
 {
-    public void OnArchitecturePhase(ArchitecturePhase phase) { }
-    public void Init() { }
-    public void Destroy() { }
+    public static TachieSystem? Instance { get; private set; }
 
     private TextureRect LeftSlot => GetNode<TextureRect>("%LeftSlot");
     private TextureRect CenterSlot => GetNode<TextureRect>("%CenterSlot");
@@ -29,7 +26,6 @@ public partial class TachieSystem : CanvasLayer, ISystem
     private string? _spotlightChar;
 
     public override void _Ready()
-        Instance = this;
     {
         this.RegisterEvent<VisualNovelTachieTriggeredEvent>(OnTachie).UnRegisterWhenNodeExitTree(this);
     }
