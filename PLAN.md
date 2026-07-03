@@ -13,18 +13,19 @@
 
 ## 第二阶段：功能补齐（预估 2-3h）
 
-- [ ] **SoundManager**——全局音频单例
+- [x] **SoundManager**——全局音频单例
   - 双 `AudioStreamPlayer` 用于 BGM 交叉淡入淡出
-  - SFX 对象池（临时 `AudioStreamPlayer`，播放完自动回收）
+  - SFX 对象池（8 个 `AudioStreamPlayer`，空闲时自动扩展）
   - 订阅 `VisualNovelSoundTriggeredEvent`，根据 `SoundType` 分发到 BGM/SFX
-  - 注册为 autoload
-- [ ] **SaveManager**——存档/读档系统
-  - 序列化 `EngineContext` 状态（`PlayingJson`、`CurrentIndex`、`TalkBranch`、`CanNotChoose`）
-  - 视觉快照（当前背景/立绘/对话文本）
-  - JSON 格式持久化到 `user://saves/`
-  - 5 个存档槽位 + UI
-- [ ] **接入点击推进**——`VnTalkPage.Signals.cs` 当前只有注释模板，需实现 `ClickArea` → `engine.Advance()`
-- [ ] **VnTestController 增加重置功能**——添加按键回到初始状态，重新开始故事
+  - 自动扫描 `assets/sound/bgm/`、`assets/sound/sfx/` 等路径
+  - 已注册为 autoload
+- [x] **SaveManager**——存档/读档系统
+  - 序列化引擎状态（`PlayingJson`、`TalkBranch`、`CanNotChoose`）
+  - JSON 格式持久化到 `user://saves/slot_N.json`
+  - 5 个存档槽位，支持 Save/Load/Delete/List
+  - 已注册为 autoload
+- [x] **接入点击推进**——`VisualNovelTalkPage.Signals.cs` 已接入 `engine.Advance()`
+- [x] **VnTestController 增加重置功能**——按 R 重置并重新开始故事
 
 ## 第三阶段：测试和文档（预估 1-2h）
 
