@@ -1,17 +1,17 @@
 using GFrameworkTemplate.scripts.component.camera;
-using GFrameworkTemplate.scripts.system.camera;
+using GFrameworkTemplate.scripts.model.camera;
 
 namespace GFrameworkTemplate.scripts.cqrs.camera.command;
 
 /// <summary>
-///     播放指定的相机效果
+///     添加相机效果
 /// </summary>
-public sealed class PlayCameraEffectCommand : AbstractCommand
+public sealed class AddCameraEffectCommand : AbstractCommand
 {
     public required CameraEffect Effect { get; set; }
 
     protected override void OnExecute()
     {
-        this.GetSystem<CameraSystem>().Play(Effect);
+        this.GetModel<CameraModel>()!.Effects.Add(Effect);
     }
 }

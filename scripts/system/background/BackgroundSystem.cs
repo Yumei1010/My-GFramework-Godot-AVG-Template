@@ -1,9 +1,9 @@
-using GFrameworkTemplate.scripts.model.background;
+using GFrameworkTemplate.scripts.cqrs.background.command;
 
 namespace GFrameworkTemplate.scripts.system.background;
 
 /// <summary>
-///     背景系统——纯 ISystem，通过 BackgroundModel 管理当前路径
+///     背景系统——纯 ISystem，通过 SendCommand 操作 Model
 /// </summary>
 [Log]
 [ContextAware]
@@ -13,11 +13,6 @@ public sealed partial class BackgroundSystem : ISystem
     public void Init() { }
     public void Destroy() { }
 
-    private BackgroundModel Model => this.GetModel<BackgroundModel>()!;
-
-    public void Change(string filePath)
-    {
-        Model.CurrentPath = filePath;
-        _log.Debug($"背景切换: {filePath}");
-    }
+    public void Change(string filePath) =>
+        this.SendCommand(new SetBackgroundCommand { FilePath = filePath });
 }

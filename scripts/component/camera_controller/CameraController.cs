@@ -1,4 +1,4 @@
-using GFrameworkTemplate.scripts.system.camera;
+using GFrameworkTemplate.scripts.cqrs.camera.query;
 
 namespace GFrameworkTemplate.scripts.component.camera_controller;
 
@@ -14,11 +14,9 @@ public partial class CameraController : CanvasLayer
     private Vector2 _basePosition;
     private float _baseZoom = 1f;
     private float _baseRotation;
-    private CameraSystem _system = null!;
 
     public override void _Ready()
     {
-        _system = this.GetSystem<CameraSystem>()!;
         _camera = GetNode<Camera2D>("Camera2D");
         _camera.MakeCurrent();
         _basePosition = _camera.Position;
@@ -31,7 +29,7 @@ public partial class CameraController : CanvasLayer
     {
         if (_camera == null) return;
 
-        var data = _system.GetFrameData((float)delta);
+        var data = this.SendQuery(new GetCameraFrameDataQuery { Delta = (float)delta });
 
         _camera.Position = _basePosition + data.Offset;
         _camera.Zoom = new Vector2(data.Zoom, data.Zoom);

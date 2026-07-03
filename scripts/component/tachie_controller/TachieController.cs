@@ -1,6 +1,6 @@
 using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 using GFrameworkTemplate.scripts.data.story;
-using GFrameworkTemplate.scripts.model.tachie;
+using GFrameworkTemplate.scripts.cqrs.tachie.query;
 using GFrameworkTemplate.scripts.system.tachie;
 
 namespace GFrameworkTemplate.scripts.component.tachie_controller;
@@ -31,7 +31,7 @@ public partial class TachieController : CanvasLayer
 
     private async void Render()
     {
-        var model = this.GetModel<TachieModel>()!;
+        var model = this.SendQuery(new GetTachieStateQuery())!;
         var oldSlots = new Dictionary<string, string?>(model.SlotToChar);
 
         foreach (var r in new[] { LeftSlot, CenterSlot, RightSlot })
