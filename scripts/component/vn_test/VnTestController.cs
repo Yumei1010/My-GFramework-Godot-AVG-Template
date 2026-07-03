@@ -39,11 +39,11 @@ public partial class VnTestController : Node
             switch (e.EventName)
             {
                 case "chapter_end":
-                    this.GetSystem<CameraManager>().Play(new CloseUpEffect { TargetPosition = Vector2.Zero, TargetZoom = 1.3f, Duration = 1.5f });
+                    this.GetSystem<CameraSystem>().Play(new CloseUpEffect { TargetPosition = Vector2.Zero, TargetZoom = 1.3f, Duration = 1.5f });
                     break;
                 case "finale":
-                    this.GetSystem<CameraManager>().Play(new BreatheEffect { Magnitude = 0.03f });
-                    this.GetSystem<CameraManager>().Play(new CloseUpEffect { TargetPosition = new Vector2(0, -20), TargetZoom = 1.2f, Duration = 3f });
+                    this.GetSystem<CameraSystem>().Play(new BreatheEffect { Magnitude = 0.03f });
+                    this.GetSystem<CameraSystem>().Play(new CloseUpEffect { TargetPosition = new Vector2(0, -20), TargetZoom = 1.2f, Duration = 3f });
                     break;
             }
         }).UnRegisterWhenNodeExitTree(this);
@@ -72,29 +72,29 @@ public partial class VnTestController : Node
             switch (key.Keycode)
             {
                 case Key.Key1:
-                    this.GetSystem<CameraManager>().Play(new WalkBobEffect());
+                    this.GetSystem<CameraSystem>().Play(new WalkBobEffect());
                     StatusLabel.Text = "走路摇晃 (按 1 再次叠加)";
                     break;
                 case Key.Key2:
-                    this.GetSystem<CameraManager>().Play(new EarthquakeEffect { Duration = 1.5f, Intensity = 25f });
+                    this.GetSystem<CameraSystem>().Play(new EarthquakeEffect { Duration = 1.5f, Intensity = 25f });
                     StatusLabel.Text = "地震震动 1.5s";
                     break;
                 case Key.Key3:
-                    this.GetSystem<CameraManager>().Play(new CloseUpEffect { TargetPosition = new Vector2(50, -30), TargetZoom = 2f, Duration = 1f });
+                    this.GetSystem<CameraSystem>().Play(new CloseUpEffect { TargetPosition = new Vector2(50, -30), TargetZoom = 2f, Duration = 1f });
                     StatusLabel.Text = "特写聚焦 1s";
                     break;
                 case Key.Key4:
-                    this.GetSystem<CameraManager>().Play(new PanEffect { Direction = Vector2.Left, Speed = 80f, Duration = 2f });
+                    this.GetSystem<CameraSystem>().Play(new PanEffect { Direction = Vector2.Left, Speed = 80f, Duration = 2f });
                     StatusLabel.Text = "左平移 2s";
                     break;
                 case Key.Key5:
-                    this.GetSystem<CameraManager>().Stop<WalkBobEffect>();
-                    this.GetSystem<CameraManager>().Clear();
+                    this.GetSystem<CameraSystem>().Stop<WalkBobEffect>();
+                    this.GetSystem<CameraSystem>().Clear();
                     StatusLabel.Text = "相机重置";
                     break;
                 case Key.H:
-                    this.GetSystem<TalkManager>().Toggle();
-                    StatusLabel.Text = this.GetSystem<TalkManager>().IsVisible ? "对话框: 显示" : "对话框: 隐藏";
+                    this.GetSystem<TalkSystem>().Toggle();
+                    StatusLabel.Text = this.GetSystem<TalkSystem>().IsVisible ? "对话框: 显示" : "对话框: 隐藏";
                     break;
                 case Key.R:
                     _engine.Stop();

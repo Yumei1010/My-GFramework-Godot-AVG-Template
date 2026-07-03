@@ -15,7 +15,7 @@ namespace GFrameworkTemplate.scripts.system.background;
 /// </summary>
 [Log]
 [ContextAware]
-public partial class BackgroundManager : CanvasLayer, ISystem
+public partial class BackgroundSystem : CanvasLayer, ISystem
 {
     public void OnArchitecturePhase(ArchitecturePhase phase) { }
     public void Init() { }
@@ -28,7 +28,7 @@ public partial class BackgroundManager : CanvasLayer, ISystem
     {
         HelperBg.Modulate = Colors.Transparent;
         this.RegisterEvent<VisualNovelBackgroundTriggeredEvent>(OnBackground).UnRegisterWhenNodeExitTree(this);
-        _log.Debug("BackgroundManager 就绪");
+        _log.Debug("BackgroundSystem 就绪");
     }
 
     private async void OnBackground(VisualNovelBackgroundTriggeredEvent e)

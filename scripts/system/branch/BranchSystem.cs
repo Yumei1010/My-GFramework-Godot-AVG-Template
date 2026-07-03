@@ -4,7 +4,6 @@ using GFramework.Core.extensions;
 using GFramework.Godot.extensions;
 using GFramework.SourceGenerators.Abstractions.logging;
 using GFramework.SourceGenerators.Abstractions.rule;
-using GFrameworkTemplate.scripts.component.branch_option;
 using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 using GFrameworkTemplate.scripts.system.visualnovel;
 using Godot;
@@ -16,7 +15,7 @@ namespace GFrameworkTemplate.scripts.system.branch;
 /// </summary>
 [Log]
 [ContextAware]
-public partial class BranchManager : CanvasLayer, ISystem
+public partial class BranchSystem : CanvasLayer, ISystem
 {
     private VBoxContainer _buttonList = null!;
     private StoryEngineSystem _engine = null!;

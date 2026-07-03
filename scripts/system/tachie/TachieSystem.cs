@@ -16,7 +16,7 @@ namespace GFrameworkTemplate.scripts.system.tachie;
 /// </summary>
 [Log]
 [ContextAware]
-public partial class TachieManager : CanvasLayer, ISystem
+public partial class TachieSystem : CanvasLayer, ISystem
 {
     public void OnArchitecturePhase(ArchitecturePhase phase) { }
     public void Init() { }

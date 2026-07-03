@@ -14,7 +14,7 @@ namespace GFrameworkTemplate.scripts.system.save;
 /// </summary>
 [Log]
 [ContextAware]
-public sealed partial class SaveManager : ISystem
+public sealed partial class SaveSystem : ISystem
 {
     private StoryEngineSystem _engine = null!;
     private const string SaveDir = "user://saves";
@@ -25,7 +25,7 @@ public sealed partial class SaveManager : ISystem
     {
         _engine = this.GetSystem<StoryEngineSystem>()!;
         DirAccess.MakeDirAbsolute(SaveDir);
-        _log.Debug("SaveManager 初始化");
+        _log.Debug("SaveSystem 初始化");
     }
     public void Destroy() { }
 

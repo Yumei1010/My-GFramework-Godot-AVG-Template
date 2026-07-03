@@ -19,6 +19,6 @@ public class SystemModule : AbstractModule
         architecture.RegisterSystem(new SceneRouter());
         architecture.RegisterSystem(new SettingsSystem());
         architecture.RegisterSystem(new StoryEngineSystem());
-        architecture.RegisterSystem(new SaveManager());
+        architecture.RegisterSystem(new SaveSystem());
     }
 }

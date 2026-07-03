@@ -9,11 +9,11 @@ namespace GFrameworkTemplate.scripts.system.camera;
 
 /// <summary>
 ///     相机管理器全局单例——优先级叠加式镜头效果系统
-///     用法: this.GetSystem&lt;CameraManager&gt;().Play(new EarthquakeEffect { Duration = 1.5f, Intensity = 25f });
+///     用法: this.GetSystem&lt;CameraSystem&gt;().Play(new EarthquakeEffect { Duration = 1.5f, Intensity = 25f });
 /// </summary>
 [Log]
 [ContextAware]
-public partial class CameraManager : CanvasLayer, ISystem
+public partial class CameraSystem : CanvasLayer, ISystem
 {
     public void OnArchitecturePhase(ArchitecturePhase phase) { }
     public void Init() { }
@@ -25,7 +25,7 @@ public partial class CameraManager : CanvasLayer, ISystem
     private float _baseRotation;
     private readonly List<CameraEffect> _effects = new();
 
-    public static CameraManager? Instance { get; private set; }
+    public static CameraSystem? Instance { get; private set; }
 
     public override void _Ready()
     {
@@ -35,7 +35,7 @@ public partial class CameraManager : CanvasLayer, ISystem
         _basePosition = _camera.Position;
         _baseZoom = _camera.Zoom.X;
         _baseRotation = _camera.Rotation;
-        _log.Debug("CameraManager 就绪");
+        _log.Debug("CameraSystem 就绪");
     }
 
     public override void _Process(double delta)

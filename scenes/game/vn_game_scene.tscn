@@ -11,14 +11,14 @@
 [node name="VnGameScene" type="Node"]
 script = ExtResource("0_ctrl")
 
-[node name="BackgroundManager" parent="." instance=ExtResource("4_bg")]
+[node name="BackgroundSystem" parent="." instance=ExtResource("4_bg")]
 
-[node name="CameraManager" parent="." instance=ExtResource("5_cam")]
+[node name="CameraSystem" parent="." instance=ExtResource("5_cam")]
 
-[node name="TachieManager" parent="." instance=ExtResource("2_tachie")]
+[node name="TachieSystem" parent="." instance=ExtResource("2_tachie")]
 
-[node name="TalkManager" parent="." instance=ExtResource("1_talk")]
+[node name="TalkSystem" parent="." instance=ExtResource("1_talk")]
 
-[node name="BranchManager" parent="." instance=ExtResource("3_branch")]
+[node name="BranchSystem" parent="." instance=ExtResource("3_branch")]
 
-[node name="SoundManager" parent="." instance=ExtResource("6_sfx")]
+[node name="SoundSystem" parent="." instance=ExtResource("6_sfx")]

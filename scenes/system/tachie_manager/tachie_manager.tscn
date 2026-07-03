@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://h7m680fxsukf" path="res://scripts/system/tachie/TachieSystem.cs" id="1_ctrl"]
 
-[node name="TachieManager" type="CanvasLayer" unique_id=1189973803]
+[node name="TachieSystem" type="CanvasLayer" unique_id=1189973803]
 layer = 10
 script = ExtResource("1_ctrl")
 

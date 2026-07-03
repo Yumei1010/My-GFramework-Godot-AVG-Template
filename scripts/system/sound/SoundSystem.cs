@@ -15,7 +15,7 @@ namespace GFrameworkTemplate.scripts.system.sound;
 /// </summary>
 [Log]
 [ContextAware]
-public partial class SoundManager : CanvasLayer, ISystem
+public partial class SoundSystem : CanvasLayer, ISystem
 {
     public void OnArchitecturePhase(ArchitecturePhase phase) { }
     public void Init() { }
@@ -35,7 +35,7 @@ public partial class SoundManager : CanvasLayer, ISystem
 
         BgmHelper.VolumeDb = -80f;
         this.RegisterEvent<VisualNovelSoundTriggeredEvent>(OnSound).UnRegisterWhenNodeExitTree(this);
-        _log.Debug("SoundManager 就绪");
+        _log.Debug("SoundSystem 就绪");
     }
 
     private void OnSound(VisualNovelSoundTriggeredEvent e)

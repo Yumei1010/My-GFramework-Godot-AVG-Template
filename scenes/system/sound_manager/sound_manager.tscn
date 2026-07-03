@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dj4hotlfyeosx" path="res://scripts/system/sound/SoundSystem.cs" id="1_ctrl"]
 
-[node name="SoundManager" type="CanvasLayer" unique_id=317858591]
+[node name="SoundSystem" type="CanvasLayer" unique_id=317858591]
 script = ExtResource("1_ctrl")
 
 [node name="BgmPlayer" type="AudioStreamPlayer" parent="." unique_id=1525004268]

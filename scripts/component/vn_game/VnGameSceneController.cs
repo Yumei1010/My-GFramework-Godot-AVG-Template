@@ -20,12 +20,12 @@ public partial class VnGameSceneController : Node
 {
     public override void _Ready()
     {
-        try { GameEntryPoint.Architecture.RegisterSystem(GetNode<TalkManager>("TalkManager")); } catch { }
-        try { GameEntryPoint.Architecture.RegisterSystem(GetNode<TachieManager>("TachieManager")); } catch { }
-        try { GameEntryPoint.Architecture.RegisterSystem(GetNode<BranchManager>("BranchManager")); } catch { }
-        try { GameEntryPoint.Architecture.RegisterSystem(GetNode<BackgroundManager>("BackgroundManager")); } catch { }
-        try { GameEntryPoint.Architecture.RegisterSystem(GetNode<CameraManager>("CameraManager")); } catch { }
-        try { GameEntryPoint.Architecture.RegisterSystem(GetNode<SoundManager>("SoundManager")); } catch { }
+        try { GameEntryPoint.Architecture.RegisterSystem(GetNode<TalkSystem>("TalkSystem")); } catch { }
+        try { GameEntryPoint.Architecture.RegisterSystem(GetNode<TachieSystem>("TachieSystem")); } catch { }
+        try { GameEntryPoint.Architecture.RegisterSystem(GetNode<BranchSystem>("BranchSystem")); } catch { }
+        try { GameEntryPoint.Architecture.RegisterSystem(GetNode<BackgroundSystem>("BackgroundSystem")); } catch { }
+        try { GameEntryPoint.Architecture.RegisterSystem(GetNode<CameraSystem>("CameraSystem")); } catch { }
+        try { GameEntryPoint.Architecture.RegisterSystem(GetNode<SoundSystem>("SoundSystem")); } catch { }
         _log.Debug("VnGameScene 就绪——Manager 已注册");
     }
 }

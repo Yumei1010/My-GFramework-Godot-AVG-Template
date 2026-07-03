@@ -14,7 +14,7 @@ namespace GFrameworkTemplate.scripts.system.talk;
 /// </summary>
 [Log]
 [ContextAware]
-public partial class TalkManager : CanvasLayer, ISystem
+public partial class TalkSystem : CanvasLayer, ISystem
 {
     private RichTextLabel TalkerNameLabel => GetNode<RichTextLabel>("%TalkerNameLabel");
     private RichTextLabel TalkContentLabel => GetNode<RichTextLabel>("%TalkContentLabel");
