@@ -1,14 +1,15 @@
 using GFrameworkTemplate.scripts.component.camera;
-using GFrameworkTemplate.scripts.system.camera;
-using GFrameworkTemplate.scripts.system.talk;
+using GFrameworkTemplate.scripts.cqrs.camera.command;
+using GFrameworkTemplate.scripts.cqrs.story.command;
+using GFrameworkTemplate.scripts.cqrs.talk.command;
 using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 using GFrameworkTemplate.scripts.system.visualnovel;
 
 namespace GFrameworkTemplate.scripts.component.vn_test;
 
 /// <summary>
-///     VN 引擎测试控制器
-///     数字键 1-5: 相机效果 | R: 重置故事
+///     VN 引擎测试控制器——通过 SendCommand 走 CQRS 管线
+///     数字键 1-5: 相机效果 | H: 切换对话框 | R: 重置
 /// </summary>
 [Log]
 [ContextAware]
@@ -34,16 +35,18 @@ public partial class VnTestController : Node
             switch (e.EventName)
             {
                 case "chapter_end":
-                    this.GetSystem<CameraSystem>().Play(new CloseUpEffect { TargetPosition = Vector2.Zero, TargetZoom = 1.3f, Duration = 1.5f });
+                    this.SendCommand(new PlayCameraEffectCommand
+                        { Effect = new CloseUpEffect { TargetPosition = Vector2.Zero, TargetZoom = 1.3f, Duration = 1.5f } });
                     break;
                 case "finale":
-                    this.GetSystem<CameraSystem>().Play(new BreatheEffect { Magnitude = 0.03f });
-                    this.GetSystem<CameraSystem>().Play(new CloseUpEffect { TargetPosition = new Vector2(0, -20), TargetZoom = 1.2f, Duration = 3f });
+                    this.SendCommand(new PlayCameraEffectCommand { Effect = new BreatheEffect { Magnitude = 0.03f } });
+                    this.SendCommand(new PlayCameraEffectCommand
+                        { Effect = new CloseUpEffect { TargetPosition = new Vector2(0, -20), TargetZoom = 1.2f, Duration = 3f } });
                     break;
             }
         }).UnRegisterWhenNodeExitTree(this);
 
-        StatusLabel.Text = "点击开始 | 1-5: 相机效果 | R: 重置";
+        StatusLabel.Text = "点击开始 | 1-5: 相机效果 | H: 对话框 | R: 重置";
         _log.Debug("VnTestController 就绪");
     }
 
@@ -53,12 +56,12 @@ public partial class VnTestController : Node
         {
             if (!_engine.IsPlaying)
             {
-                _ = _engine.LoadAndPlay("FirstDay");
-                StatusLabel.Text = "播放中... | 1-5: 相机 | R: 重置";
+                this.SendCommand(new LoadStoryCommand { StoryName = "FirstDay" });
+                StatusLabel.Text = "播放中... | 1-5: 相机 | H: 对话框 | R: 重置";
             }
             else
             {
-                _engine.Advance();
+                this.SendCommand(new AdvanceStoryCommand());
             }
         }
 
@@ -67,33 +70,35 @@ public partial class VnTestController : Node
             switch (key.Keycode)
             {
                 case Key.Key1:
-                    this.GetSystem<CameraSystem>().Play(new WalkBobEffect());
+                    this.SendCommand(new PlayCameraEffectCommand { Effect = new WalkBobEffect() });
                     StatusLabel.Text = "走路摇晃 (按 1 再次叠加)";
                     break;
                 case Key.Key2:
-                    this.GetSystem<CameraSystem>().Play(new EarthquakeEffect { Duration = 1.5f, Intensity = 25f });
+                    this.SendCommand(new PlayCameraEffectCommand
+                        { Effect = new EarthquakeEffect { Duration = 1.5f, Intensity = 25f } });
                     StatusLabel.Text = "地震震动 1.5s";
                     break;
                 case Key.Key3:
-                    this.GetSystem<CameraSystem>().Play(new CloseUpEffect { TargetPosition = new Vector2(50, -30), TargetZoom = 2f, Duration = 1f });
+                    this.SendCommand(new PlayCameraEffectCommand
+                        { Effect = new CloseUpEffect { TargetPosition = new Vector2(50, -30), TargetZoom = 2f, Duration = 1f } });
                     StatusLabel.Text = "特写聚焦 1s";
                     break;
                 case Key.Key4:
-                    this.GetSystem<CameraSystem>().Play(new PanEffect { Direction = Vector2.Left, Speed = 80f, Duration = 2f });
+                    this.SendCommand(new PlayCameraEffectCommand
+                        { Effect = new PanEffect { Direction = Vector2.Left, Speed = 80f, Duration = 2f } });
                     StatusLabel.Text = "左平移 2s";
                     break;
                 case Key.Key5:
-                    this.GetSystem<CameraSystem>().Stop<WalkBobEffect>();
-                    this.GetSystem<CameraSystem>().Clear();
+                    this.SendCommand(new StopCameraEffectCommand());
                     StatusLabel.Text = "相机重置";
                     break;
                 case Key.H:
-                    this.GetSystem<TalkSystem>().Toggle();
-                    StatusLabel.Text = this.GetSystem<TalkSystem>().IsVisible ? "对话框: 显示" : "对话框: 隐藏";
+                    this.SendCommand(new ToggleTalkCommand());
+                    StatusLabel.Text = "对话框: 已切换";
                     break;
                 case Key.R:
                     _engine.Stop();
-                    _ = _engine.LoadAndPlay("FirstDay");
+                    this.SendCommand(new LoadStoryCommand { StoryName = "FirstDay" });
                     StatusLabel.Text = "已重置，重新播放中...";
                     break;
             }

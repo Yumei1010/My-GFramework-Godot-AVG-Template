@@ -11,6 +11,10 @@ global using Godot;
 global using GFramework.Core.extensions;
 global using GFramework.Godot.extensions;
 
+// GFramework 命令/查询基类
+global using GFramework.Core.command;
+global using GFramework.Core.query;
+
 // GFramework 源代码生成器特性（[Log] / [ContextAware]）
 global using GFramework.SourceGenerators.Abstractions.logging;
 global using GFramework.SourceGenerators.Abstractions.rule;

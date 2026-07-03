@@ -1,4 +1,4 @@
-using GFrameworkTemplate.scripts.system.visualnovel;
+using GFrameworkTemplate.scripts.cqrs.story.command;
 
 namespace GFrameworkTemplate.scripts.menu;
 
@@ -9,9 +9,7 @@ public partial class VisualNovelTalkPage
         ClickArea.GuiInput += args =>
         {
             if (args is InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left })
-            {
-                this.GetSystem<StoryEngineSystem>()?.Advance();
-            }
+                this.SendCommand(new AdvanceStoryCommand());
         };
     }
 }
