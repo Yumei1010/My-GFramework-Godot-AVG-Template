@@ -16,12 +16,25 @@ namespace GFrameworkTemplate.scripts.system.visualnovel;
 public sealed partial class StoryEngineSystem : ISystem
 {
     private readonly EngineContext _ctx;
-    private StoryExecutionSystem _executor = null!;
+    private readonly Dictionary<string, IStoryExecutionSystem> _executors = new();
 
     public StoryEngineSystem() => _ctx = new EngineContext(this);
 
     public void OnArchitecturePhase(ArchitecturePhase phase) { }
-    public void Init() { _executor = this.GetSystem<StoryExecutionSystem>()!; }
+    public void Init()
+    {
+        foreach (var sys in new IStoryExecutionSystem[]
+        {
+            this.GetSystem<TalkExecutionSystem>()!,
+            this.GetSystem<BackgroundExecutionSystem>()!,
+            this.GetSystem<TachieExecutionSystem>()!,
+            this.GetSystem<SoundExecutionSystem>()!,
+            this.GetSystem<BranchExecutionSystem>()!,
+            this.GetSystem<GotoExecutionSystem>()!,
+            this.GetSystem<EventExecutionSystem>()!
+        })
+            _executors[sys.CommandType] = sys;
+    }
     public void Destroy() { }
 
     private StoryStateResult State => this.SendQuery(new GetStoryStateQuery());
@@ -64,7 +77,8 @@ public sealed partial class StoryEngineSystem : ISystem
             if (cmd.HideLabels)
                 this.SendEvent<VisualNovelAdvanceRequestedEvent>();
 
-            await _executor.Dispatch(cmd, _ctx);
+            if (_executors.TryGetValue(cmd.Type, out var executor))
+                await executor.ExecuteAsync(cmd, _ctx);
 
             if (cmd.Wait.HasValue)
                 await Task.Delay(TimeSpan.FromSeconds(cmd.Wait.Value));
