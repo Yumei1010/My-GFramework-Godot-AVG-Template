@@ -1,9 +1,27 @@
 [gd_scene format=3 uid="uid://ddihmwmfs7734"]
 
 [ext_resource type="Script" uid="uid://bnkeicomr0ihu" path="res://scripts/component/vn_test/VnTestController.cs" id="1_ctrl"]
+[ext_resource type="PackedScene" path="res://scenes/system/talk_manager/talk_manager.tscn" id="2_talk"]
+[ext_resource type="PackedScene" path="res://scenes/system/tachie_manager/tachie_manager.tscn" id="3_tachie"]
+[ext_resource type="PackedScene" path="res://scenes/system/branch_manager/branch_manager.tscn" id="4_branch"]
+[ext_resource type="PackedScene" path="res://scenes/system/background_manager/background_manager.tscn" id="5_bg"]
+[ext_resource type="PackedScene" path="res://scenes/system/camera_manager/camera_manager.tscn" id="6_cam"]
+[ext_resource type="PackedScene" path="res://scenes/system/sound_manager/sound_manager.tscn" id="7_sfx"]
 
 [node name="VnTest" type="Node"]
 script = ExtResource("1_ctrl")
+
+[node name="BackgroundManager" parent="." instance=ExtResource("5_bg")]
+
+[node name="CameraManager" parent="." instance=ExtResource("6_cam")]
+
+[node name="TachieManager" parent="." instance=ExtResource("3_tachie")]
+
+[node name="TalkManager" parent="." instance=ExtResource("2_talk")]
+
+[node name="BranchManager" parent="." instance=ExtResource("4_branch")]
+
+[node name="SoundManager" parent="." instance=ExtResource("7_sfx")]
 
 [node name="StatusLabel" type="Label" parent="."]
 unique_name_in_owner = true

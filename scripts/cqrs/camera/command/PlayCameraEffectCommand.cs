@@ -1,4 +1,3 @@
-using GFramework.Core.Abstractions.command;
 using GFrameworkTemplate.scripts.component.camera;
 using GFrameworkTemplate.scripts.system.camera;
 

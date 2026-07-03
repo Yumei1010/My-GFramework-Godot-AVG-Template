@@ -1,4 +1,3 @@
-using GFramework.Core.Abstractions.command;
 using GFrameworkTemplate.scripts.system.camera;
 
 namespace GFrameworkTemplate.scripts.cqrs.camera.command;
