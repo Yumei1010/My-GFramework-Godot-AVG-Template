@@ -1,9 +1,4 @@
-using GFramework.Core.Abstractions.enums;
-using GFramework.Core.Abstractions.system;
-using GFramework.SourceGenerators.Abstractions.logging;
-using GFramework.SourceGenerators.Abstractions.rule;
 using GFrameworkTemplate.scripts.component.camera;
-using Godot;
 
 namespace GFrameworkTemplate.scripts.system.camera;
 

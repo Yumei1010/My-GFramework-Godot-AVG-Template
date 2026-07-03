@@ -1,5 +1,4 @@
 ﻿using GFramework.Core.command;
-using GFramework.Core.extensions;
 using GFramework.Game.Abstractions.setting;
 
 namespace GFrameworkTemplate.scripts.cqrs.setting.command;

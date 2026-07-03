@@ -1,7 +1,4 @@
-using GFramework.Core.extensions;
-using GFramework.Godot.extensions;
 using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
-using Godot;
 
 namespace GFrameworkTemplate.scripts.menu;
 

@@ -1,6 +1,4 @@
-using GFramework.Core.extensions;
 using GFrameworkTemplate.scripts.system.visualnovel;
-using Godot;
 
 namespace GFrameworkTemplate.scripts.menu;
 

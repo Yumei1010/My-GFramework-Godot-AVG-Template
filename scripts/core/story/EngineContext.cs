@@ -1,6 +1,5 @@
 using GFramework.Core.Abstractions.events;
 using GFramework.Core.Abstractions.rule;
-using GFramework.Core.extensions;
 
 namespace GFrameworkTemplate.scripts.core.story;
 

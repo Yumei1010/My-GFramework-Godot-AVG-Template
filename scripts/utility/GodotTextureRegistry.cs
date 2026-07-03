@@ -1,5 +1,4 @@
 ﻿using GFramework.Core.Abstractions.registries;
-using Godot;
 
 namespace GFrameworkTemplate.scripts.utility;
 

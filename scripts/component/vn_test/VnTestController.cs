@@ -1,13 +1,8 @@
-using GFramework.Core.extensions;
-using GFramework.Godot.extensions;
-using GFramework.SourceGenerators.Abstractions.logging;
-using GFramework.SourceGenerators.Abstractions.rule;
 using GFrameworkTemplate.scripts.component.camera;
 using GFrameworkTemplate.scripts.system.camera;
 using GFrameworkTemplate.scripts.system.talk;
 using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 using GFrameworkTemplate.scripts.system.visualnovel;
-using Godot;
 
 namespace GFrameworkTemplate.scripts.component.vn_test;
 

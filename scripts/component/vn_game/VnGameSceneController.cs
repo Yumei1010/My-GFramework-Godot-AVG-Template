@@ -1,5 +1,3 @@
-using GFramework.SourceGenerators.Abstractions.logging;
-using GFramework.SourceGenerators.Abstractions.rule;
 using GFrameworkTemplate.global;
 using GFrameworkTemplate.scripts.system.background;
 using GFrameworkTemplate.scripts.system.branch;
@@ -7,7 +5,6 @@ using GFrameworkTemplate.scripts.system.camera;
 using GFrameworkTemplate.scripts.system.sound;
 using GFrameworkTemplate.scripts.system.tachie;
 using GFrameworkTemplate.scripts.system.talk;
-using Godot;
 
 namespace GFrameworkTemplate.scripts.component.vn_game;
 

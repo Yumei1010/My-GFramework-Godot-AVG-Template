@@ -1,6 +1,4 @@
-using GFramework.Core.extensions;
 using GFrameworkTemplate.global;
-using Godot;
 
 namespace GFrameworkTemplate.scripts.menu;
 

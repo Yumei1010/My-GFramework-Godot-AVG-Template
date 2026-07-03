@@ -7,7 +7,6 @@ using GFramework.Godot.scene;
 using GFramework.Godot.storage;
 using GFramework.Godot.ui;
 using GFrameworkTemplate.scripts.utility;
-using Godot;
 
 namespace GFrameworkTemplate.scripts.module;
 
