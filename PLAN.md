@@ -35,6 +35,87 @@
 - [x] **补充示例素材说明**：`assets/README.md` 说明目录用途和素材规格
 - [x] **README.md 补充 VN 快速上手**：`STORY_FORMAT.md` 已有完整文档 + `assets/README.md`
 
+## 第四阶段：AVG-CQRS 架构重构（待定夺）
+
+> 分支 `AVG-CQRS`。目标：Manager 脱离 autoload + static Instance，转为 GF 框架的 ISystem，挂载到专用游戏场景下。
+> 参考上游：`D:\By GitHub\Twenty-four`。
+
+### 背景
+
+当前所有 Manager（Talk/Tachie/Branch/Background/Camera/Sound/Save）均注册为 Godot autoload，通过 `static Instance` 全局访问。问题：
+- 它们仅在 VN 游戏场景中有意义，主菜单/相册/设置不需要它们
+- static Instance 与 GFramework DI 体系不一致
+- 无法利用生命期管理（随场景进入/退出自动 Init/Destroy）
+
+### 核心变化
+
+```
+当前                              → 目标
+Manager = autoload + Instance      → ISystem，注册到 SystemModule
+Manager 挂 scene tree 根            → 挂载在 VnGameScene 下
+project.godot 11 个 autoload       → 仅 5 个框架 autoload 保留
+```
+
+### Manager 分类
+
+**需 Godot 节点的 Manager（挂到 VnGameScene）：**
+
+| Manager | 节点类型 | 实现 ISystem |
+|---------|---------|-------------|
+| TalkManager | CanvasLayer + RichTextLabel | ✅ |
+| TachieManager | CanvasLayer + TextureRect×4 | ✅ |
+| BranchManager | CanvasLayer + Button | ✅ |
+| BackgroundManager | CanvasLayer + TextureRect×2 | ✅ |
+| CameraManager | CanvasLayer + Camera2D | ✅ |
+| SoundManager | CanvasLayer + AudioStreamPlayer×10 | ✅ |
+
+**纯逻辑 Manager（注册为 ISystem，无场景节点）：**
+
+| 类 | 职责 |
+|---|------|
+| StoryEngineSystem | 引擎循环（已注册为 IUtility，需改为 ISystem） |
+| SaveManager | JSON 存档 |
+
+**保留为 autoload（框架基础设施）：**
+
+```
+GameEntryPoint, SceneRoot, UiRoot, GlobalInputController, SceneTransitionManager
+```
+
+### 实施步骤
+
+- [ ] 1. **Manager 实现 ISystem**：添加 `ISystem` 接口（`Init()`/`Destroy()`/`OnArchitecturePhase()`）
+- [ ] 2. **移除 static Instance**：删除所有 `public static Xxx Instance`，改用 DI 访问
+- [ ] 3. **注册到 SystemModule**：`architecture.RegisterSystem(new TalkManager())` 等
+- [ ] 4. **创建 VnGameScene**：新建 `.tscn` 场景，容纳所有需节点的 Manager 作为子节点
+- [ ] 5. **创建 VnGameState**：进入状态时加载 VnGameScene，退出时卸载
+- [ ] 6. **清理 autoload**：project.godot 移除 7 个 Manager autoload
+- [ ] 7. **更新所有引用**：`TalkManager.Instance` → `this.GetSystem<TalkManager>()`
+- [ ] 8. **StoryEngineSystem 迁移**：从 `IUtility` → `ISystem`
+- [ ] 9. **VnTestController 适配**：通过 `GetSystem<T>()` 访问 Manager 和 Engine
+- [ ] 10. **回归测试**：dotnet build + 3 章故事完整播放
+
+### 访问方式对比
+
+```csharp
+// 重构前
+TalkManager.Instance?.Toggle();
+CameraManager.Instance?.Play(new EarthquakeEffect { Duration = 1.5f });
+
+// 重构后
+this.GetSystem<TalkManager>().Toggle();
+this.GetSystem<CameraManager>().Play(new EarthquakeEffect { Duration = 1.5f });
+```
+
+### 风险评估
+
+| 风险 | 缓解 |
+|------|------|
+| `ISystem` 接口契约未知 | 参考 `PokerSystem` 等 Twenty-four 现有实现 |
+| `[ContextAware]` + `ISystem` 兼容性 | 已验证 Twenty-four 的 System 同时使用两者 |
+| Godot 节点在 System 中的生命周期 | Manager 挂在 VnGameScene 下，随场景 `queue_free` 自然释放 |
+| 事件订阅者变更 | `UnRegisterWhenNodeExitTree` 仍适用 |
+
 ## 后续考虑
 
 - [ ] 给 `branch_option.tscn` 加 C# 脚本，消除 `BranchManager` 中的硬编码字符串路径
