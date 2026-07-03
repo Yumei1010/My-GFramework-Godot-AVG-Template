@@ -4,13 +4,6 @@ using GFramework.Game.setting;
 using GFrameworkTemplate.scripts.core.scene;
 using GFrameworkTemplate.scripts.core.ui;
 using GFrameworkTemplate.scripts.system.visualnovel;
-using GFrameworkTemplate.scripts.system.visualnovel;
-using GFrameworkTemplate.scripts.system.visualnovel;
-using GFrameworkTemplate.scripts.system.visualnovel;
-using GFrameworkTemplate.scripts.system.visualnovel;
-using GFrameworkTemplate.scripts.system.visualnovel;
-using GFrameworkTemplate.scripts.system.visualnovel;
-using GFrameworkTemplate.scripts.system.visualnovel;
 
 namespace GFrameworkTemplate.scripts.module;
 
