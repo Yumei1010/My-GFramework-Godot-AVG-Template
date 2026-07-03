@@ -12,14 +12,13 @@ namespace GFrameworkTemplate.scripts.component.vn_test;
 
 /// <summary>
 ///     VN 引擎测试控制器
-///     数字键 1-5 手动测试相机效果
+///     数字键 1-5: 相机效果 | R: 重置故事
 /// </summary>
 [Log]
 [ContextAware]
 public partial class VnTestController : Node
 {
     private Label StatusLabel => GetNode<Label>("%StatusLabel");
-
     private StoryEngineSystem _engine = null!;
 
     public override void _Ready()
@@ -31,10 +30,9 @@ public partial class VnTestController : Node
         StoryEngineSystem.RegisterJson("Chapter3.json", "res://resource/story/chapter3/Chapter3.json");
 
         this.RegisterEvent<VisualNovelStoryFinishedEvent>(_ =>
-            StatusLabel.Text = "故事播放完毕。按 1-5 测试相机效果。"
+            StatusLabel.Text = "故事播放完毕。按 1-5 测试相机效果，R 重置。"
         ).UnRegisterWhenNodeExitTree(this);
 
-        // 故事事件 → 相机效果
         this.RegisterEvent<VisualNovelCustomEventTriggeredEvent>(e =>
         {
             switch (e.EventName)
@@ -49,7 +47,7 @@ public partial class VnTestController : Node
             }
         }).UnRegisterWhenNodeExitTree(this);
 
-        StatusLabel.Text = "点击开始 | 数字键 1-5: 相机效果";
+        StatusLabel.Text = "点击开始 | 1-5: 相机效果 | R: 重置";
         _log.Debug("VnTestController 就绪");
     }
 
@@ -60,7 +58,7 @@ public partial class VnTestController : Node
             if (!_engine.IsPlaying)
             {
                 _ = _engine.LoadAndPlay("FirstDay");
-                StatusLabel.Text = "播放中... | 1-5: 相机效果";
+                StatusLabel.Text = "播放中... | 1-5: 相机 | R: 重置";
             }
             else
             {
@@ -92,6 +90,11 @@ public partial class VnTestController : Node
                     CameraManager.Instance?.Stop<WalkBobEffect>();
                     CameraManager.Instance?.Clear();
                     StatusLabel.Text = "相机重置";
+                    break;
+                case Key.R:
+                    _engine.Stop();
+                    _ = _engine.LoadAndPlay("FirstDay");
+                    StatusLabel.Text = "已重置，重新播放中...";
                     break;
             }
         }

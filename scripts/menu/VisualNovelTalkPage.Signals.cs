@@ -1,3 +1,5 @@
+using GFramework.Core.extensions;
+using GFrameworkTemplate.scripts.system.visualnovel;
 using Godot;
 
 namespace GFrameworkTemplate.scripts.menu;
@@ -10,7 +12,7 @@ public partial class VisualNovelTalkPage
         {
             if (args is InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left })
             {
-                // 使用者在此调用故事引擎的 Advance() 方法
+                this.GetUtility<StoryEngineSystem>()?.Advance();
             }
         };
     }

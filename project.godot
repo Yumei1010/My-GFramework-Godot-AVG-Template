@@ -39,6 +39,8 @@ TachieManager="*res://global/tachie_manager.tscn"
 TalkManager="*res://global/talk_manager.tscn"
 BranchManager="*res://global/branch_manager.tscn"
 CameraManager="*res://global/camera_manager.tscn"
+SoundManager="*res://global/sound_manager.tscn"
+SaveManager="*res://global/save_manager.tscn"
 
 [display]
 

@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://global/SoundManager.cs" id="1_ctrl"]
+
+[node name="SoundManager" type="CanvasLayer"]
+script = ExtResource("1_ctrl")
