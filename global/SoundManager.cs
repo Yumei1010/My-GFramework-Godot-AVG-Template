@@ -15,7 +15,7 @@ namespace GFrameworkTemplate.global;
 [ContextAware]
 public partial class SoundManager : CanvasLayer
 {
-    private AudioStreamPlayer BgmMain => GetNode<AudioStreamPlayer>("%BgmMain");
+    private AudioStreamPlayer BgmPlayer => GetNode<AudioStreamPlayer>("%BgmPlayer");
     private AudioStreamPlayer BgmHelper => GetNode<AudioStreamPlayer>("%BgmHelper");
     private Tween? _bgmTween;
     private string _currentBgmPath = string.Empty;
@@ -25,7 +25,7 @@ public partial class SoundManager : CanvasLayer
     public override void _Ready()
     {
         for (var i = 0; i < 8; i++)
-            _sfxPool[i] = GetNode<AudioStreamPlayer>($"%Sfx_{i}");
+            _sfxPool[i] = GetNode<AudioStreamPlayer>($"%SfxPlayer_{i}");
 
         BgmHelper.VolumeDb = -80f;
         this.RegisterEvent<VisualNovelSoundTriggeredEvent>(OnSound).UnRegisterWhenNodeExitTree(this);
@@ -57,11 +57,11 @@ public partial class SoundManager : CanvasLayer
 
         _bgmTween = CreateTween();
         _bgmTween.TweenProperty(BgmHelper, "volume_db", 0f, 1f);
-        _bgmTween.Parallel().TweenProperty(BgmMain, "volume_db", -80f, 1f);
+        _bgmTween.Parallel().TweenProperty(BgmPlayer, "volume_db", -80f, 1f);
         await ToSignal(_bgmTween, Tween.SignalName.Finished);
 
-        (BgmMain.Stream, BgmHelper.Stream) = (BgmHelper.Stream, BgmMain.Stream);
-        BgmMain.VolumeDb = 0f;
+        (BgmPlayer.Stream, BgmHelper.Stream) = (BgmHelper.Stream, BgmPlayer.Stream);
+        BgmPlayer.VolumeDb = 0f;
         BgmHelper.Stop();
     }
 
