@@ -1,6 +1,5 @@
 using GFrameworkTemplate.scripts.core.story;
 using GFrameworkTemplate.scripts.cqrs.visualnovel.command;
-using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 
 namespace GFrameworkTemplate.scripts.entities.story_command_worker;
 
@@ -14,7 +13,6 @@ public sealed class GotoWorker : IStoryCommandWorker
         if (string.IsNullOrEmpty(target))
             return Task.CompletedTask;
 
-        ctx.SendEvent(new VisualNovelGotoTriggeredEvent { TargetFilePath = target });
         ctx.IsPlaying = false;
         ctx.PendingGoto = target;
 

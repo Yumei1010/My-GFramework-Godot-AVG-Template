@@ -1,5 +1,6 @@
 using GFrameworkTemplate.scripts.core.story;
 using GFrameworkTemplate.scripts.cqrs.story.command;
+using GFrameworkTemplate.scripts.cqrs.visualnovel.command;
 using GFrameworkTemplate.scripts.cqrs.story.query;
 using GFrameworkTemplate.scripts.cqrs.story.query.result;
 using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
@@ -77,6 +78,9 @@ public sealed partial class StoryEngineSystem : ISystem
             if (Workers.TryGetValue(cmd.Type, out var worker))
                 await worker.ExecuteAsync(cmd, _ctx);
 
+            // 事件由 System 层统一发送（Worker 不发送事件）
+            SendCmdEvent(cmd);
+
             if (cmd.Wait.HasValue)
                 await Task.Delay(TimeSpan.FromSeconds(cmd.Wait.Value));
 
@@ -96,6 +100,36 @@ public sealed partial class StoryEngineSystem : ISystem
             this.SendCommand(new UpdateStoryStateCommand { IsPlaying = false });
             this.SendEvent<VisualNovelStoryFinishedEvent>();
             _log.Debug("故事播放结束");
+        }
+    }
+
+    private void SendCmdEvent(StoryCommand cmd)
+    {
+        switch (cmd)
+        {
+            case TalkCommand t:
+                this.SendEvent(new VisualNovelTalkTriggeredEvent
+                    { Talker = t.Talker, Content = t.TalkContent, IsCenter = t.IsCenter, AvatarPath = t.AvatarPath });
+                break;
+            case BackgroundCommand b:
+                this.SendEvent(new VisualNovelBackgroundTriggeredEvent
+                    { FilePath = b.FilePath ?? "", WaitTweenEnd = b.WaitTweenEnd, Delay = b.Delay });
+                break;
+            case TachieCommand tc:
+                this.SendEvent(new VisualNovelTachieTriggeredEvent { Tachies = tc.Tachies });
+                break;
+            case SoundCommand s:
+                this.SendEvent(new VisualNovelSoundTriggeredEvent { SoundType = s.SoundType, FilePath = s.FilePath ?? "" });
+                break;
+            case BranchCommand br:
+                this.SendEvent(new VisualNovelBranchTriggeredEvent { Options = br.Options });
+                break;
+            case GotoCommand gt:
+                this.SendEvent(new VisualNovelGotoTriggeredEvent { TargetFilePath = gt.FilePath ?? "" });
+                break;
+            case EventCommand evt:
+                this.SendEvent(new VisualNovelCustomEventTriggeredEvent { EventName = evt.EventName });
+                break;
         }
     }
 
