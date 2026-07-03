@@ -6,7 +6,7 @@
 
 - [x] **编写 `STORY_FORMAT.md`**——JSON 故事格式文档，覆盖 7 种命令类型、字段说明、tachie 的 4 种操作（show/change/close/onlyShow）、分支过滤、goto 链式跳转，附带完整示例
 - [x] **删除死代码**：`UiFactory.cs`、`IReadStorageUtility.cs`、`IWriteStorageUtility.cs`、`scripts/component/state_machine/IState.cs`
-- [x] **删除死节点**：`talk_manager.tscn` 中的 `CenterTextContainer`（代码已用 `[center]` BBCode 替代）
+- [ ] **删除死节点**：`talk_manager.tscn` 中的 `CenterTextContainer`（保留备用，当前代码已用 `[center]` BBCode 替代）
 - [x] **补充 `[ContextAware]`**：`GlobalInputController` 基类已有，无需重复添加
 - [x] **补充 XML 注释**：`IStoryCommandWorker`、`EngineContext` 公开属性
 - [x] **修复 `VisualNovelTalkPage` + `TemplatePage`**：创建对应的 `.tscn` 场景文件（`scenes/menu/vn_talk_page.tscn`、`scenes/menu/template_page.tscn`）
