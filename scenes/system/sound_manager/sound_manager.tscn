@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d2qdgy0sn4824"]
 
-[ext_resource type="Script" uid="uid://dj4hotlfyeosx" path="res://scripts/system/soundmanager/soundmanager.cs" id="1_ctrl"]
+[ext_resource type="Script" uid="uid://dj4hotlfyeosx" path="res://scripts/system/sound/SoundSystem.cs" id="1_ctrl"]
 
 [node name="SoundManager" type="CanvasLayer" unique_id=317858591]
 script = ExtResource("1_ctrl")

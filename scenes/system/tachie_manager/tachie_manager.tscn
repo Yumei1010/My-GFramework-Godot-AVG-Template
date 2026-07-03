@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d8d61e522lfd"]
 
-[ext_resource type="Script" uid="uid://h7m680fxsukf" path="res://scripts/system/tachiemanager/tachiemanager.cs" id="1_ctrl"]
+[ext_resource type="Script" uid="uid://h7m680fxsukf" path="res://scripts/system/tachie/TachieSystem.cs" id="1_ctrl"]
 
 [node name="TachieManager" type="CanvasLayer" unique_id=1189973803]
 layer = 10

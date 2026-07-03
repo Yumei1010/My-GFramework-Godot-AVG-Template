@@ -3,7 +3,7 @@ using GFramework.Game.architecture;
 using GFramework.Game.setting;
 using GFrameworkTemplate.scripts.core.scene;
 using GFrameworkTemplate.scripts.core.ui;
-using GFrameworkTemplate.scripts.system.save_manager;
+using GFrameworkTemplate.scripts.system.save;
 using GFrameworkTemplate.scripts.system.visualnovel;
 
 namespace GFrameworkTemplate.scripts.module;

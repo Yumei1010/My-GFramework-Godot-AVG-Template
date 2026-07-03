@@ -8,7 +8,7 @@ using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 using GFrameworkTemplate.scripts.data.story;
 using Godot;
 
-namespace GFrameworkTemplate.scripts.system.sound_manager;
+namespace GFrameworkTemplate.scripts.system.sound;
 
 /// <summary>
 ///     音频管理器全局单例——双轨 BGM 交叉淡入淡出 + SFX 对象池

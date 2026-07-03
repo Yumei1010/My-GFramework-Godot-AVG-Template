@@ -5,7 +5,7 @@ using GFramework.SourceGenerators.Abstractions.rule;
 using GFrameworkTemplate.scripts.component.camera;
 using Godot;
 
-namespace GFrameworkTemplate.scripts.system.camera_manager;
+namespace GFrameworkTemplate.scripts.system.camera;
 
 /// <summary>
 ///     相机管理器全局单例——优先级叠加式镜头效果系统

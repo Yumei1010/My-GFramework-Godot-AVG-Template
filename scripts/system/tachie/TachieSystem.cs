@@ -9,7 +9,7 @@ using GFrameworkTemplate.scripts.data.story;
 using GFrameworkTemplate.scripts.enums.visualnovel;
 using Godot;
 
-namespace GFrameworkTemplate.scripts.system.tachie_manager;
+namespace GFrameworkTemplate.scripts.system.tachie;
 
 /// <summary>
 ///     立绘栏全局单例——3 槽位（左/中/右），自动分配，交叉淡入淡出切换表情

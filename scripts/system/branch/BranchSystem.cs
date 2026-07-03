@@ -9,7 +9,7 @@ using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 using GFrameworkTemplate.scripts.system.visualnovel;
 using Godot;
 
-namespace GFrameworkTemplate.scripts.system.branch_manager;
+namespace GFrameworkTemplate.scripts.system.branch;
 
 /// <summary>
 ///     分支栏——动态实例化 branch_option.tscn，通过 ISystem 注册到 GF 框架

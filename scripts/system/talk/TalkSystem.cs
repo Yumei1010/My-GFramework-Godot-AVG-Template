@@ -7,7 +7,7 @@ using GFramework.SourceGenerators.Abstractions.rule;
 using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 using Godot;
 
-namespace GFrameworkTemplate.scripts.system.talk_manager;
+namespace GFrameworkTemplate.scripts.system.talk;
 
 /// <summary>
 ///     对话栏——响应 VN 对话事件，通过 ISystem 注册到 GF 框架
