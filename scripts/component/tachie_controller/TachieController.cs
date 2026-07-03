@@ -1,5 +1,6 @@
 using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 using GFrameworkTemplate.scripts.data.story;
+using GFrameworkTemplate.scripts.model.tachie;
 using GFrameworkTemplate.scripts.system.tachie;
 
 namespace GFrameworkTemplate.scripts.component.tachie_controller;
@@ -30,14 +31,15 @@ public partial class TachieController : CanvasLayer
 
     private async void Render()
     {
-        var oldSlots = new Dictionary<string, string?>(_system.SlotToChar);
+        var model = this.GetModel<TachieModel>()!;
+        var oldSlots = new Dictionary<string, string?>(model.SlotToChar);
 
         foreach (var r in new[] { LeftSlot, CenterSlot, RightSlot })
             r.Visible = false;
 
-        foreach (var (slotName, charName) in _system.SlotToChar)
+        foreach (var (slotName, charName) in model.SlotToChar)
         {
-            if (!_system.Chars.TryGetValue(charName, out var path)) continue;
+            if (!model.Chars.TryGetValue(charName, out var path)) continue;
             var tex = LoadTexture(path);
             if (tex == null) continue;
 

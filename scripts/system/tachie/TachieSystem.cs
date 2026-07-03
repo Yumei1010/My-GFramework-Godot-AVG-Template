@@ -1,25 +1,22 @@
-using GFrameworkTemplate.scripts.component.tachie_slot;
-using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 using GFrameworkTemplate.scripts.enums.visualnovel;
+using GFrameworkTemplate.scripts.model.tachie;
 
 namespace GFrameworkTemplate.scripts.system.tachie;
 
 /// <summary>
-///     立绘系统——纯 ISystem，管理角色数据和槽位分配逻辑
+///     立绘系统——纯 ISystem，通过 TachieModel 管理角色数据
 /// </summary>
 [Log]
 [ContextAware]
 public sealed partial class TachieSystem : ISystem
 {
-    public readonly Dictionary<string, string> Chars = new();
-    public readonly Dictionary<string, string> SlotToChar = new();
-    public string? SpotlightChar { get; private set; }
-
     public event Action? Changed;
 
     public void OnArchitecturePhase(ArchitecturePhase phase) { }
     public void Init() { }
     public void Destroy() { }
+
+    private TachieModel Model => this.GetModel<TachieModel>()!;
 
     public void Handle(TachieOperation type, string charName, string filePath)
     {
@@ -35,44 +32,40 @@ public sealed partial class TachieSystem : ISystem
 
     private void Show(string name, string path)
     {
-        if (Chars.ContainsKey(name)) return;
-        Chars[name] = path;
+        if (Model.Chars.ContainsKey(name)) return;
+        Model.Chars[name] = path;
         Reposition();
     }
 
     private void Change(string name, string path)
     {
-        if (!Chars.ContainsKey(name))
-        {
-            Show(name, path);
-            return;
-        }
-        Chars[name] = path;
+        if (!Model.Chars.ContainsKey(name)) { Show(name, path); return; }
+        Model.Chars[name] = path;
     }
 
     private void Close(string name)
     {
-        Chars.Remove(name);
-        if (name == SpotlightChar) SpotlightChar = null;
-        var slot = SlotToChar.FirstOrDefault(kv => kv.Value == name).Key;
-        if (slot != null) SlotToChar.Remove(slot);
+        Model.Chars.Remove(name);
+        if (name == Model.SpotlightChar) Model.SpotlightChar = null;
+        var slot = Model.SlotToChar.FirstOrDefault(kv => kv.Value == name).Key;
+        if (slot != null) Model.SlotToChar.Remove(slot);
         Reposition();
     }
 
     private void OnlyShow(string name, string path)
     {
-        Chars[name] = path;
-        SpotlightChar = name;
-        SlotToChar.Clear();
-        SlotToChar["Center"] = name;
+        Model.Chars[name] = path;
+        Model.SpotlightChar = name;
+        Model.SlotToChar.Clear();
+        Model.SlotToChar["Center"] = name;
     }
 
     private void Reposition()
     {
-        if (SpotlightChar != null) return;
-        SlotToChar.Clear();
-        var list = Chars.ToList();
-        if (list.Count >= 1) SlotToChar["Left"] = list[0].Key;
-        if (list.Count >= 2) SlotToChar["Right"] = list[1].Key;
+        if (Model.SpotlightChar != null) return;
+        Model.SlotToChar.Clear();
+        var list = Model.Chars.ToList();
+        if (list.Count >= 1) Model.SlotToChar["Left"] = list[0].Key;
+        if (list.Count >= 2) Model.SlotToChar["Right"] = list[1].Key;
     }
 }

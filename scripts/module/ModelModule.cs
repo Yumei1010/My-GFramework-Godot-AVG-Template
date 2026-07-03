@@ -6,6 +6,11 @@ using GFramework.Game.setting;
 using GFramework.Godot.setting;
 using GFramework.Godot.setting.data;
 using GFrameworkTemplate.scripts.data.setting;
+using GFrameworkTemplate.scripts.model.background;
+using GFrameworkTemplate.scripts.model.camera;
+using GFrameworkTemplate.scripts.model.sound;
+using GFrameworkTemplate.scripts.model.tachie;
+using GFrameworkTemplate.scripts.model.talk;
 using GFrameworkTemplate.scripts.model.visualnovel;
 
 namespace GFrameworkTemplate.scripts.module;
@@ -31,5 +36,10 @@ public class ModelModule : AbstractModule
         );
 
         architecture.RegisterModel(new StoryStateModel());
+        architecture.RegisterModel(new CameraModel());
+        architecture.RegisterModel(new TalkModel());
+        architecture.RegisterModel(new TachieModel());
+        architecture.RegisterModel(new BackgroundModel());
+        architecture.RegisterModel(new SoundModel());
     }
 }

@@ -1,14 +1,14 @@
+using GFrameworkTemplate.scripts.model.sound;
+
 namespace GFrameworkTemplate.scripts.system.sound;
 
 /// <summary>
-///     音频系统——纯 ISystem，管理 BGM 和 SFX 播放请求
+///     音频系统——纯 ISystem，通过 SoundModel 管理 BGM
 /// </summary>
 [Log]
 [ContextAware]
 public sealed partial class SoundSystem : ISystem
 {
-    public string CurrentBgm { get; private set; } = string.Empty;
-
     public event Action<string>? BgmRequested;
     public event Action<string>? SfxRequested;
 
@@ -16,10 +16,12 @@ public sealed partial class SoundSystem : ISystem
     public void Init() { }
     public void Destroy() { }
 
+    private SoundModel Model => this.GetModel<SoundModel>()!;
+
     public void PlayBgm(string logicalName)
     {
-        if (CurrentBgm == logicalName) return;
-        CurrentBgm = logicalName;
+        if (Model.CurrentBgm == logicalName) return;
+        Model.CurrentBgm = logicalName;
         BgmRequested?.Invoke(logicalName);
         _log.Debug($"BGM: {logicalName}");
     }
