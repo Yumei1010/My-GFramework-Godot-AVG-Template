@@ -29,5 +29,6 @@ public class SystemModule : AbstractModule
         architecture.RegisterSystem(new TachieSystem());
         architecture.RegisterSystem(new TalkSystem());
         architecture.RegisterSystem(new StoryEngineSystem());
+        architecture.RegisterSystem(new StoryExecutionSystem());
     }
 }

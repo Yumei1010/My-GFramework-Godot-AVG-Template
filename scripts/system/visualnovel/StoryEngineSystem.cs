@@ -4,7 +4,6 @@ using GFrameworkTemplate.scripts.cqrs.story.query;
 using GFrameworkTemplate.scripts.cqrs.story.query.result;
 using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 using GFrameworkTemplate.scripts.data.story;
-using GFrameworkTemplate.scripts.entities.story_command_worker;
 
 namespace GFrameworkTemplate.scripts.system.visualnovel;
 
@@ -17,21 +16,12 @@ namespace GFrameworkTemplate.scripts.system.visualnovel;
 public sealed partial class StoryEngineSystem : ISystem
 {
     private readonly EngineContext _ctx;
-    private static readonly Dictionary<string, IStoryCommandWorker> Workers = new()
-    {
-        ["talk"] = new TalkWorker(),
-        ["background"] = new BackgroundWorker(),
-        ["tachie"] = new TachieWorker(),
-        ["sound"] = new SoundWorker(),
-        ["branch"] = new BranchWorker(),
-        ["goto"] = new GotoWorker(),
-        ["event"] = new EventWorker()
-    };
+    private StoryExecutionSystem _executor = null!;
 
     public StoryEngineSystem() => _ctx = new EngineContext(this);
 
     public void OnArchitecturePhase(ArchitecturePhase phase) { }
-    public void Init() { }
+    public void Init() { _executor = this.GetSystem<StoryExecutionSystem>()!; }
     public void Destroy() { }
 
     private StoryStateResult State => this.SendQuery(new GetStoryStateQuery());
@@ -74,8 +64,7 @@ public sealed partial class StoryEngineSystem : ISystem
             if (cmd.HideLabels)
                 this.SendEvent<VisualNovelAdvanceRequestedEvent>();
 
-            if (Workers.TryGetValue(cmd.Type, out var worker))
-                await worker.ExecuteAsync(cmd, _ctx);
+            await _executor.Dispatch(cmd, _ctx);
 
             if (cmd.Wait.HasValue)
                 await Task.Delay(TimeSpan.FromSeconds(cmd.Wait.Value));
