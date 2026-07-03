@@ -9,6 +9,14 @@ namespace GFrameworkTemplate.scripts.system.camera;
 [ContextAware]
 public sealed partial class CameraSystem : ISystem
 {
+    public struct CameraFrameData
+    {
+        public Vector2 Offset;
+        public float Zoom;
+        public float Rotation;
+        public static CameraFrameData Identity => new() { Zoom = 1f };
+    }
+
     private readonly List<CameraEffect> _effects = new();
 
     public void OnArchitecturePhase(ArchitecturePhase phase) { }
@@ -50,12 +58,4 @@ public sealed partial class CameraSystem : ISystem
 
         return new CameraFrameData { Offset = offset, Zoom = zoom, Rotation = rotation };
     }
-}
-
-public struct CameraFrameData
-{
-    public Vector2 Offset;
-    public float Zoom;
-    public float Rotation;
-    public static CameraFrameData Identity => new() { Zoom = 1f };
 }

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cyg40uvof2v40"]
 
-[ext_resource type="Script" uid="uid://rjnkjhongfoy" path="res://scripts/system/talk/TalkSystem.cs" id="1_ctrl"]
+[ext_resource type="Script" uid="uid://rjnkjhongfoy" path="res://scripts/component/talk_controller/TalkController.cs" id="1_ctrl"]
 
 [node name="TalkBar" type="CanvasLayer" unique_id=1870246737]
 script = ExtResource("1_ctrl")

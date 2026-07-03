@@ -1,93 +1,28 @@
-using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
-using GFrameworkTemplate.scripts.data.story;
-
 namespace GFrameworkTemplate.scripts.system.sound;
 
 /// <summary>
-///     音频管理器全局单例——双轨 BGM 交叉淡入淡出 + SFX 对象池
+///     音频系统——纯 ISystem，管理 BGM 和 SFX 播放请求
 /// </summary>
 [Log]
 [ContextAware]
-public partial class SoundSystem : CanvasLayer
+public sealed partial class SoundSystem : ISystem
 {
-    public static SoundSystem? Instance { get; private set; }
+    public string CurrentBgm { get; private set; } = string.Empty;
 
-    private AudioStreamPlayer BgmPlayer => GetNode<AudioStreamPlayer>("%BgmPlayer");
-    private AudioStreamPlayer BgmHelper => GetNode<AudioStreamPlayer>("%BgmHelper");
-    private Tween? _bgmTween;
-    private string _currentBgmPath = string.Empty;
+    public event Action<string>? BgmRequested;
+    public event Action<string>? SfxRequested;
 
-    private readonly AudioStreamPlayer[] _sfxPool = new AudioStreamPlayer[8];
+    public void OnArchitecturePhase(ArchitecturePhase phase) { }
+    public void Init() { }
+    public void Destroy() { }
 
-    public override void _Ready()
+    public void PlayBgm(string logicalName)
     {
-        for (var i = 0; i < 8; i++)
-            _sfxPool[i] = GetNode<AudioStreamPlayer>($"%SfxPlayer_{i}");
-
-        BgmHelper.VolumeDb = -80f;
-        this.RegisterEvent<VisualNovelSoundTriggeredEvent>(OnSound).UnRegisterWhenNodeExitTree(this);
-        _log.Debug("SoundSystem 就绪");
+        if (CurrentBgm == logicalName) return;
+        CurrentBgm = logicalName;
+        BgmRequested?.Invoke(logicalName);
+        _log.Debug($"BGM: {logicalName}");
     }
 
-    private void OnSound(VisualNovelSoundTriggeredEvent e)
-    {
-        if (e.SoundType == "bgm")
-            PlayBgm(e.FilePath);
-        else
-            PlaySfx(e.FilePath);
-    }
-
-    private async void PlayBgm(string logicalName)
-    {
-        var path = StoryResourceMapper.ResolveTexturePath(logicalName)
-                   ?? ResolveAudioPath(logicalName);
-        if (string.IsNullOrEmpty(path)) return;
-
-        var stream = GD.Load<AudioStream>(path);
-        if (stream == null || _currentBgmPath == path) return;
-        _currentBgmPath = path;
-
-        _bgmTween?.Kill();
-        BgmHelper.Stream = stream;
-        BgmHelper.Play();
-        BgmHelper.VolumeDb = -80f;
-
-        _bgmTween = CreateTween();
-        _bgmTween.TweenProperty(BgmHelper, "volume_db", 0f, 1f);
-        _bgmTween.Parallel().TweenProperty(BgmPlayer, "volume_db", -80f, 1f);
-        await ToSignal(_bgmTween, Tween.SignalName.Finished);
-
-        (BgmPlayer.Stream, BgmHelper.Stream) = (BgmHelper.Stream, BgmPlayer.Stream);
-        BgmPlayer.VolumeDb = 0f;
-        BgmHelper.Stop();
-    }
-
-    private void PlaySfx(string logicalName)
-    {
-        var path = ResolveAudioPath(logicalName);
-        if (string.IsNullOrEmpty(path)) return;
-
-        var stream = GD.Load<AudioStream>(path);
-        if (stream == null) return;
-
-        var player = _sfxPool.FirstOrDefault(p => !p.Playing);
-        if (player == null) return;
-
-        player.Stream = stream;
-        player.Play();
-    }
-
-    private static string? ResolveAudioPath(string logicalName)
-    {
-        var candidates = new[]
-        {
-            $"res://assets/sound/bgm/{logicalName}.ogg",
-            $"res://assets/sound/sfx/{logicalName}.ogg",
-            $"res://assets/sound/bgm/{logicalName}.mp3",
-            $"res://assets/sound/sfx/{logicalName}.mp3",
-            $"res://assets/sound/ambience/{logicalName}.ogg",
-            $"res://assets/sound/voice/{logicalName}.ogg",
-        };
-        return candidates.FirstOrDefault(FileAccess.FileExists);
-    }
+    public void PlaySfx(string logicalName) => SfxRequested?.Invoke(logicalName);
 }

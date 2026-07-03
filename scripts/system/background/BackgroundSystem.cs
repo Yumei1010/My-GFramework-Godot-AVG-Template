@@ -1,62 +1,21 @@
-using GFramework.Core.Abstractions.architecture;
-using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
-using GFrameworkTemplate.scripts.data.story;
-
 namespace GFrameworkTemplate.scripts.system.background;
 
 /// <summary>
-///     背景管理器全局单例——双 TextureRect 交叉淡入淡出切换背景
+///     背景系统——纯 ISystem，管理当前背景路径
 /// </summary>
 [Log]
 [ContextAware]
-public partial class BackgroundSystem : CanvasLayer
+public sealed partial class BackgroundSystem : ISystem
 {
-    public static BackgroundSystem? Instance { get; private set; }
-    private TextureRect MainBg => GetNode<TextureRect>("%MainBg");
-    private TextureRect HelperBg => GetNode<TextureRect>("%HelperBg");
-    private Tween? _tween;
+    public string CurrentPath { get; private set; } = string.Empty;
 
-    public override void _Ready()
+    public void OnArchitecturePhase(ArchitecturePhase phase) { }
+    public void Init() { }
+    public void Destroy() { }
+
+    public void Change(string filePath)
     {
-        HelperBg.Modulate = Colors.Transparent;
-        this.RegisterEvent<VisualNovelBackgroundTriggeredEvent>(OnBackground).UnRegisterWhenNodeExitTree(this);
-        _log.Debug("BackgroundSystem 就绪");
-    }
-
-    private async void OnBackground(VisualNovelBackgroundTriggeredEvent e)
-    {
-        var path = StoryResourceMapper.ResolveTexturePath(e.FilePath);
-        if (string.IsNullOrEmpty(path))
-        {
-            _log.Warn($"背景纹理未注册: {e.FilePath}");
-            return;
-        }
-
-        var texture = GD.Load<Texture2D>(path);
-        if (texture == null) return;
-
-        _tween?.Kill();
-
-        if (e.Delay > 0)
-            await Task.Delay(TimeSpan.FromSeconds(e.Delay));
-
-        if (e.WaitTweenEnd)
-        {
-            HelperBg.Texture = texture;
-            HelperBg.Modulate = Colors.Transparent;
-
-            _tween = CreateTween();
-            _tween.TweenProperty(HelperBg, "modulate", Colors.White, 0.5f);
-            await ToSignal(_tween, Tween.SignalName.Finished);
-
-            MainBg.Texture = texture;
-            HelperBg.Modulate = Colors.Transparent;
-        }
-        else
-        {
-            MainBg.Texture = texture;
-        }
-
-        _log.Debug($"背景切换: {e.FilePath}");
+        CurrentPath = filePath;
+        _log.Debug($"背景切换: {filePath}");
     }
 }
