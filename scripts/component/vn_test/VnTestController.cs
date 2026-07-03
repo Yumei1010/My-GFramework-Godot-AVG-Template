@@ -91,6 +91,10 @@ public partial class VnTestController : Node
                     CameraManager.Instance?.Clear();
                     StatusLabel.Text = "相机重置";
                     break;
+                case Key.H:
+                    TalkManager.Instance?.Toggle();
+                    StatusLabel.Text = TalkManager.Instance is { IsVisible: true } ? "对话框: 显示" : "对话框: 隐藏";
+                    break;
                 case Key.R:
                     _engine.Stop();
                     _ = _engine.LoadAndPlay("FirstDay");

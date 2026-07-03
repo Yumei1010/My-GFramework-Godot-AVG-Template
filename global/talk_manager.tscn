@@ -6,6 +6,7 @@
 script = ExtResource("1_ctrl")
 
 [node name="TalkBarContainer" type="MarginContainer" parent="." unique_id=229791084]
+unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
