@@ -1,7 +1,7 @@
 using System.Text.Json;
 using GFrameworkTemplate.scripts.system.visualnovel;
 
-namespace GFrameworkTemplate.scripts.system.save;
+namespace GFrameworkTemplate.scripts.system.visualnovel;
 
 /// <summary>
 ///     存档管理器——5 槽位 JSON 持久化引擎状态，通过 ISystem 注册到 DI

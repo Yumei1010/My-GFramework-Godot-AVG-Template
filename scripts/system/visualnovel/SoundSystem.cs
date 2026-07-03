@@ -4,7 +4,7 @@ using GFrameworkTemplate.scripts.cqrs.sound.command;
 using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 using GFrameworkTemplate.scripts.system.visualnovel;
 
-namespace GFrameworkTemplate.scripts.system.sound;
+namespace GFrameworkTemplate.scripts.system.visualnovel;
 
 /// <summary>
 ///     音频系统——BGM/SFX 管理 + 故事命令执行

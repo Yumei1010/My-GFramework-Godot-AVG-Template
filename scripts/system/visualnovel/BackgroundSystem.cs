@@ -4,7 +4,7 @@ using GFrameworkTemplate.scripts.cqrs.visualnovel.command;
 using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 using GFrameworkTemplate.scripts.system.visualnovel;
 
-namespace GFrameworkTemplate.scripts.system.background;
+namespace GFrameworkTemplate.scripts.system.visualnovel;
 
 /// <summary>
 ///     背景系统——路径管理 + 故事命令执行

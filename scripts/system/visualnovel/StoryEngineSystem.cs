@@ -1,10 +1,10 @@
 using GFrameworkTemplate.scripts.core.story;
 using GFrameworkTemplate.scripts.cqrs.story.command;
-using GFrameworkTemplate.scripts.system.background;
-using GFrameworkTemplate.scripts.system.branch;
-using GFrameworkTemplate.scripts.system.sound;
-using GFrameworkTemplate.scripts.system.tachie;
-using GFrameworkTemplate.scripts.system.talk;
+using GFrameworkTemplate.scripts.system.visualnovel;
+using GFrameworkTemplate.scripts.system.visualnovel;
+using GFrameworkTemplate.scripts.system.visualnovel;
+using GFrameworkTemplate.scripts.system.visualnovel;
+using GFrameworkTemplate.scripts.system.visualnovel;
 using GFrameworkTemplate.scripts.cqrs.story.query;
 using GFrameworkTemplate.scripts.cqrs.story.query.result;
 using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;

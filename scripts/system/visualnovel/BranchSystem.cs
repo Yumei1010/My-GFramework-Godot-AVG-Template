@@ -3,7 +3,7 @@ using GFrameworkTemplate.scripts.cqrs.visualnovel.command;
 using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 using GFrameworkTemplate.scripts.system.visualnovel;
 
-namespace GFrameworkTemplate.scripts.system.branch;
+namespace GFrameworkTemplate.scripts.system.visualnovel;
 
 /// <summary>
 ///     分支系统——分支选择 + 故事命令执行
@@ -13,12 +13,12 @@ namespace GFrameworkTemplate.scripts.system.branch;
 public sealed partial class BranchSystem : ISystem, IStoryExecutionSystem
 {
     public string CommandType => "branch";
-    private StoryEngineSystem _engine = null!;
     public void OnArchitecturePhase(ArchitecturePhase phase) { }
-    public void Init() { _engine = this.GetSystem<StoryEngineSystem>()!; }
+    public void Init() { }
     public void Destroy() { }
 
-    public void Choose(string optionId) => _engine.ChooseBranch(optionId);
+    public void Choose(string optionId) =>
+        this.SendEvent(new VisualNovelBranchChosenEvent { OptionId = optionId });
 
     async Task IStoryExecutionSystem.ExecuteAsync(StoryCommand cmd, EngineContext ctx)
     {

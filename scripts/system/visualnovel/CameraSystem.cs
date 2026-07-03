@@ -2,7 +2,7 @@ using GFrameworkTemplate.scripts.component.camera;
 using GFrameworkTemplate.scripts.cqrs.camera.command;
 using GFrameworkTemplate.scripts.cqrs.camera.query;
 
-namespace GFrameworkTemplate.scripts.system.camera;
+namespace GFrameworkTemplate.scripts.system.visualnovel;
 
 /// <summary>
 ///     相机效果系统——纯 ISystem，通过 SendCommand/SendQuery 操作 Model

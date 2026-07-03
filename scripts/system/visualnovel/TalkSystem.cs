@@ -6,7 +6,7 @@ using GFrameworkTemplate.scripts.cqrs.talk.query.result;
 using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 using GFrameworkTemplate.scripts.system.visualnovel;
 
-namespace GFrameworkTemplate.scripts.system.talk;
+namespace GFrameworkTemplate.scripts.system.visualnovel;
 
 /// <summary>
 ///     对话系统——状态管理 + 故事命令执行

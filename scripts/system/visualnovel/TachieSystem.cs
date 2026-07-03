@@ -5,7 +5,7 @@ using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 using GFrameworkTemplate.scripts.enums.visualnovel;
 using GFrameworkTemplate.scripts.system.visualnovel;
 
-namespace GFrameworkTemplate.scripts.system.tachie;
+namespace GFrameworkTemplate.scripts.system.visualnovel;
 
 /// <summary>
 ///     立绘系统——状态管理 + 故事命令执行
