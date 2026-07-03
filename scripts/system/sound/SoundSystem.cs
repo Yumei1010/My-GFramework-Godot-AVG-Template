@@ -1,26 +1,29 @@
+using GFrameworkTemplate.scripts.core.story;
+using GFrameworkTemplate.scripts.cqrs.visualnovel.command;
 using GFrameworkTemplate.scripts.cqrs.sound.command;
+using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
+using GFrameworkTemplate.scripts.system.visualnovel;
 
 namespace GFrameworkTemplate.scripts.system.sound;
 
 /// <summary>
-///     音频系统——纯 ISystem，通过 SendCommand 操作 Model
+///     音频系统——BGM/SFX 管理 + 故事命令执行
 /// </summary>
 [Log]
 [ContextAware]
-public sealed partial class SoundSystem : ISystem
+public sealed partial class SoundSystem : ISystem, IStoryExecutionSystem
 {
+    public string CommandType => "sound";
     public event Action<string>? BgmRequested;
     public event Action<string>? SfxRequested;
+    public void OnArchitecturePhase(ArchitecturePhase phase) { } public void Init() { } public void Destroy() { }
 
-    public void OnArchitecturePhase(ArchitecturePhase phase) { }
-    public void Init() { }
-    public void Destroy() { }
+    public void PlayBgm(string name) { this.SendCommand(new PlayBgmCommand { LogicalName = name }); BgmRequested?.Invoke(name); }
+    public void PlaySfx(string name) => SfxRequested?.Invoke(name);
 
-    public void PlayBgm(string logicalName)
+    async Task IStoryExecutionSystem.ExecuteAsync(StoryCommand cmd, EngineContext ctx)
     {
-        this.SendCommand(new PlayBgmCommand { LogicalName = logicalName });
-        BgmRequested?.Invoke(logicalName);
+        var s = (SoundCommand)cmd;
+        ctx.SendEvent(new VisualNovelSoundTriggeredEvent { SoundType = s.SoundType, FilePath = s.FilePath ?? "" });
     }
-
-    public void PlaySfx(string logicalName) => SfxRequested?.Invoke(logicalName);
 }
