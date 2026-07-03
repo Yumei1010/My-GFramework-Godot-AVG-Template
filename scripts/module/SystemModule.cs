@@ -8,6 +8,7 @@ using GFrameworkTemplate.scripts.system.branch;
 using GFrameworkTemplate.scripts.system.camera;
 using GFrameworkTemplate.scripts.system.save;
 using GFrameworkTemplate.scripts.system.sound;
+using GFrameworkTemplate.scripts.system.tachie;
 using GFrameworkTemplate.scripts.system.talk;
 using GFrameworkTemplate.scripts.system.visualnovel;
 
@@ -25,6 +26,7 @@ public class SystemModule : AbstractModule
         architecture.RegisterSystem(new CameraSystem());
         architecture.RegisterSystem(new SaveSystem());
         architecture.RegisterSystem(new SoundSystem());
+        architecture.RegisterSystem(new TachieSystem());
         architecture.RegisterSystem(new TalkSystem());
         architecture.RegisterSystem(new StoryEngineSystem());
     }
