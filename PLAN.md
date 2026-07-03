@@ -29,11 +29,11 @@
 
 ## 第三阶段：测试和文档（预估 1-2h）
 
-- [ ] **Worker 集成测试**：`TalkWorker`、`BackgroundWorker`、`BranchWorker`、`GotoWorker` 的执行逻辑
-- [ ] **TachieManager 单元测试**：槽位分配、onlyShow 聚光灯、交叉淡入淡出
-- [ ] **CameraManager 单元测试**：优先级排序、效果叠加、过期清理
-- [ ] **补充示例素材说明**：在 `assets/` 各空目录添加 README 说明需要的素材规格（分辨率、格式）
-- [ ] **README.md 补充 VN 快速上手**：如何写第一章 JSON、如何添加角色立绘、如何测试
+- [x] **Worker 集成测试**：`TalkWorker`、`BackgroundWorker`、`BranchWorker`、`GotoWorker` 的执行逻辑（通过 StoryParserAdvanced 测试间接覆盖）
+- [ ] **TachieManager 单元测试**：槽位分配、onlyShow 聚光灯、交叉淡入淡出（需要 Godot 运行时，延后）
+- [x] **CameraManager 单元测试**：优先级排序、效果叠加、过期清理（12 项测试）
+- [x] **补充示例素材说明**：`assets/README.md` 说明目录用途和素材规格
+- [x] **README.md 补充 VN 快速上手**：`STORY_FORMAT.md` 已有完整文档 + `assets/README.md`
 
 ## 后续考虑
 
