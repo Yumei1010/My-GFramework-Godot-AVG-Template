@@ -3,90 +3,59 @@ using GFrameworkTemplate.scripts.component.camera;
 namespace GFrameworkTemplate.scripts.system.camera;
 
 /// <summary>
-///     相机管理器全局单例——优先级叠加式镜头效果系统
-///     用法: this.GetSystem&lt;CameraSystem&gt;().Play(new EarthquakeEffect { Duration = 1.5f, Intensity = 25f });
+///     相机效果系统——纯 ISystem，管理效果列表、优先级排序、帧偏移计算
 /// </summary>
 [Log]
 [ContextAware]
-public partial class CameraSystem : CanvasLayer
+public sealed partial class CameraSystem : ISystem
 {
-
-    private Camera2D? _camera;
-    private Vector2 _basePosition;
-    private float _baseZoom = 1f;
-    private float _baseRotation;
     private readonly List<CameraEffect> _effects = new();
 
-    public static CameraSystem? Instance { get; private set; }
+    public void OnArchitecturePhase(ArchitecturePhase phase) { }
+    public void Init() { }
+    public void Destroy() { }
 
-    public override void _Ready()
+    public void Play(CameraEffect effect)
     {
-        Instance = this;
-        _camera = GetNode<Camera2D>("Camera2D");
-        _camera.MakeCurrent();
-        _basePosition = _camera.Position;
-        _baseZoom = _camera.Zoom.X;
-        _baseRotation = _camera.Rotation;
-        _log.Debug("CameraSystem 就绪");
+        _effects.Add(effect);
+        _log.Debug($"相机效果: {effect.GetType().Name} 优先级={effect.Priority}");
     }
 
-    public override void _Process(double delta)
+    public void Stop<T>() where T : CameraEffect => _effects.RemoveAll(e => e is T);
+    public void Clear() => _effects.Clear();
+
+    public CameraFrameData GetFrameData(float delta)
     {
-        if (_camera == null) return;
-
-        var dt = (float)delta;
-
-        // 更新 + 清理过期效果
         for (var i = _effects.Count - 1; i >= 0; i--)
         {
-            _effects[i].Elapsed += dt;
-            if (_effects[i].IsExpired)
-                _effects.RemoveAt(i);
+            _effects[i].Elapsed += delta;
+            if (_effects[i].IsExpired) _effects.RemoveAt(i);
         }
 
-        // 按优先级降序
+        if (_effects.Count == 0) return CameraFrameData.Identity;
+
         _effects.Sort((a, b) => b.Priority.CompareTo(a.Priority));
 
-        // 累积计算偏移（同类型只取最高优先级）
         var offset = Vector2.Zero;
-        var zoom = _baseZoom;
-        var rotation = _baseRotation;
+        var zoom = 1f;
+        var rotation = 0f;
 
         foreach (var fx in _effects)
         {
             var t = fx.Progress;
             offset += fx.GetOffset(t);
-            zoom *= fx.GetZoom(t) - 1f + 1f; // 乘积叠加
+            zoom *= fx.GetZoom(t);
             rotation += fx.GetRotation(t);
         }
 
-        _camera.Position = _basePosition + offset;
-        _camera.Zoom = new Vector2(zoom, zoom);
-        _camera.Rotation = rotation;
+        return new CameraFrameData { Offset = offset, Zoom = zoom, Rotation = rotation };
     }
+}
 
-    /// <summary>添加并播放效果</summary>
-    public void Play(CameraEffect effect)
-    {
-        _effects.Add(effect);
-        _log.Debug($"相机效果: {effect.GetType().Name} 优先级={effect.Priority} 时长={effect.Duration}s");
-    }
-
-    /// <summary>按类型移除效果</summary>
-    public void Stop<T>() where T : CameraEffect
-    {
-        _effects.RemoveAll(e => e is T);
-    }
-
-    /// <summary>清除所有效果</summary>
-    public void Clear()
-    {
-        _effects.Clear();
-        if (_camera != null)
-        {
-            _camera.Position = _basePosition;
-            _camera.Zoom = new Vector2(_baseZoom, _baseZoom);
-            _camera.Rotation = _baseRotation;
-        }
-    }
+public struct CameraFrameData
+{
+    public Vector2 Offset;
+    public float Zoom;
+    public float Rotation;
+    public static CameraFrameData Identity => new() { Zoom = 1f };
 }
