@@ -9,6 +9,7 @@ namespace GFrameworkTemplate.scripts.system.background;
 [Log]
 [ContextAware]
 public partial class BackgroundSystem : CanvasLayer, ISystem
+    public static BackgroundSystem? Instance { get; private set; }
 {
     public void OnArchitecturePhase(ArchitecturePhase phase) { }
     public void Init() { }
@@ -18,6 +19,7 @@ public partial class BackgroundSystem : CanvasLayer, ISystem
     private Tween? _tween;
 
     public override void _Ready()
+        Instance = this;
     {
         HelperBg.Modulate = Colors.Transparent;
         this.RegisterEvent<VisualNovelBackgroundTriggeredEvent>(OnBackground).UnRegisterWhenNodeExitTree(this);

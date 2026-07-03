@@ -8,6 +8,7 @@ namespace GFrameworkTemplate.scripts.system.talk;
 [Log]
 [ContextAware]
 public partial class TalkSystem : CanvasLayer, ISystem
+    public static TalkSystem? Instance { get; private set; }
 {
     private RichTextLabel TalkerNameLabel => GetNode<RichTextLabel>("%TalkerNameLabel");
     private RichTextLabel TalkContentLabel => GetNode<RichTextLabel>("%TalkContentLabel");
@@ -21,6 +22,7 @@ public partial class TalkSystem : CanvasLayer, ISystem
     public void Destroy() { }
 
     public override void _Ready()
+        Instance = this;
     {
         Hide();
         this.RegisterEvent<VisualNovelTalkTriggeredEvent>(OnTalk).UnRegisterWhenNodeExitTree(this);

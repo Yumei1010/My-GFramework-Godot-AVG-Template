@@ -9,6 +9,6 @@ public sealed class StopCameraEffectCommand : AbstractCommand
 {
     protected override void OnExecute()
     {
-        this.GetSystem<CameraSystem>().Clear();
+        CameraSystem.Instance?.Clear();
     }
 }

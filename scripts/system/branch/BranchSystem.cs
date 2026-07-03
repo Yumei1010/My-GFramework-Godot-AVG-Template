@@ -9,6 +9,7 @@ namespace GFrameworkTemplate.scripts.system.branch;
 [Log]
 [ContextAware]
 public partial class BranchSystem : CanvasLayer, ISystem
+    public static BranchSystem? Instance { get; private set; }
 {
     private VBoxContainer _buttonList = null!;
     private StoryEngineSystem _engine = null!;
@@ -20,6 +21,7 @@ public partial class BranchSystem : CanvasLayer, ISystem
     public void Destroy() { }
 
     public override void _Ready()
+        Instance = this;
     {
         _engine = this.GetSystem<StoryEngineSystem>()!;
         _optionScene = GD.Load<PackedScene>("res://scenes/component/branch_option/branch_option.tscn");

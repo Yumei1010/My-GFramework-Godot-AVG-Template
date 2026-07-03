@@ -10,6 +10,6 @@ public sealed class ToggleTalkCommand : AbstractCommand
 {
     protected override void OnExecute()
     {
-        this.GetSystem<TalkSystem>().Toggle();
+        TalkSystem.Instance?.Toggle();
     }
 }

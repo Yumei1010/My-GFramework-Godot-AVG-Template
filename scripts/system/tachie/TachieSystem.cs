@@ -10,6 +10,7 @@ namespace GFrameworkTemplate.scripts.system.tachie;
 [Log]
 [ContextAware]
 public partial class TachieSystem : CanvasLayer, ISystem
+    public static TachieSystem? Instance { get; private set; }
 {
     public void OnArchitecturePhase(ArchitecturePhase phase) { }
     public void Init() { }
@@ -28,6 +29,7 @@ public partial class TachieSystem : CanvasLayer, ISystem
     private string? _spotlightChar;
 
     public override void _Ready()
+        Instance = this;
     {
         this.RegisterEvent<VisualNovelTachieTriggeredEvent>(OnTachie).UnRegisterWhenNodeExitTree(this);
     }

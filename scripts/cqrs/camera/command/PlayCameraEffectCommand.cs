@@ -12,6 +12,6 @@ public sealed class PlayCameraEffectCommand : AbstractCommand
 
     protected override void OnExecute()
     {
-        this.GetSystem<CameraSystem>().Play(Effect);
+        CameraSystem.Instance?.Play(Effect);
     }
 }
