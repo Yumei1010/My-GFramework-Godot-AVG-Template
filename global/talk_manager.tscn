@@ -58,25 +58,3 @@ text = "[b]请输入文本[/b][i]请输入文本[/i][s]请输入文本[/s][rainb
 scroll_active = false
 vertical_alignment = 1
 
-[node name="CenterTextContainer" type="MarginContainer" parent="." unique_id=21694436]
-unique_name_in_owner = true
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 144
-theme_override_constants/margin_top = 216
-theme_override_constants/margin_right = 144
-theme_override_constants/margin_bottom = 216
-
-[node name="CenterTextContentLabel" type="RichTextLabel" parent="CenterTextContainer" unique_id=245339962]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(672, 108)
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 24
-bbcode_enabled = true
-text = "请输入文本"
-scroll_active = false
-vertical_alignment = 1

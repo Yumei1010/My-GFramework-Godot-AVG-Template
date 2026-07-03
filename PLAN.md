@@ -4,12 +4,12 @@
 
 ## 第一阶段：消除阻塞（预估 1-2h）
 
-- [ ] **编写 `STORY_FORMAT.md`**——JSON 故事格式文档，覆盖 7 种命令类型、字段说明、tachie 的 4 种操作（show/change/close/onlyShow）、分支过滤、goto 链式跳转，附带完整示例
-- [ ] **删除死代码**：`UiFactory.cs`、`IReadStorageUtility.cs`、`IWriteStorageUtility.cs`、`scripts/component/state_machine/IState.cs`
-- [ ] **删除死节点**：`talk_manager.tscn` 中的 `CenterTextContainer`（代码已用 `[center]` BBCode 替代）
-- [ ] **补充 `[ContextAware]`**：`GlobalInputController.cs` 缺少该特性
-- [ ] **补充 XML 注释**：`IStoryCommandWorker`、`EngineContext` 公开属性、VN 事件类缺少 `<summary>`
-- [ ] **修复 `VisualNovelTalkPage` + `TemplatePage`**：创建对应的 `.tscn` 场景文件（目前仅有 C# partial class，无法实例化）
+- [x] **编写 `STORY_FORMAT.md`**——JSON 故事格式文档，覆盖 7 种命令类型、字段说明、tachie 的 4 种操作（show/change/close/onlyShow）、分支过滤、goto 链式跳转，附带完整示例
+- [x] **删除死代码**：`UiFactory.cs`、`IReadStorageUtility.cs`、`IWriteStorageUtility.cs`、`scripts/component/state_machine/IState.cs`
+- [x] **删除死节点**：`talk_manager.tscn` 中的 `CenterTextContainer`（代码已用 `[center]` BBCode 替代）
+- [x] **补充 `[ContextAware]`**：`GlobalInputController` 基类已有，无需重复添加
+- [x] **补充 XML 注释**：`IStoryCommandWorker`、`EngineContext` 公开属性
+- [x] **修复 `VisualNovelTalkPage` + `TemplatePage`**：创建对应的 `.tscn` 场景文件（`scenes/menu/vn_talk_page.tscn`、`scenes/menu/template_page.tscn`）
 
 ## 第二阶段：功能补齐（预估 2-3h）
 
