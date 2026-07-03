@@ -1,7 +1,8 @@
+using GFrameworkTemplate.scripts.cqrs.tachie.command;
+using GFrameworkTemplate.scripts.cqrs.tachie.query;
 using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 using GFrameworkTemplate.scripts.data.story;
-using GFrameworkTemplate.scripts.cqrs.tachie.query;
-using GFrameworkTemplate.scripts.system.tachie;
+using GFrameworkTemplate.scripts.enums.visualnovel;
 
 namespace GFrameworkTemplate.scripts.component.tachie_controller;
 
@@ -16,16 +17,13 @@ public partial class TachieController : CanvasLayer
     private TextureRect CenterSlot => GetNode<TextureRect>("%CenterSlot");
     private TextureRect RightSlot => GetNode<TextureRect>("%RightSlot");
     private TextureRect HelperSlot => GetNode<TextureRect>("%HelperSlot");
-    private TachieSystem _system = null!;
-
     public override void _Ready()
     {
-        _system = this.GetSystem<TachieSystem>()!;
-        _system.Changed += Render;
         this.RegisterEvent<VisualNovelTachieTriggeredEvent>(e =>
         {
             foreach (var (name, slot) in e.Tachies)
-                _system.Handle(slot.Type, name, slot.FilePath);
+                this.SendCommand(new UpdateTachieCommand { Type = slot.Type, CharName = name, FilePath = slot.FilePath });
+            Render();
         }).UnRegisterWhenNodeExitTree(this);
     }
 

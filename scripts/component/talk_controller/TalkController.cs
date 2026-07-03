@@ -1,5 +1,6 @@
+using GFrameworkTemplate.scripts.cqrs.talk.command;
+using GFrameworkTemplate.scripts.cqrs.talk.query;
 using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
-using GFrameworkTemplate.scripts.system.talk;
 
 namespace GFrameworkTemplate.scripts.component.talk_controller;
 
@@ -15,11 +16,8 @@ public partial class TalkController : CanvasLayer
     private TextureRect TalkNameBackgroundTextureRect => GetNode<TextureRect>("%TalkNameBackgroundTextureRect");
     private MarginContainer TalkBarContainer => GetNode<MarginContainer>("%TalkBarContainer");
 
-    private TalkSystem _system = null!;
-
     public override void _Ready()
     {
-        _system = this.GetSystem<TalkSystem>()!;
         TalkBarContainer.Visible = false;
 
         this.RegisterEvent<VisualNovelTalkTriggeredEvent>(OnTalk).UnRegisterWhenNodeExitTree(this);
@@ -27,12 +25,12 @@ public partial class TalkController : CanvasLayer
 
     public override void _Process(double delta)
     {
-        TalkBarContainer.Visible = _system.Visible;
+        TalkBarContainer.Visible = this.SendQuery(new GetTalkVisibleQuery()).Visible;
     }
 
     private void OnTalk(VisualNovelTalkTriggeredEvent e)
     {
-        _system.Show();
+        this.SendCommand(new SetTalkVisibleCommand { Visible = true });
         TalkContentLabel.Visible = true;
 
         if (e.IsCenter)

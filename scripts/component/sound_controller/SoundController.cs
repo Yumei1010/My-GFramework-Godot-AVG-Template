@@ -1,5 +1,4 @@
 using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
-using GFrameworkTemplate.scripts.system.sound;
 
 namespace GFrameworkTemplate.scripts.component.sound_controller;
 
@@ -22,14 +21,10 @@ public partial class SoundController : CanvasLayer
 
         BgmHelper.VolumeDb = -80f;
 
-        var system = this.GetSystem<SoundSystem>()!;
-        system.BgmRequested += OnBgmRequested;
-        system.SfxRequested += OnSfxRequested;
-
         this.RegisterEvent<VisualNovelSoundTriggeredEvent>(e =>
         {
-            if (e.SoundType == "bgm") system.PlayBgm(e.FilePath);
-            else system.PlaySfx(e.FilePath);
+            if (e.SoundType == "bgm") OnBgmRequested(e.FilePath);
+            else OnSfxRequested(e.FilePath);
         }).UnRegisterWhenNodeExitTree(this);
     }
 

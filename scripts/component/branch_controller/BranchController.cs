@@ -1,6 +1,6 @@
 using GFrameworkTemplate.scripts.component.branch_option;
+using GFrameworkTemplate.scripts.cqrs.story.command;
 using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
-using GFrameworkTemplate.scripts.system.branch;
 
 namespace GFrameworkTemplate.scripts.component.branch_controller;
 
@@ -34,7 +34,7 @@ public partial class BranchController : CanvasLayer
             node.GetNode<RichTextLabel>("%BranchContentLabel").Text = $"[center]{option.Text}[/center]";
             var capturedId = optionId;
             node.GetNode<Button>("%BranchOptionButton").Pressed += () =>
-                this.GetSystem<BranchSystem>().Choose(capturedId);
+                this.SendCommand(new ChooseBranchCommand { OptionId = capturedId });
             _buttonList.AddChild(node);
             _activeOptions.Add(node);
         }
