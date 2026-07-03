@@ -2,21 +2,18 @@ using GFrameworkTemplate.scripts.core.story;
 using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 using GFrameworkTemplate.scripts.data.story;
 using GFrameworkTemplate.scripts.entities.story_command_worker;
+using GFrameworkTemplate.scripts.model.visualnovel;
 
 namespace GFrameworkTemplate.scripts.system.visualnovel;
 
 /// <summary>
-///     故事引擎系统——JSON 驱动视觉小说解释器，通过 ISystem 注册到 DI
+///     故事引擎系统——JSON 驱动视觉小说解释器
+///     读写 StoryStateModel，通过 Worker 分发命令执行
 /// </summary>
 [Log]
 [ContextAware]
 public sealed partial class StoryEngineSystem : ISystem
 {
-    public void OnArchitecturePhase(ArchitecturePhase phase) { }
-    public void Init() { }
-    public void Destroy() { }
-    private List<StoryCommand> _commands = new();
-    private int _currentIndex;
     private readonly EngineContext _ctx;
     private static readonly Dictionary<string, IStoryCommandWorker> Workers = new()
     {
@@ -30,6 +27,12 @@ public sealed partial class StoryEngineSystem : ISystem
     };
 
     public StoryEngineSystem() => _ctx = new EngineContext(this);
+
+    public void OnArchitecturePhase(ArchitecturePhase phase) { }
+    public void Init() { }
+    public void Destroy() { }
+
+    private StoryStateModel Model => this.GetModel<StoryStateModel>()!;
 
     public async Task LoadAndPlay(string logicName)
     {
@@ -48,29 +51,29 @@ public sealed partial class StoryEngineSystem : ISystem
         }
 
         var script = StoryParser.ParseStory(json);
-        _commands = script.Content;
-        _currentIndex = 0;
-        _ctx.IsPlaying = true;
-        _ctx.PlayingJson = jsonPath;
-        _ctx.PendingGoto = null;
-        _ctx.TalkBranch.Clear();
-        _ctx.CanNotChoose.Clear();
+        Model.Commands = script.Content;
+        Model.CurrentIndex = 0;
+        Model.IsPlaying = true;
+        Model.PlayingJson = jsonPath;
+        Model.PendingGoto = null;
+        Model.TalkBranch.Clear();
+        Model.CanNotChoose.Clear();
 
-        this.SendEvent(new VisualNovelStoryLoadedEvent { CommandCount = _commands.Count });
-        _log.Debug($"故事加载完成: {jsonPath} ({_commands.Count} 条命令)");
+        this.SendEvent(new VisualNovelStoryLoadedEvent { CommandCount = Model.Commands.Count });
+        _log.Debug($"故事加载完成: {jsonPath} ({Model.Commands.Count} 条命令)");
 
         await PlayLoop();
     }
 
     private async Task PlayLoop()
     {
-        while (_ctx.IsPlaying && _currentIndex < _commands.Count)
+        var model = Model;
+        while (model.IsPlaying && model.CurrentIndex < model.Commands.Count)
         {
-            var cmd = _commands[_currentIndex];
-            _currentIndex++;
+            var cmd = model.Commands[model.CurrentIndex];
+            model.CurrentIndex++;
 
-            if (!ShouldExecute(cmd))
-                continue;
+            if (!ShouldExecute(cmd)) continue;
 
             if (cmd.HideLabels)
                 this.SendEvent<VisualNovelAdvanceRequestedEvent>();
@@ -82,17 +85,17 @@ public sealed partial class StoryEngineSystem : ISystem
                 await Task.Delay(TimeSpan.FromSeconds(cmd.Wait.Value));
         }
 
-        if (_ctx.PendingGoto != null)
+        if (model.PendingGoto != null)
         {
-            var target = _ctx.PendingGoto;
-            _ctx.PendingGoto = null;
+            var target = model.PendingGoto;
+            model.PendingGoto = null;
             await LoadAndPlay(target);
             return;
         }
 
-        if (_currentIndex >= _commands.Count)
+        if (model.CurrentIndex >= model.Commands.Count)
         {
-            _ctx.IsPlaying = false;
+            model.IsPlaying = false;
             this.SendEvent<VisualNovelStoryFinishedEvent>();
             _log.Debug("故事播放结束");
         }
@@ -100,9 +103,9 @@ public sealed partial class StoryEngineSystem : ISystem
 
     private bool ShouldExecute(StoryCommand cmd)
     {
-        if (string.IsNullOrEmpty(cmd.Branch))
-            return true;
-        return _ctx.TalkBranch.Contains(cmd.Branch) && !_ctx.CanNotChoose.Contains(cmd.Branch);
+        if (string.IsNullOrEmpty(cmd.Branch)) return true;
+        var model = Model;
+        return model.TalkBranch.Contains(cmd.Branch) && !model.CanNotChoose.Contains(cmd.Branch);
     }
 
     public static void RegisterJson(string name, string path) => StoryResourceMapper.RegisterJson(name, path);
@@ -116,19 +119,19 @@ public sealed partial class StoryEngineSystem : ISystem
     public void ChooseBranch(string optionId) =>
         this.SendEvent(new VisualNovelBranchChosenEvent { OptionId = optionId });
 
-    public bool IsPlaying => _ctx.IsPlaying;
-    public string CurrentJsonPath => _ctx.PlayingJson;
-    public IReadOnlyList<string> TalkBranch => _ctx.TalkBranch;
-    public IReadOnlyList<string> CanNotChoose => _ctx.CanNotChoose;
+    public bool IsPlaying => Model.IsPlaying;
+    public string CurrentJsonPath => Model.PlayingJson;
+    public IReadOnlyList<string> TalkBranch => Model.TalkBranch;
+    public IReadOnlyList<string> CanNotChoose => Model.CanNotChoose;
 
-    public void SetAutoPlay(float? delay) => _ctx.AutoPlayDelay = delay;
-    public void SetWordSpeed(float speed) => _ctx.WordSpeed = speed;
-    public void AddCannotChoose(string id) => _ctx.CanNotChoose.Add(id);
-    public void RemoveCannotChoose(string id) => _ctx.CanNotChoose.Remove(id);
+    public void SetAutoPlay(float? delay) => Model.AutoPlayDelay = delay;
+    public void SetWordSpeed(float speed) => Model.WordSpeed = speed;
+    public void AddCannotChoose(string id) => Model.CanNotChoose.Add(id);
+    public void RemoveCannotChoose(string id) => Model.CanNotChoose.Remove(id);
 
     public void Stop()
     {
-        _ctx.IsPlaying = false;
+        Model.IsPlaying = false;
         _ctx.WaitSource?.TrySetResult(false);
     }
 }
