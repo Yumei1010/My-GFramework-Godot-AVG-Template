@@ -6,7 +6,6 @@ using GFramework.Game.setting;
 using GFramework.Godot.setting;
 using GFramework.Godot.setting.data;
 using GFrameworkTemplate.scripts.data.setting;
-using GFrameworkTemplate.scripts.model.background;
 using GFrameworkTemplate.scripts.model.camera;
 using GFrameworkTemplate.scripts.model.sound;
 using GFrameworkTemplate.scripts.model.tachie;
@@ -39,7 +38,6 @@ public class ModelModule : AbstractModule
         architecture.RegisterModel(new CameraModel());
         architecture.RegisterModel(new TalkModel());
         architecture.RegisterModel(new TachieModel());
-        architecture.RegisterModel(new BackgroundModel());
         architecture.RegisterModel(new SoundModel());
     }
 }

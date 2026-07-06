@@ -1,7 +1,10 @@
 using GFrameworkTemplate.scripts.core.story;
+using GFrameworkTemplate.scripts.cqrs.background.command;
+using GFrameworkTemplate.scripts.cqrs.background.command.input;
 using GFrameworkTemplate.scripts.cqrs.story.command;
 using GFrameworkTemplate.scripts.cqrs.story.query;
 using GFrameworkTemplate.scripts.cqrs.story.query.result;
+using GFrameworkTemplate.scripts.cqrs.visualnovel.command;
 using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 using GFrameworkTemplate.scripts.data.story;
 
@@ -9,7 +12,6 @@ namespace GFrameworkTemplate.scripts.system.visualnovel;
 
 /// <summary>
 ///     故事引擎系统——JSON 驱动视觉小说解释器
-///     通过 SendCommand 写模型，SendQuery 读模型
 /// </summary>
 [Log]
 [ContextAware]
@@ -20,13 +22,16 @@ public sealed partial class StoryEngineSystem : ISystem
 
     public StoryEngineSystem() => _ctx = new EngineContext(this);
 
-    public void OnArchitecturePhase(ArchitecturePhase phase) { }
+    public void OnArchitecturePhase(ArchitecturePhase phase)
+    {
+        _log.Debug("System initialized: StoryEngineSystem");
+    }
+
     public void Init()
     {
         foreach (var sys in new IStoryExecutionSystem[]
         {
             this.GetSystem<TalkSystem>()!,
-            this.GetSystem<BackgroundSystem>()!,
             this.GetSystem<TachieSystem>()!,
             this.GetSystem<SoundSystem>()!,
             this.GetSystem<BranchSystem>()!,
@@ -35,7 +40,10 @@ public sealed partial class StoryEngineSystem : ISystem
         })
         _executors[sys.CommandType] = sys;
     }
-    public void Destroy() { }
+    public void Destroy()
+    {
+        _log.Debug("System destroyed: StoryEngineSystem");
+    }
 
     private StoryStateResult State => this.SendQuery(new GetStoryStateQuery());
 
@@ -87,6 +95,17 @@ public sealed partial class StoryEngineSystem : ISystem
 
             if (_executors.TryGetValue(cmd.Type, out var executor))
                 await executor.ExecuteAsync(cmd, _ctx);
+            else if (cmd.Type == "background")
+            {
+                var b = (BackgroundCommand)cmd;
+                await this.SendCommandAsync(new ChangeBackgroundCommand(
+                    new ChangeBackgroundCommandInput
+                    {
+                        FilePath = b.FilePath ?? "",
+                        WaitTweenEnd = b.WaitTweenEnd,
+                        Delay = b.Delay
+                    }));
+            }
 
             if (cmd.Wait.HasValue)
                 await Task.Delay(TimeSpan.FromSeconds(cmd.Wait.Value));
@@ -134,22 +153,9 @@ public sealed partial class StoryEngineSystem : ISystem
     public IReadOnlyList<string> TalkBranch => State.TalkBranch;
     public IReadOnlyList<string> CanNotChoose => State.CanNotChoose;
 
-    public void SetAutoPlay(float? delay) =>
-        this.SendCommand(new UpdateStoryStateCommand { AutoPlayDelay = delay });
-
-    public void SetWordSpeed(float speed) =>
-        this.SendCommand(new UpdateStoryStateCommand { WordSpeed = speed });
-
     public void AddCannotChoose(string id)
     {
         var list = new List<string>(State.CanNotChoose) { id };
-        this.SendCommand(new UpdateStoryStateCommand { CanNotChoose = list });
-    }
-
-    public void RemoveCannotChoose(string id)
-    {
-        var list = new List<string>(State.CanNotChoose);
-        list.Remove(id);
         this.SendCommand(new UpdateStoryStateCommand { CanNotChoose = list });
     }
 

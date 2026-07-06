@@ -18,7 +18,7 @@ public partial class BackgroundController : CanvasLayer
         HelperBackgroundRect.Modulate = Colors.Transparent;
     }
 
-    public async Task Change(string filePath = "", bool waitTweenEnd = true, float delay = 0f)
+    public async Task Change(string filePath = "", bool waitTweenEnd = true)
     {
         var path = StoryResourceMapper.ResolveTexturePath(filePath);
         if (string.IsNullOrEmpty(path)) return;
@@ -27,9 +27,6 @@ public partial class BackgroundController : CanvasLayer
         if (texture == null) return;
 
         _tween?.Kill();
-
-        if (delay > 0)
-            await Task.Delay(TimeSpan.FromSeconds(delay));
 
         if (waitTweenEnd)
         {
