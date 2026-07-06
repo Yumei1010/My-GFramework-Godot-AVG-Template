@@ -1,10 +1,5 @@
 using GFrameworkTemplate.scripts.core.story;
 using GFrameworkTemplate.scripts.cqrs.story.command;
-using GFrameworkTemplate.scripts.system.visualnovel;
-using GFrameworkTemplate.scripts.system.visualnovel;
-using GFrameworkTemplate.scripts.system.visualnovel;
-using GFrameworkTemplate.scripts.system.visualnovel;
-using GFrameworkTemplate.scripts.system.visualnovel;
 using GFrameworkTemplate.scripts.cqrs.story.query;
 using GFrameworkTemplate.scripts.cqrs.story.query.result;
 using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
@@ -38,7 +33,7 @@ public sealed partial class StoryEngineSystem : ISystem
             this.GetSystem<GotoSystem>()!,
             this.GetSystem<EventSystem>()!
         })
-            _executors[sys.CommandType] = sys;
+        _executors[sys.CommandType] = sys;
     }
     public void Destroy() { }
 
@@ -47,10 +42,18 @@ public sealed partial class StoryEngineSystem : ISystem
     public async Task LoadAndPlay(string logicName)
     {
         var jsonPath = StoryResourceMapper.ResolveJsonPath(logicName);
-        if (string.IsNullOrEmpty(jsonPath)) { _log.Error($"找不到脚本: {logicName}"); return; }
+        if (string.IsNullOrEmpty(jsonPath))
+        { 
+            _log.Error($"json script not found: {logicName}");
+            return; 
+        }
 
         var json = await StoryResourceMapper.LoadJsonAsync(jsonPath);
-        if (string.IsNullOrEmpty(json)) { _log.Error($"加载脚本失败: {jsonPath}"); return; }
+        if (string.IsNullOrEmpty(json)) 
+        { 
+            _log.Error($"failed to load json script: {jsonPath}");
+            return; 
+        }
 
         var script = StoryParser.ParseStory(json);
         this.SendCommand(new UpdateStoryStateCommand
@@ -61,7 +64,7 @@ public sealed partial class StoryEngineSystem : ISystem
         });
 
         this.SendEvent(new VisualNovelStoryLoadedEvent { CommandCount = script.Content.Count });
-        _log.Debug($"故事加载完成: {jsonPath} ({script.Content.Count} 条命令)");
+        _log.Debug($"Story loaded: {jsonPath} ({script.Content.Count} orders)");
 
         await PlayLoop();
     }
@@ -103,13 +106,14 @@ public sealed partial class StoryEngineSystem : ISystem
         {
             this.SendCommand(new UpdateStoryStateCommand { IsPlaying = false });
             this.SendEvent<VisualNovelStoryFinishedEvent>();
-            _log.Debug("故事播放结束");
+            _log.Debug("story finished");
         }
     }
 
     private bool ShouldExecute(StoryCommand cmd)
     {
-        if (string.IsNullOrEmpty(cmd.Branch)) return true;
+        if (string.IsNullOrEmpty(cmd.Branch)) 
+            return true;
         var s = State;
         return s.TalkBranch.Contains(cmd.Branch) && !s.CanNotChoose.Contains(cmd.Branch);
     }

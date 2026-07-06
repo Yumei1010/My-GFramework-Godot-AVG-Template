@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bffhi578ucemk"]
 
 [ext_resource type="PackedScene" uid="uid://d06i0d82dnuj8" path="res://scenes/component/background_controller/background_controller.tscn" id="1_621ay"]
+[ext_resource type="Script" uid="uid://diswnmaoolk1u" path="res://scripts/menu/story_page/StoryPage.cs" id="1_iiuyp"]
 
 [node name="StoryPage" type="Control" unique_id=168405206]
 layout_mode = 3
@@ -10,9 +11,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("1_iiuyp")
 
 [node name="InputDetector" type="Button" parent="." unique_id=1229434949]
 unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

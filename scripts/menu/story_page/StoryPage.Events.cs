@@ -14,6 +14,7 @@ public partial class StoryPage
 
     private void OnVisualNovelBackgroundChangedEvent(string filePath, bool waitTweenEnd, float delay)
     {
-        Background.Change(filePath, waitTweenEnd, delay);
+         _ = Background.Change(filePath, waitTweenEnd, delay);
+         _log.Debug($"change background to: {filePath}, waitTweenEnd: {waitTweenEnd}, delay: {delay}");
     }
 }
