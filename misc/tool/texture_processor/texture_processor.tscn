@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://d00vhjpdbmmw7"]
+
+[ext_resource type="Script" uid="uid://d0as5s6uiquc" path="res://scripts/tool/TextureProcessor.cs" id="1_proc"]
+
+[node name="TextureProcessor" type="Node" unique_id=1576321063]
+script = ExtResource("1_proc")
