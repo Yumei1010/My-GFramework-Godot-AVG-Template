@@ -1,8 +1,8 @@
 using GFrameworkTemplate.global;
 
-namespace GFrameworkTemplate.scripts.menu;
+namespace GFrameworkTemplate.scripts.menu.story_page;
 
-public partial class VisualNovelTalkPage
+public partial class StoryPage
 {
     private Label TalkerName => GetNode<Label>("%TalkerName");
     private Label TalkContent => GetNode<Label>("%TalkContent");
@@ -14,6 +14,6 @@ public partial class VisualNovelTalkPage
     private async Task ReadyAsync()
     {
         await GameEntryPoint.Architecture.WaitUntilReadyAsync().ConfigureAwait(false);
-        _log.Debug("VisualNovelTalkPage 初始化完成");
+        _log.Debug("StoryPage 初始化完成");
     }
 }

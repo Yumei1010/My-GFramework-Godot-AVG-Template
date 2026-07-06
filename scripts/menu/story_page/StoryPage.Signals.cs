@@ -1,8 +1,8 @@
 using GFrameworkTemplate.scripts.cqrs.story.command;
 
-namespace GFrameworkTemplate.scripts.menu;
+namespace GFrameworkTemplate.scripts.menu.story_page;
 
-public partial class VisualNovelTalkPage
+public partial class StoryPage
 {
     private void ConnectPageSignals()
     {

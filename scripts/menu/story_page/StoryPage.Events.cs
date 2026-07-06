@@ -1,8 +1,8 @@
 using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 
-namespace GFrameworkTemplate.scripts.menu;
+namespace GFrameworkTemplate.scripts.menu.story_page;
 
-public partial class VisualNovelTalkPage
+public partial class StoryPage
 {
     private void RegisterEvents()
     {

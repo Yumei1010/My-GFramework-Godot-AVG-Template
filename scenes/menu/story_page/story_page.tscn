@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://x18u2ee0vwak"]
+[gd_scene format=3 uid="uid://bffhi578ucemk"]
 
-[node name="TemplatePage" type="Control" unique_id=965228841]
+[node name="StoryPage" type="Control" unique_id=168405206]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

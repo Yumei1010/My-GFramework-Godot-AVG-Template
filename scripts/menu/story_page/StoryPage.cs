@@ -4,11 +4,11 @@ using GFramework.Game.Abstractions.ui;
 using GFramework.Godot.ui;
 using GFrameworkTemplate.scripts.core.ui;
 
-namespace GFrameworkTemplate.scripts.menu;
+namespace GFrameworkTemplate.scripts.menu.story_page;
 
 [Log]
 [ContextAware]
-public partial class VisualNovelTalkPage : Control, IController, IUiPageBehaviorProvider, ISimpleUiPage
+public partial class StoryPage : Control, IController, IUiPageBehaviorProvider, ISimpleUiPage
 {
     private IUiPageBehavior? _page;
 
@@ -21,7 +21,7 @@ public partial class VisualNovelTalkPage : Control, IController, IUiPageBehavior
 
     public IUiPageBehavior GetPage()
     {
-        _page ??= UiPageBehaviorFactory.Create<VisualNovelTalkPage>(this, UiKeyStr, UiLayer.Page);
+        _page ??= UiPageBehaviorFactory.Create<StoryPage>(this, UiKeyStr, UiLayer.Page);
         return _page;
     }
 }

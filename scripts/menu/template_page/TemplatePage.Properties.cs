@@ -1,6 +1,6 @@
 using GFrameworkTemplate.scripts.enums.ui;
 
-namespace GFrameworkTemplate.scripts.menu;
+namespace GFrameworkTemplate.scripts.menu.template_page;
 
 public partial class TemplatePage
 {

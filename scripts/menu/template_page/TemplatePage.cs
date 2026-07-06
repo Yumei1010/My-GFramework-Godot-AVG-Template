@@ -4,7 +4,7 @@ using GFramework.Game.Abstractions.ui;
 using GFramework.Godot.ui;
 using GFrameworkTemplate.scripts.core.ui;
 
-namespace GFrameworkTemplate.scripts.menu;
+namespace GFrameworkTemplate.scripts.menu.template_page;
 
 /// <summary>
 ///     模板页面——演示 UI 页面的 partial class 五文件模式
