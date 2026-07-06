@@ -1,15 +1,16 @@
-using GFrameworkTemplate.scripts.cqrs.story.command;
+using GFrameworkTemplate.scripts.cqrs.player.command;
 
 namespace GFrameworkTemplate.scripts.menu.story_page;
 
 public partial class StoryPage
 {
-    private void ConnectPageSignals()
+    private void ConnectSignal()
     {
-        ClickArea.GuiInput += args =>
-        {
-            if (args is InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left })
-                this.SendCommand(new AdvanceStoryCommand());
-        };
+        InputDetector.Pressed += OnInputDetectorPressed;
+    }
+
+    private void OnInputDetectorPressed()
+    {
+        this.SendCommand(new PlayerClickCommand());
     }
 }

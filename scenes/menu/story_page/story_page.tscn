@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://bffhi578ucemk"]
 
+[ext_resource type="PackedScene" uid="uid://d06i0d82dnuj8" path="res://scenes/component/background_controller/background_controller.tscn" id="1_621ay"]
+
 [node name="StoryPage" type="Control" unique_id=168405206]
 layout_mode = 3
 anchors_preset = 15
@@ -8,3 +10,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="InputDetector" type="Button" parent="." unique_id=1229434949]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Background" parent="." unique_id=2085531883 instance=ExtResource("1_621ay")]
+unique_name_in_owner = true

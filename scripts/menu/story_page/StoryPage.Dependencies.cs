@@ -1,19 +1,16 @@
 using GFrameworkTemplate.global;
+using GFrameworkTemplate.scripts.component.background_controller;
 
 namespace GFrameworkTemplate.scripts.menu.story_page;
 
 public partial class StoryPage
 {
-    private Label TalkerName => GetNode<Label>("%TalkerName");
-    private Label TalkContent => GetNode<Label>("%TalkContent");
-    private Label CenterContent => GetNode<Label>("%CenterContent");
-    private TextureRect Avatar => GetNode<TextureRect>("%Avatar");
-    private Control ClickArea => GetNode<Control>("%ClickArea");
-    private Tween? _typewriterTween;
+    private Button InputDetector => GetNode<Button>("%InputDetector");
+    private BackgroundController Background => GetNode<BackgroundController>("%Background");
 
     private async Task ReadyAsync()
     {
         await GameEntryPoint.Architecture.WaitUntilReadyAsync().ConfigureAwait(false);
-        _log.Debug("StoryPage 初始化完成");
+        _log.Debug("StoryPage Initialized");
     }
 }

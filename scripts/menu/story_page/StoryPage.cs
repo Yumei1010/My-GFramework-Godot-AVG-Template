@@ -15,8 +15,8 @@ public partial class StoryPage : Control, IController, IUiPageBehaviorProvider, 
     public override void _Ready()
     {
         _ = ReadyAsync();
-        ConnectPageSignals();
-        RegisterEvents();
+        ConnectSignal();
+        RegisterEvent();
     }
 
     public IUiPageBehavior GetPage()
