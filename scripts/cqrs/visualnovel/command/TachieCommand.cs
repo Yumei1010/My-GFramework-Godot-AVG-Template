@@ -28,7 +28,8 @@ public sealed class TachieCommand : StoryCommand
                         "close" => TachieOperation.Close,
                         "onlyShow" => TachieOperation.OnlyShow,
                         _ => TachieOperation.Show
-                    }
+                    },
+                    Slot = GetString(entry.Value, "slot")
                 };
             }
         }

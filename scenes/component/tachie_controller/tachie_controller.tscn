@@ -1,59 +1,63 @@
 [gd_scene format=3 uid="uid://d8d61e522lfd"]
 
-[ext_resource type="Script" uid="uid://h7m680fxsukf" path="res://scripts/component/tachie_controller/TachieController.cs" id="1_ctrl"]
+[ext_resource type="Script" uid="uid://b2pdmpx3d56" path="res://scripts/component/tachie_controller/TachieController.cs" id="1_ctrl"]
 
 [node name="TachieSystem" type="CanvasLayer" unique_id=1189973803]
 layer = 10
 script = ExtResource("1_ctrl")
 
-[node name="TachieBarContainer" type="MarginContainer" parent="." unique_id=1564078568]
+[node name="SlotContainer" type="Control" parent="." unique_id=1564078568]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 192.0
-offset_bottom = 192.0
+offset_left = -276.0
+offset_top = -128.0
+offset_right = 276.0
+offset_bottom = 712.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 128
-theme_override_constants/margin_top = 384
-theme_override_constants/margin_right = 128
-theme_override_constants/margin_bottom = 0
-metadata/_edit_lock_ = true
+mouse_filter = 2
 
-[node name="TachieSlotContainer" type="HBoxContainer" parent="TachieBarContainer" unique_id=1886382926]
-layout_mode = 2
-theme_override_constants/separation = 96
-alignment = 1
-metadata/_edit_lock_ = true
-
-[node name="LeftSlot" type="TextureRect" parent="TachieBarContainer/TachieSlotContainer" unique_id=814438125]
+[node name="LeftSlot" type="TextureRect" parent="SlotContainer" unique_id=814438125]
 unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
+layout_mode = 0
+offset_right = 1080.0
+offset_bottom = 1920.0
 mouse_filter = 2
 expand_mode = 1
-stretch_mode = 5
+stretch_mode = 6
 
-[node name="CenterSlot" type="TextureRect" parent="TachieBarContainer/TachieSlotContainer" unique_id=973059801]
+[node name="CenterSlot" type="TextureRect" parent="SlotContainer" unique_id=973059801]
 unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -540.0
+offset_right = 540.0
+offset_bottom = 1920.0
 mouse_filter = 2
 expand_mode = 1
-stretch_mode = 5
+stretch_mode = 6
 
-[node name="RightSlot" type="TextureRect" parent="TachieBarContainer/TachieSlotContainer" unique_id=2017282553]
+[node name="RightSlot" type="TextureRect" parent="SlotContainer" unique_id=2017282553]
 unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1080.0
+offset_bottom = 1920.0
 mouse_filter = 2
 expand_mode = 1
-stretch_mode = 5
+stretch_mode = 6
 
-[node name="HelperSlot" type="TextureRect" parent="TachieBarContainer" unique_id=203569991]
+[node name="HelperSlot" type="TextureRect" parent="SlotContainer" unique_id=203569991]
 unique_name_in_owner = true
+visible = false
 modulate = Color(1, 1, 1, 0)
-layout_mode = 2
+layout_mode = 0
+offset_right = 1080.0
+offset_bottom = 1920.0
 mouse_filter = 2
 expand_mode = 1
-stretch_mode = 5
+stretch_mode = 6

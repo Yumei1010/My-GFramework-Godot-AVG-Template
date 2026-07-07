@@ -4,3 +4,6 @@
 
 [node name="TextureProcessor" type="Node" unique_id=1576321063]
 script = ExtResource("1_proc")
+_targetWidth = 1080
+_targetHeight = 1920
+_padToExact = true

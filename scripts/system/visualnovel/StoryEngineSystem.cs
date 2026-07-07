@@ -1,6 +1,7 @@
 using GFrameworkTemplate.scripts.core.story;
 using GFrameworkTemplate.scripts.cqrs.background.command;
 using GFrameworkTemplate.scripts.cqrs.background.command.input;
+using GFrameworkTemplate.scripts.cqrs.tachie.command;
 using GFrameworkTemplate.scripts.cqrs.story.command;
 using GFrameworkTemplate.scripts.cqrs.story.query;
 using GFrameworkTemplate.scripts.cqrs.story.query.result;
@@ -32,7 +33,6 @@ public sealed partial class StoryEngineSystem : ISystem
         foreach (var sys in new IStoryExecutionSystem[]
         {
             this.GetSystem<TalkSystem>()!,
-            this.GetSystem<TachieSystem>()!,
             this.GetSystem<SoundSystem>()!,
             this.GetSystem<BranchSystem>()!,
             this.GetSystem<GotoSystem>()!,
@@ -105,6 +105,11 @@ public sealed partial class StoryEngineSystem : ISystem
                         WaitTweenEnd = b.WaitTweenEnd,
                         Delay = b.Delay
                     }));
+            }
+            else if (cmd.Type == "tachie")
+            {
+                var t = (TachieCommand)cmd;
+                this.SendCommand(new ChangeTachieCommand { Tachies = t.Tachies });
             }
 
             if (cmd.Wait.HasValue)

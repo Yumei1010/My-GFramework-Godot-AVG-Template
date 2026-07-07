@@ -1,32 +1,36 @@
-using GFrameworkTemplate.scripts.core.story;
-using GFrameworkTemplate.scripts.cqrs.visualnovel.command;
+using GFrameworkTemplate.scripts.component.tachie_slot;
 using GFrameworkTemplate.scripts.cqrs.tachie.command;
 using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 using GFrameworkTemplate.scripts.enums.visualnovel;
-using GFrameworkTemplate.scripts.system.visualnovel;
 
 namespace GFrameworkTemplate.scripts.system.visualnovel;
 
 /// <summary>
-///     立绘系统——状态管理 + 故事命令执行
+///     立绘系统——独立 ISystem，通过 ChangeTachieCommand 驱动
 /// </summary>
 [Log]
 [ContextAware]
-public sealed partial class TachieSystem : ISystem, IStoryExecutionSystem
+public sealed partial class TachieSystem : ISystem
 {
-    public string CommandType => "tachie";
     public event Action? Changed;
-    public void OnArchitecturePhase(ArchitecturePhase phase) { } public void Init() { } public void Destroy() { }
+    public void OnArchitecturePhase(ArchitecturePhase phase) { }
+    public void Init() { }
+    public void Destroy() { }
 
+    /// <summary>
+    ///     外部直接操作立绘（非故事引擎路径）
+    /// </summary>
     public void Handle(TachieOperation type, string charName, string filePath)
     {
         this.SendCommand(new UpdateTachieCommand { Type = type, CharName = charName, FilePath = filePath });
         Changed?.Invoke();
     }
 
-    async Task IStoryExecutionSystem.ExecuteAsync(StoryCommand cmd, EngineContext ctx)
+    /// <summary>
+    ///     故事引擎路径：发送立绘事件，由 TachieController 订阅处理
+    /// </summary>
+    public void Apply(Dictionary<string, TachieSlot> tachies)
     {
-        var t = (TachieCommand)cmd;
-        ctx.SendEvent(new VisualNovelTachieUpdatedEvent { Tachies = t.Tachies });
+        this.SendEvent(new VisualNovelTachieUpdatedEvent { Tachies = tachies });
     }
 }

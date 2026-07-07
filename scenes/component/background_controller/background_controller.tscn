@@ -16,6 +16,7 @@ grow_vertical = 2
 mouse_filter = 2
 expand_mode = 1
 stretch_mode = 2
+metadata/_edit_lock_ = true
 
 [node name="HelperBackgroundRect" type="TextureRect" parent="." unique_id=991266620]
 unique_name_in_owner = true
@@ -28,3 +29,4 @@ grow_vertical = 2
 mouse_filter = 2
 expand_mode = 1
 stretch_mode = 2
+metadata/_edit_lock_ = true

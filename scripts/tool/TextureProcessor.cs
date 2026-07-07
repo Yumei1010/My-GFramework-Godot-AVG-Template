@@ -21,6 +21,9 @@ public partial class TextureProcessor : Node
     /// <summary>缩放模式：true = Fit（等比缩放不裁剪），false = Cover（填满居中裁剪）</summary>
     [Export] private bool _fitMode = true;
 
+    /// <summary>Fit 模式下是否补透明边到精确目标尺寸</summary>
+    [Export] private bool _padToExact = false;
+
     /// <summary>是否递归处理子目录</summary>
     [Export] private bool _recursive = true;
 
@@ -29,7 +32,7 @@ public partial class TextureProcessor : Node
 
     public override void _Ready()
     {
-        GD.Print($"TextureProcessor: source={_sourceFolder}, target={_targetWidth}×{_targetHeight}, fit={_fitMode}, recursive={_recursive}");
+        GD.Print($"TextureProcessor: source={_sourceFolder}, target={_targetWidth}×{_targetHeight}, fit={_fitMode}, pad={_padToExact}, recursive={_recursive}");
 
         ProcessDirectory(_sourceFolder);
 
@@ -101,9 +104,22 @@ public partial class TextureProcessor : Node
         var newH = Mathf.RoundToInt(srcH * scale);
 
         img.Resize(newW, newH, Image.Interpolation.Lanczos);
-        img.SavePng(savePath);
 
-        GD.Print($"  FIT  {savePath.GetFile()}: {srcW}×{srcH} → {newW}×{newH}");
+        if (_padToExact)
+        {
+            var target = Image.Create(_targetWidth, _targetHeight, false, Image.Format.Rgba8);
+            target.Fill(Colors.Transparent);
+            var offsetX = (_targetWidth - newW) / 2;
+            var offsetY = (_targetHeight - newH) / 2;
+            target.BlitRect(img, new Rect2I(0, 0, newW, newH), new Vector2I(offsetX, offsetY));
+            target.SavePng(savePath);
+            GD.Print($"  FIT+PAD {savePath.GetFile()}: {srcW}×{srcH} → {newW}×{newH} → {_targetWidth}×{_targetHeight}");
+        }
+        else
+        {
+            img.SavePng(savePath);
+            GD.Print($"  FIT  {savePath.GetFile()}: {srcW}×{srcH} → {newW}×{newH}");
+        }
     }
 
     private void ProcessCover(Image img, string savePath, int srcW, int srcH)

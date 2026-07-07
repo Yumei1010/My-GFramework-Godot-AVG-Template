@@ -17,20 +17,21 @@ public partial class TachieController : CanvasLayer
     private TextureRect CenterSlot => GetNode<TextureRect>("%CenterSlot");
     private TextureRect RightSlot => GetNode<TextureRect>("%RightSlot");
     private TextureRect HelperSlot => GetNode<TextureRect>("%HelperSlot");
+
     public override void _Ready()
     {
         this.RegisterEvent<VisualNovelTachieUpdatedEvent>(e =>
         {
+            var oldSlots = this.SendQuery(new GetTachieStateQuery())!.SlotToChar;
             foreach (var (name, slot) in e.Tachies)
-                this.SendCommand(new UpdateTachieCommand { Type = slot.Type, CharName = name, FilePath = slot.FilePath });
-            Render();
+                this.SendCommand(new UpdateTachieCommand { Type = slot.Type, CharName = name, FilePath = slot.FilePath, Slot = slot.Slot });
+            Render(oldSlots);
         }).UnRegisterWhenNodeExitTree(this);
     }
 
-    private async void Render()
+    private async void Render(IReadOnlyDictionary<string, string> oldSlotMap)
     {
         var model = this.SendQuery(new GetTachieStateQuery())!;
-        var oldSlots = new Dictionary<string, string?>(model.SlotToChar);
 
         foreach (var r in new[] { LeftSlot, CenterSlot, RightSlot })
             r.Visible = false;
@@ -42,14 +43,22 @@ public partial class TachieController : CanvasLayer
             if (tex == null) continue;
 
             var rect = GetSlot(slotName);
-            var wasVisible = oldSlots.ContainsKey(slotName);
 
-            if (wasVisible)
+            if (oldSlotMap.TryGetValue(slotName, out var oldChar) && oldChar == charName)
             {
+                // 同一角色已在同一槽位显示过，直接恢复
+                rect.Texture = tex;
+                rect.Modulate = Colors.White;
+                rect.Visible = true;
+            }
+            else if (oldSlotMap.ContainsKey(slotName))
+            {
+                // 同一槽位切换不同角色，交叉淡入淡出
                 await CrossfadeSlot(rect, tex);
             }
             else
             {
+                // 新槽位，直接显示
                 rect.Texture = tex;
                 rect.Modulate = Colors.White;
                 rect.Visible = true;
@@ -72,6 +81,7 @@ public partial class TachieController : CanvasLayer
 
         rect.Texture = newTex;
         rect.Modulate = Colors.White;
+        rect.Visible = true;
         HelperSlot.Visible = false;
     }
 
