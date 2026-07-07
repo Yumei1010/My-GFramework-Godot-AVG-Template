@@ -9,13 +9,9 @@ namespace GFrameworkTemplate.scripts.entities.background_controller;
 [ContextAware]
 public partial class BackgroundController : CanvasLayer
 {
-    private TextureRect MainBackgroundRect => GetNode<TextureRect>("%MainBackgroundRect");
-    private TextureRect HelperBackgroundRect => GetNode<TextureRect>("%HelperBackgroundRect");
-    private Tween? _tween;
-
     public override void _Ready()
     {
-        HelperBackgroundRect.Modulate = Colors.Transparent;
+        _ = ReadyAsync();
     }
 
     public async Task Change(string filePath = "", bool waitTweenEnd = true)
@@ -26,8 +22,7 @@ public partial class BackgroundController : CanvasLayer
         var texture = GD.Load<Texture2D>(path);
         if (texture == null) return;
 
-        _tween?.Kill();
-
+        if (_tween != null && _tween.IsRunning()) _tween.Kill();
         if (waitTweenEnd)
         {
             HelperBackgroundRect.Texture = texture;
