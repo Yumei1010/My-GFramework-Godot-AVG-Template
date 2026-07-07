@@ -1,6 +1,6 @@
 using GFramework.Core.command;
 using GFrameworkTemplate.scripts.component.tachie_slot;
-using GFrameworkTemplate.scripts.system.visualnovel;
+using GFrameworkTemplate.scripts.system.tachie_system;
 
 namespace GFrameworkTemplate.scripts.cqrs.tachie.command;
 

@@ -1,5 +1,5 @@
 using GFramework.Core.command;
-using GFrameworkTemplate.scripts.system.visualnovel;
+using GFrameworkTemplate.scripts.system.sound_system;
 
 namespace GFrameworkTemplate.scripts.cqrs.sound.command;
 

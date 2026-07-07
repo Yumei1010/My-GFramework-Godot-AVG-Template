@@ -16,7 +16,7 @@ using GFrameworkTemplate.scripts.core.state.impls;
 using GFrameworkTemplate.scripts.enums.scene;
 using GFrameworkTemplate.scripts.utility;
 using GFrameworkTemplate.scripts.cqrs.setting.command;
-using GFrameworkTemplate.scripts.system.visualnovel;
+using GFrameworkTemplate.scripts.system.story_engine_system;
 using Godot.Collections;
 
 namespace GFrameworkTemplate.global;

@@ -1,5 +1,5 @@
 using GFrameworkTemplate.scripts.cqrs.background.command.input;
-using GFrameworkTemplate.scripts.system.visualnovel;
+using GFrameworkTemplate.scripts.system.background_system;
 
 namespace GFrameworkTemplate.scripts.cqrs.background.command;
 

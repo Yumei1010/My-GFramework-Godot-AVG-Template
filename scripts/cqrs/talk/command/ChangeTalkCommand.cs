@@ -1,6 +1,6 @@
 using GFramework.Core.command;
 using GFrameworkTemplate.scripts.cqrs.talk.command.input;
-using GFrameworkTemplate.scripts.system.visualnovel;
+using GFrameworkTemplate.scripts.system.talk_system;
 
 namespace GFrameworkTemplate.scripts.cqrs.talk.command;
 

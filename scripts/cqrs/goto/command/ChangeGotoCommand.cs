@@ -1,5 +1,5 @@
 using GFrameworkTemplate.scripts.cqrs.story.command;
-using GFrameworkTemplate.scripts.system.visualnovel;
+using GFrameworkTemplate.scripts.system.goto_system;
 
 namespace GFrameworkTemplate.scripts.cqrs.@goto.command;
 

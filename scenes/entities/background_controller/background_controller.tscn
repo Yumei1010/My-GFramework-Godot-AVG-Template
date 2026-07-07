@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://d06i0d82dnuj8"]
+
+[ext_resource type="Script" uid="uid://dha5euehwh7ty" path="res://scripts/entities/background_controller/BackgroundController.cs" id="1_ctrl"]
+
+[node name="BackgroundController" type="CanvasLayer" unique_id=2085531883]
+layer = -10
+script = ExtResource("1_ctrl")
+
+[node name="MainBackgroundRect" type="TextureRect" parent="." unique_id=2093327097]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="HelperBackgroundRect" type="TextureRect" parent="." unique_id=991266620]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 2
+metadata/_edit_lock_ = true

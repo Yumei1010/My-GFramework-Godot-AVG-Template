@@ -1,5 +1,5 @@
 using GFrameworkTemplate.scripts.component.branch_option;
-using GFrameworkTemplate.scripts.system.visualnovel;
+using GFrameworkTemplate.scripts.system.branch_system;
 
 namespace GFrameworkTemplate.scripts.cqrs.branch.command;
 

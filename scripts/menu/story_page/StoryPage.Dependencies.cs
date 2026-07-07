@@ -1,9 +1,9 @@
 using GFrameworkTemplate.global;
-using GFrameworkTemplate.scripts.component.background_controller;
-using GFrameworkTemplate.scripts.component.branch_controller;
-using GFrameworkTemplate.scripts.component.sound_controller;
-using GFrameworkTemplate.scripts.component.tachie_controller;
-using GFrameworkTemplate.scripts.component.talk_controller;
+using GFrameworkTemplate.scripts.entities.background_controller;
+using GFrameworkTemplate.scripts.entities.branch_controller;
+using GFrameworkTemplate.scripts.entities.sound_controller;
+using GFrameworkTemplate.scripts.entities.tachie_controller;
+using GFrameworkTemplate.scripts.entities.talk_controller;
 
 namespace GFrameworkTemplate.scripts.menu.story_page;
 
