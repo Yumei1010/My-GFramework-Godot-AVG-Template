@@ -59,21 +59,33 @@ _ = engine.LoadAndPlay("MyStory");
 | 字段 | 类型 | 说明 |
 |------|------|------|
 | `type` | string | `"tachie"` |
-| `tachies` | object | `{角色名: {file_path, type}}` |
+| `tachies` | object | `{角色名: {file_path, type?, slot?}}` |
 
 **操作类型（type）：**
 
 | type 值 | 效果 | 是否可省略 |
 |---------|------|-----------|
-| `show` | 入场到左右槽位 | ✅ 默认（省略等于 show） |
+| `show` | 入场 | ✅ 默认（省略等于 show） |
 | `change` | 原位交叉淡入淡出换表情 | 否 |
 | `close` | 离场 | 否 |
-| `onlyShow` | 居中聚光灯凸显（独占 Center 槽位） | 否 |
+| `onlyShow` | 居中聚光灯凸显 | 否 |
+
+**槽位指定（slot）：**
+
+| slot 值 | 效果 |
+|---------|------|
+| `"Left"` | 显示在左侧 |
+| `"Center"` | 显示在中间 |
+| `"Right"` | 显示在右侧 |
+| 不填 | `show`/`change` 自动分配（第 1 个→Left，第 2 个→Right）；`onlyShow` 默认→Center |
 
 **示例：**
 ```json
-// 登场（type 可省略）
+// 登场（自动分配槽位）
 {"type": "tachie", "tachies": {"saya": {"file_path": "saya_normal"}}}
+
+// 显式指定槽位
+{"type": "tachie", "tachies": {"saya": {"file_path": "saya_normal", "type": "show", "slot": "Right"}}}
 
 // 切换表情
 {"type": "tachie", "tachies": {"saya": {"file_path": "saya_smile", "type": "change"}}}
@@ -86,8 +98,8 @@ _ = engine.LoadAndPlay("MyStory");
 
 // 批量操作
 {"type": "tachie", "tachies": {
-  "saya": {"file_path": "saya_normal", "type": "show"},
-  "kenta": {"file_path": "kenta_excited", "type": "show"}
+  "saya": {"file_path": "saya_normal", "type": "show", "slot": "Left"},
+  "kenta": {"file_path": "kenta_excited", "type": "show", "slot": "Right"}
 }}
 ```
 

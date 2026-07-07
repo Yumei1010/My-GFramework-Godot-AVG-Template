@@ -20,7 +20,7 @@ dotnet test
 
 以下为 CONVENTIONS.md 的核心规则，开发时务必遵守：
 
-- **命名空间** 与目录一对一映射，使用文件范围声明 `namespace X.Y.Z;`（无大括号）；事件的 C# 关键字 `event` 在命名空间中转义为 `@event`
+- **命名空间** 与目录一对一映射，使用文件范围声明 `namespace X.Y.Z;`（无大括号）；C# 关键字 `event`/`goto` 在命名空间中转义为 `@event`/`@goto`
 - **事件** 全部 `public sealed class`；属性全部 `{ get; init; }` + `required`；无数据事件用分号声明 `public sealed class FooEvent;`
 - **命令** 全部 `public sealed class`，继承 `AbstractCommand(Async)`；命令输入全部 `sealed class : ICommandInput`（**禁止 struct**）
 - **Godot 节点** 全部 `public partial class`（不 sealed）；标注 `[Log]` + `[ContextAware]`（成对，`[Log]` 在前）
@@ -44,10 +44,10 @@ dotnet test
 
 | 模块 | 职责 |
 |---|---|
-| `ModelModule` | 注册设置模型及其应用器（音频/图形/本地化） |
-| `SystemModule` | 注册 UiRouter、SceneRouter、SettingsSystem |
+| `ModelModule` | 注册设置模型及其应用器 + VN 领域模型（StoryState/Camera/Talk/Tachie/Sound） |
+| `SystemModule` | 注册 UiRouter、SceneRouter、SettingsSystem + 10 个 VN 子系统 |
 | `UtilityModule` | 注册工具：UI/场景/纹理注册表、存储、序列化、工厂 |
-| `StateModule` | 注册 `GameStateMachineSystem` 及状态 |
+| `StateModule` | 注册 `GameStateMachineSystem` + `AppState` |
 
 **状态 → UI 映射：** 每个状态实现 `ContextAwareStateBase`，在 `OnEnter` 中清除之前的 UI/场景，并通过 `UiRouter.Push()` 推入对应的 UI 页面。参见 `AppState` 作为模板示例。
 
@@ -61,8 +61,6 @@ dotnet test
 | `*.Events.cs` | 通过 `RegisterEvent()` 订阅 CQRS 事件 |
 | `*.Signals.cs` | Godot 信号 → CQRS 事件桥接（`ConnectSignal()`） |
 
-**Entity partial 类** 遵循相同模式：`Entity.cs`、`Entity.Dependencies.cs`、`Entity.Properties.cs`、`Entity.Events.cs`、`Entity.Signals.cs`。
-
 ## 核心模式
 
 ### CQRS 通信
@@ -72,42 +70,83 @@ dotnet test
 - 事件位于 `scripts/cqrs/<domain>/event/`，命名空间 `...cqrs.<domain>.@event`
 - 命令位于 `scripts/cqrs/<domain>/command/`，命令输入位于 `scripts/cqrs/<domain>/command/input/`
 - 命令发送：`this.SendCommand(new SomeCommand(input))`
+- 异步命令：`await this.SendCommandAsync(new SomeCommand(input))`
 
 ### 日志与上下文
 - `[Log]` 特性通过 GFramework 源代码生成器自动生成静态 `Log` 属性
 - `[ContextAware]` 特性自动注入 GFramework 架构上下文
 - 两者**成对使用**，`[Log]` 在前
 
+## VN 故事引擎
+
+### 命令类型（7 种）
+
+| 类型 | 用途 | 驱动方式 |
+|------|------|---------|
+| `talk` | 对话文本 + 说话人 | `ChangeTalkCommand` → `TalkSystem.PlayAsync` |
+| `background` | 背景切换（淡入淡出） | `ChangeBackgroundCommand` → `BackgroundSystem.Change` |
+| `tachie` | 立绘管理（显式槽位） | `ChangeTachieCommand` → `TachieSystem.Apply` |
+| `sound` | 音效/音乐 | 直接发送 `VisualNovelSoundPlayedEvent` |
+| `branch` | 分支选项 + 等待选择 | `ChangeBranchCommand` → `BranchSystem.ShowAsync` |
+| `goto` | 跳转到另一脚本 | `ChangeGotoCommand` → `GotoSystem.Navigate` + 写 Model |
+| `event` | 自定义事件 + 等待点击 | 直接发送 `VisualNovelCustomEventFiredEvent` + `WaitClickAsync` |
+
+### PlayLoop 架构
+
+```
+PlayLoop (纯 switch 分发)
+  ├── "background" → await SendCommandAsync(ChangeBackgroundCommand)
+  ├── "tachie"     → SendCommand(ChangeTachieCommand)
+  ├── "talk"       → await SendCommandAsync(ChangeTalkCommand)
+  ├── "branch"     → await SendCommandAsync(ChangeBranchCommand)
+  ├── "goto"       → await SendCommandAsync(ChangeGotoCommand)
+  ├── "sound"      → SendEvent(VisualNovelSoundPlayedEvent)
+  └── "event"      → SendEvent + await WaitClickAsync
+
+统一模式: Command → System → SendEvent → Controller（View 层）
+```
+
+### JSON 故事格式
+
+详见 [STORY_FORMAT.md](STORY_FORMAT.md)。JSON 脚本通过 `StoryParser` 解析为 `StoryCommand` 对象，`StoryEngineSystem.LoadAndPlay(logicName)` 启动播放。纹理/JSON 逻辑名通过 `StoryResourceMapper.Register*` 注册。
+
 ## 框架模块清单
 
 | 模块 | 文件 | 注册内容 |
 |---|---|---|
-| ModelModule | `scripts/module/ModelModule.cs` | `SettingsModel` + Audio/Graphics/Localization 应用器 |
-| SystemModule | `scripts/module/SystemModule.cs` | `UiRouter`、`SceneRouter`、`SettingsSystem` |
+| ModelModule | `scripts/module/ModelModule.cs` | `SettingsModel` + VN 领域模型（5 个） |
+| SystemModule | `scripts/module/SystemModule.cs` | UiRouter、SceneRouter、SettingsSystem + 10 个 VN 子系统 |
 | UtilityModule | `scripts/module/UtilityModule.cs` | UI/场景/纹理注册表、存储、JSON 序列化、设置仓储 |
 | StateModule | `scripts/module/StateModule.cs` | `GameStateMachineSystem` + `AppState` |
 
-## 示例 CQRS 域
+## VN 子系统清单
 
-框架保留了以下通用 CQRS 域作为参考：
-
-- `scripts/cqrs/audio/command/` — 音量控制命令（Master/Bgm/Sfx）
-- `scripts/cqrs/graphics/` — 分辨率和全屏切换命令
-- `scripts/cqrs/setting/` — 设置保存/重置/查询命令
-- `scripts/cqrs/game/command/ExitGameCommand.cs` — 退出游戏命令
+| 系统 | 职责 | 命令入口 |
+|------|------|---------|
+| `StoryEngineSystem` | JSON 脚本解释器，PlayLoop 驱动 | `LoadAndPlay` |
+| `BackgroundSystem` | 背景切换（延迟 + 事件） | `ChangeBackgroundCommand` |
+| `TachieSystem` | 立绘管理（显式槽位支持） | `ChangeTachieCommand` |
+| `TalkSystem` | 对话播放 + 等待点击推进 | `ChangeTalkCommand` |
+| `BranchSystem` | 分支选项 + 等待玩家选择 | `ChangeBranchCommand` |
+| `GotoSystem` | 跳转导航（发事件 + 写 Model） | `ChangeGotoCommand` |
+| `SoundSystem` | BGM/SFX 管理 | — |
+| `EventSystem` | 自定义事件系统 | — |
+| `CameraSystem` | 相机效果 | — |
+| `SaveSystem` | 存档管理 | — |
 
 ## 目录结构约定
 
 ```
 scripts/
-├── component/       # 可复用组件（VolumeContainer 等）
+├── component/       # 可复用组件（Controller 场景节点）
 ├── constants/       # 全局常量
-├── core/            # 框架核心（架构、路由、状态、UI 基类）
+├── core/            # 框架核心（架构、路由、状态、故事解析）
 ├── cqrs/            # CQRS 命令/事件/查询（按域划分）
-├── data/            # 数据层（设置数据位置提供者等）
-├── enums/           # 枚举（UI Key、场景 Key、纹理 Key 等）
+├── data/            # 数据层（资源映射、设置存储）
+├── enums/           # 枚举（UI Key、场景 Key、立绘操作等）
 ├── model/           # 领域模型（按业务域划分）
 ├── module/          # DI 模块
-├── system/          # 系统（按业务域划分）
-└── utility/         # 工具类
+├── system/          # 系统（按业务域划分，统一在 visualnovel/ 下）
+├── menu/            # UI 页面
+└── tool/            # 开发工具脚本
 ```
