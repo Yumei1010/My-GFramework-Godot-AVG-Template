@@ -16,6 +16,7 @@ mouse_filter = 2
 theme_override_constants/margin_left = 256
 theme_override_constants/margin_top = 872
 theme_override_constants/margin_right = 256
+metadata/_edit_lock_ = true
 
 [node name="TalkBarBackgroundTextureRect" type="TextureRect" parent="TalkBarContainer" unique_id=793925008]
 unique_name_in_owner = true

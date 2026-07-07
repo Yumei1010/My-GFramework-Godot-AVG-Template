@@ -2,6 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://d06i0d82dnuj8" path="res://scenes/component/background_controller/background_controller.tscn" id="1_621ay"]
 [ext_resource type="Script" uid="uid://diswnmaoolk1u" path="res://scripts/menu/story_page/StoryPage.cs" id="1_iiuyp"]
+[ext_resource type="PackedScene" uid="uid://d8d61e522lfd" path="res://scenes/component/tachie_controller/tachie_controller.tscn" id="3_0hynk"]
+[ext_resource type="PackedScene" uid="uid://d2qdgy0sn4824" path="res://scenes/component/sound_controller/sound_controller.tscn" id="3_sound"]
+[ext_resource type="PackedScene" uid="uid://cyg40uvof2v40" path="res://scenes/component/talk_controller/talk_controller.tscn" id="4_g0n51"]
+[ext_resource type="PackedScene" uid="uid://8bnqdblg3myu" path="res://scenes/component/branch_controller/branch_controller.tscn" id="6_v257i"]
 
 [node name="StoryPage" type="Control" unique_id=168405206]
 layout_mode = 3
@@ -12,6 +16,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_iiuyp")
+metadata/_edit_lock_ = true
 
 [node name="InputDetector" type="Button" parent="." unique_id=1229434949]
 unique_name_in_owner = true
@@ -24,5 +29,17 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_lock_ = true
 
+[node name="Sound" parent="." unique_id=317858591 instance=ExtResource("3_sound")]
+unique_name_in_owner = true
+
 [node name="Background" parent="." unique_id=2085531883 instance=ExtResource("1_621ay")]
+unique_name_in_owner = true
+
+[node name="Tachie" parent="." unique_id=1189973803 instance=ExtResource("3_0hynk")]
+unique_name_in_owner = true
+
+[node name="Talk" parent="." unique_id=1870246737 instance=ExtResource("4_g0n51")]
+unique_name_in_owner = true
+
+[node name="Branch" parent="." unique_id=206957926 instance=ExtResource("6_v257i")]
 unique_name_in_owner = true

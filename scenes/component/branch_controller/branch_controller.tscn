@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bwxxrfb5ymwst" path="res://scripts/component/branch_controller/BranchController.cs" id="1_ctrl"]
 
-[node name="BranchSystem" type="CanvasLayer" unique_id=206957926]
+[node name="BranchController" type="CanvasLayer" unique_id=206957926]
 layer = 100
 script = ExtResource("1_ctrl")
 
@@ -12,11 +12,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 128
 theme_override_constants/margin_right = 128
+metadata/_edit_lock_ = true
 
 [node name="ButtonList" type="VBoxContainer" parent="BranchBarContainer" unique_id=1199927417]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 12
 alignment = 1
+metadata/_edit_lock_ = true
