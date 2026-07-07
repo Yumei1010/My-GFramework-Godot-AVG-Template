@@ -1,25 +1,37 @@
 using GFrameworkTemplate.scripts.cqrs.sound.command;
+using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
+using GFrameworkTemplate.scripts.model.sound;
 
 namespace GFrameworkTemplate.scripts.system.visualnovel;
 
 /// <summary>
-///     音频系统——BGM/SFX 管理
+///     音频系统——独立 ISystem，通过 ChangeSoundCommand 驱动
 /// </summary>
 [Log]
 [ContextAware]
 public sealed partial class SoundSystem : ISystem
 {
-    public event Action<string>? BgmRequested;
-    public event Action<string>? SfxRequested;
     public void OnArchitecturePhase(ArchitecturePhase phase) { }
     public void Init() { }
     public void Destroy() { }
 
-    public void PlayBgm(string name)
+    /// <summary>
+    ///     播放 BGM（防重复播放）
+    /// </summary>
+    public void PlayBgm(string filePath)
     {
-        this.SendCommand(new PlayBgmCommand { LogicalName = name });
-        BgmRequested?.Invoke(name);
+        var model = this.GetModel<SoundModel>()!;
+        if (model.CurrentBgm == filePath) return;
+
+        model.CurrentBgm = filePath;
+        this.SendEvent(new VisualNovelSoundPlayedEvent { SoundType = "bgm", FilePath = filePath });
     }
 
-    public void PlaySfx(string name) => SfxRequested?.Invoke(name);
+    /// <summary>
+    ///     播放音效
+    /// </summary>
+    public void PlaySfx(string filePath)
+    {
+        this.SendEvent(new VisualNovelSoundPlayedEvent { SoundType = "oneSound", FilePath = filePath });
+    }
 }

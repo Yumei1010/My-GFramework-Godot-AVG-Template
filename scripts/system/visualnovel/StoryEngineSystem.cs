@@ -1,5 +1,6 @@
 using GFrameworkTemplate.scripts.core.story;
 using GFrameworkTemplate.scripts.cqrs.background.command;
+using GFrameworkTemplate.scripts.cqrs.sound.command;
 using GFrameworkTemplate.scripts.cqrs.background.command.input;
 using GFrameworkTemplate.scripts.cqrs.branch.command;
 using GFrameworkTemplate.scripts.cqrs.@goto.command;
@@ -110,7 +111,7 @@ public sealed partial class StoryEngineSystem : ISystem
                     break;
                 case "sound":
                     var s = (SoundCommand)cmd;
-                    this.SendEvent(new VisualNovelSoundPlayedEvent { SoundType = s.SoundType, FilePath = s.FilePath ?? "" });
+                    this.SendCommand(new ChangeSoundCommand { SoundType = s.SoundType, FilePath = s.FilePath ?? "" });
                     break;
                 case "event":
                     var ev = (EventCommand)cmd;

@@ -3,23 +3,19 @@ using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 namespace GFrameworkTemplate.scripts.component.sound_controller;
 
 /// <summary>
-///     音频控制器——CanvasLayer 场景节点，AudioStreamPlayer 播放
+///     音频控制器——CanvasLayer 场景节点，BGM 直接播放，SFX 对象池
 /// </summary>
 [Log]
 [ContextAware]
 public partial class SoundController : CanvasLayer
 {
     private AudioStreamPlayer BgmPlayer => GetNode<AudioStreamPlayer>("%BgmPlayer");
-    private AudioStreamPlayer BgmHelper => GetNode<AudioStreamPlayer>("%BgmHelper");
     private readonly AudioStreamPlayer[] _sfxPool = new AudioStreamPlayer[8];
-    private Tween? _bgmTween;
 
     public override void _Ready()
     {
         for (var i = 0; i < 8; i++)
             _sfxPool[i] = GetNode<AudioStreamPlayer>($"%SfxPlayer_{i}");
-
-        BgmHelper.VolumeDb = -80f;
 
         this.RegisterEvent<VisualNovelSoundPlayedEvent>(e =>
         {
@@ -28,26 +24,15 @@ public partial class SoundController : CanvasLayer
         }).UnRegisterWhenNodeExitTree(this);
     }
 
-    private async void OnBgmRequested(string logicalName)
+    private void OnBgmRequested(string logicalName)
     {
         var path = ResolveAudioPath(logicalName);
         if (string.IsNullOrEmpty(path)) return;
         var stream = GD.Load<AudioStream>(path);
         if (stream == null) return;
 
-        _bgmTween?.Kill();
-        BgmHelper.Stream = stream;
-        BgmHelper.Play();
-        BgmHelper.VolumeDb = -80f;
-
-        _bgmTween = CreateTween();
-        _bgmTween.TweenProperty(BgmHelper, "volume_db", 0f, 1f);
-        _bgmTween.Parallel().TweenProperty(BgmPlayer, "volume_db", -80f, 1f);
-        await ToSignal(_bgmTween, Tween.SignalName.Finished);
-
-        (BgmPlayer.Stream, BgmHelper.Stream) = (BgmHelper.Stream, BgmPlayer.Stream);
-        BgmPlayer.VolumeDb = 0f;
-        BgmHelper.Stop();
+        BgmPlayer.Stream = stream;
+        BgmPlayer.Play();
     }
 
     private void OnSfxRequested(string logicalName)
