@@ -9,6 +9,9 @@ public class TachieModel : AbstractModel
     /// <summary>槽位名 → 角色名</summary>
     public Dictionary<string, string> SlotToChar { get; set; } = new();
     /// <summary>聚光灯下的角色名</summary>
-    public string? SpotlightChar { get; set; }
-    protected override void OnInit() { }
+    public string SpotlightChar { get; set; } = string.Empty;
+    protected override void OnInit()
+    {
+        
+    }
 }

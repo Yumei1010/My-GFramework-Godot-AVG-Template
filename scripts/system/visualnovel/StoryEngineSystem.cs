@@ -2,6 +2,8 @@ using GFrameworkTemplate.scripts.core.story;
 using GFrameworkTemplate.scripts.cqrs.background.command;
 using GFrameworkTemplate.scripts.cqrs.background.command.input;
 using GFrameworkTemplate.scripts.cqrs.tachie.command;
+using GFrameworkTemplate.scripts.cqrs.talk.command;
+using GFrameworkTemplate.scripts.cqrs.talk.command.input;
 using GFrameworkTemplate.scripts.cqrs.story.command;
 using GFrameworkTemplate.scripts.cqrs.story.query;
 using GFrameworkTemplate.scripts.cqrs.story.query.result;
@@ -32,7 +34,6 @@ public sealed partial class StoryEngineSystem : ISystem
     {
         foreach (var sys in new IStoryExecutionSystem[]
         {
-            this.GetSystem<TalkSystem>()!,
             this.GetSystem<SoundSystem>()!,
             this.GetSystem<BranchSystem>()!,
             this.GetSystem<GotoSystem>()!,
@@ -111,6 +112,21 @@ public sealed partial class StoryEngineSystem : ISystem
                 var t = (TachieCommand)cmd;
                 this.SendCommand(new ChangeTachieCommand { Tachies = t.Tachies });
             }
+            else if (cmd.Type == "talk")
+            {
+                var t = (TalkCommand)cmd;
+                var model = this.SendQuery(new GetStoryStateQuery());
+                await this.SendCommandAsync(new ChangeTalkCommand(
+                    new ChangeTalkCommandInput
+                    {
+                        Talker = t.Talker ?? "",
+                        Content = t.TalkContent,
+                        IsCenter = t.IsCenter,
+                        AvatarPath = t.AvatarPath ?? "",
+                        WordSpeed = model.WordSpeed,
+                        AutoPlayDelay = model.AutoPlayDelay ?? 0f
+                    }));
+            }
 
             if (cmd.Wait.HasValue)
                 await Task.Delay(TimeSpan.FromSeconds(cmd.Wait.Value));
@@ -148,6 +164,12 @@ public sealed partial class StoryEngineSystem : ISystem
     {
         _ctx.WaitSource?.TrySetResult(true);
         this.SendEvent<VisualNovelAdvanceRequestedEvent>();
+    }
+
+    /// <summary>供 TalkSystem 调用：等待玩家点击或自动播放计时</summary>
+    public async Task WaitForAdvance(float minDuration, float? autoPlayDelay)
+    {
+        await _ctx.AdvanceAsync(minDuration, autoPlayDelay);
     }
 
     public void ChooseBranch(string optionId) =>

@@ -17,6 +17,6 @@ public sealed partial class EventSystem : ISystem, IStoryExecutionSystem
     {
         var e = (EventCommand)cmd;
         ctx.SendEvent(new VisualNovelCustomEventFiredEvent { EventName = e.EventName });
-        await ctx.AdvanceAsync(0.1f);
+        await ctx.AdvanceAsync(0.1f, null);
     }
 }
