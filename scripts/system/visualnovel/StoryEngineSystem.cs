@@ -1,12 +1,12 @@
 using GFrameworkTemplate.scripts.core.story;
 using GFrameworkTemplate.scripts.cqrs.background.command;
 using GFrameworkTemplate.scripts.cqrs.background.command.input;
-using GFrameworkTemplate.scripts.cqrs.story.command;
+using GFrameworkTemplate.scripts.cqrs.branch.command;
+using GFrameworkTemplate.scripts.cqrs.@goto.command;
 using GFrameworkTemplate.scripts.cqrs.tachie.command;
 using GFrameworkTemplate.scripts.cqrs.talk.command;
 using GFrameworkTemplate.scripts.cqrs.talk.command.input;
-using GFrameworkTemplate.scripts.cqrs.branch.command;
-using GFrameworkTemplate.scripts.cqrs.@goto.command;
+using GFrameworkTemplate.scripts.cqrs.story.command;
 using GFrameworkTemplate.scripts.cqrs.story.query;
 using GFrameworkTemplate.scripts.cqrs.story.query.result;
 using GFrameworkTemplate.scripts.cqrs.visualnovel.command;
@@ -15,28 +15,21 @@ using GFrameworkTemplate.scripts.data.story;
 
 namespace GFrameworkTemplate.scripts.system.visualnovel;
 
+/// <summary>
+///     故事引擎系统——JSON 驱动视觉小说解释器
+/// </summary>
 [Log]
 [ContextAware]
 public sealed partial class StoryEngineSystem : ISystem
 {
     private readonly EngineContext _ctx;
-    private readonly Dictionary<string, IStoryExecutionSystem> _executors = new();
 
     public StoryEngineSystem() => _ctx = new EngineContext(this);
 
     public void OnArchitecturePhase(ArchitecturePhase phase) =>
         _log.Debug("System initialized: StoryEngineSystem");
 
-    public void Init()
-    {
-        foreach (var sys in new IStoryExecutionSystem[]
-        {
-            this.GetSystem<SoundSystem>()!,
-            this.GetSystem<EventSystem>()!
-        })
-        _executors[sys.CommandType] = sys;
-    }
-
+    public void Init() { }
     public void Destroy() =>
         _log.Debug("System destroyed: StoryEngineSystem");
 
@@ -87,45 +80,43 @@ public sealed partial class StoryEngineSystem : ISystem
             if (cmd.HideLabels)
                 this.SendEvent<VisualNovelAdvanceRequestedEvent>();
 
-            if (_executors.TryGetValue(cmd.Type, out var executor))
-                await executor.ExecuteAsync(cmd, _ctx);
-            else if (cmd.Type == "background")
+            switch (cmd.Type)
             {
-                var b = (BackgroundCommand)cmd;
-                await this.SendCommandAsync(new ChangeBackgroundCommand(
-                    new ChangeBackgroundCommandInput
-                    {
-                        FilePath = b.FilePath ?? "",
-                        WaitTweenEnd = b.WaitTweenEnd,
-                        Delay = b.Delay
-                    }));
-            }
-            else if (cmd.Type == "tachie")
-            {
-                var t = (TachieCommand)cmd;
-                this.SendCommand(new ChangeTachieCommand { Tachies = t.Tachies });
-            }
-            else if (cmd.Type == "talk")
-            {
-                var t = (TalkCommand)cmd;
-                await this.SendCommandAsync(new ChangeTalkCommand(
-                    new ChangeTalkCommandInput
-                    {
-                        Talker = t.Talker ?? "",
-                        Content = t.TalkContent,
-                        IsCenter = t.IsCenter,
-                        AvatarPath = t.AvatarPath ?? ""
-                    }));
-            }
-            else if (cmd.Type == "branch")
-            {
-                var b = (BranchCommand)cmd;
-                await this.SendCommandAsync(new ChangeBranchCommand { Options = b.Options });
-            }
-            else if (cmd.Type == "goto")
-            {
-                var g = (GotoCommand)cmd;
-                await this.SendCommandAsync(new ChangeGotoCommand { TargetPath = g.FilePath ?? "" });
+                case "background":
+                    var b = (BackgroundCommand)cmd;
+                    await this.SendCommandAsync(new ChangeBackgroundCommand(
+                        new ChangeBackgroundCommandInput
+                        {
+                            FilePath = b.FilePath ?? "", WaitTweenEnd = b.WaitTweenEnd, Delay = b.Delay
+                        }));
+                    break;
+                case "tachie":
+                    this.SendCommand(new ChangeTachieCommand { Tachies = ((TachieCommand)cmd).Tachies });
+                    break;
+                case "talk":
+                    var t = (TalkCommand)cmd;
+                    await this.SendCommandAsync(new ChangeTalkCommand(
+                        new ChangeTalkCommandInput
+                        {
+                            Talker = t.Talker ?? "", Content = t.TalkContent,
+                            IsCenter = t.IsCenter, AvatarPath = t.AvatarPath ?? ""
+                        }));
+                    break;
+                case "branch":
+                    await this.SendCommandAsync(new ChangeBranchCommand { Options = ((BranchCommand)cmd).Options });
+                    break;
+                case "goto":
+                    await this.SendCommandAsync(new ChangeGotoCommand { TargetPath = ((GotoCommand)cmd).FilePath ?? "" });
+                    break;
+                case "sound":
+                    var s = (SoundCommand)cmd;
+                    this.SendEvent(new VisualNovelSoundPlayedEvent { SoundType = s.SoundType, FilePath = s.FilePath ?? "" });
+                    break;
+                case "event":
+                    var ev = (EventCommand)cmd;
+                    this.SendEvent(new VisualNovelCustomEventFiredEvent { EventName = ev.EventName });
+                    await _ctx.WaitClickAsync();
+                    break;
             }
 
             if (cmd.Wait.HasValue)
@@ -166,7 +157,6 @@ public sealed partial class StoryEngineSystem : ISystem
         this.SendEvent<VisualNovelAdvanceRequestedEvent>();
     }
 
-    /// <summary>供 TalkSystem 调用：等待玩家点击推进</summary>
     public async Task WaitForAdvance()
     {
         await _ctx.WaitClickAsync();
