@@ -1,4 +1,3 @@
-using GFrameworkTemplate.scripts.component.branch_option;
 using GFrameworkTemplate.scripts.cqrs.story.command;
 using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 
@@ -21,6 +20,7 @@ public partial class BranchController : CanvasLayer
         _buttonList = GetNode<VBoxContainer>("%ButtonList");
         Hide();
         this.RegisterEvent<VisualNovelBranchShownEvent>(OnBranch).UnRegisterWhenNodeExitTree(this);
+        this.RegisterEvent<VisualNovelBranchChosenEvent>(_ => Hide()).UnRegisterWhenNodeExitTree(this);
     }
 
 
@@ -34,7 +34,11 @@ public partial class BranchController : CanvasLayer
             node.GetNode<RichTextLabel>("%BranchContentLabel").Text = $"[center]{option.Text}[/center]";
             var capturedId = optionId;
             node.GetNode<Button>("%BranchOptionButton").Pressed += () =>
+            {
                 this.SendCommand(new ChooseBranchCommand { OptionId = capturedId });
+                ClearOptions();
+                Hide();
+            };
             _buttonList.AddChild(node);
             _activeOptions.Add(node);
         }

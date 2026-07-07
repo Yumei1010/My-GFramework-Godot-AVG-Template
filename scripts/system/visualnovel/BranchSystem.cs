@@ -1,33 +1,38 @@
-using GFrameworkTemplate.scripts.core.story;
-using GFrameworkTemplate.scripts.cqrs.visualnovel.command;
+using GFrameworkTemplate.scripts.component.branch_option;
+using GFrameworkTemplate.scripts.cqrs.story.command;
+using GFrameworkTemplate.scripts.cqrs.story.query;
 using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
-using GFrameworkTemplate.scripts.system.visualnovel;
 
 namespace GFrameworkTemplate.scripts.system.visualnovel;
 
 /// <summary>
-///     分支系统——分支选择 + 故事命令执行
+///     分支系统——独立 ISystem，通过 ChangeBranchCommand 驱动
 /// </summary>
 [Log]
 [ContextAware]
-public sealed partial class BranchSystem : ISystem, IStoryExecutionSystem
+public sealed partial class BranchSystem : ISystem
 {
-    public string CommandType => "branch";
     public void OnArchitecturePhase(ArchitecturePhase phase) { }
     public void Init() { }
     public void Destroy() { }
 
-    public void Choose(string optionId) =>
-        this.SendEvent(new VisualNovelBranchChosenEvent { OptionId = optionId });
-
-    async Task IStoryExecutionSystem.ExecuteAsync(StoryCommand cmd, EngineContext ctx)
+    /// <summary>
+    ///     显示分支选项，等待玩家选择，返回后自动更新 Model 的 TalkBranch
+    /// </summary>
+    public async Task ShowAsync(Dictionary<string, BranchOption> options)
     {
-        var b = (BranchCommand)cmd;
-        ctx.SendEvent(new VisualNovelBranchShownEvent { Options = b.Options });
+        this.SendEvent(new VisualNovelBranchShownEvent { Options = options });
+
         var tcs = new TaskCompletionSource<string?>();
-        var sub = ctx.RegisterEvent<VisualNovelBranchChosenEvent>(e => tcs.TrySetResult(e.OptionId));
+        var sub = this.RegisterEvent<VisualNovelBranchChosenEvent>(e => tcs.TrySetResult(e.OptionId));
         var chosenId = await tcs.Task;
         sub.UnRegister();
-        if (chosenId != null) ctx.TalkBranch.Add(chosenId);
+
+        if (chosenId != null)
+        {
+            var state = this.SendQuery(new GetStoryStateQuery());
+            var list = new List<string>(state.TalkBranch) { chosenId };
+            this.SendCommand(new UpdateStoryStateCommand { TalkBranch = list });
+        }
     }
 }

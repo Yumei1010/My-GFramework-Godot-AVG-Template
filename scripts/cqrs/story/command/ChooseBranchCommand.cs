@@ -1,5 +1,5 @@
 using GFramework.Core.Abstractions.command;
-using GFrameworkTemplate.scripts.system.visualnovel;
+using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 
 namespace GFrameworkTemplate.scripts.cqrs.story.command;
 
@@ -12,6 +12,6 @@ public sealed class ChooseBranchCommand : AbstractCommand
 
     protected override void OnExecute()
     {
-        this.GetSystem<StoryEngineSystem>().ChooseBranch(OptionId);
+        this.SendEvent(new VisualNovelBranchChosenEvent { OptionId = OptionId });
     }
 }

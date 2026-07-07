@@ -1,10 +1,12 @@
 using GFrameworkTemplate.scripts.core.story;
 using GFrameworkTemplate.scripts.cqrs.background.command;
 using GFrameworkTemplate.scripts.cqrs.background.command.input;
+using GFrameworkTemplate.scripts.cqrs.story.command;
 using GFrameworkTemplate.scripts.cqrs.tachie.command;
 using GFrameworkTemplate.scripts.cqrs.talk.command;
 using GFrameworkTemplate.scripts.cqrs.talk.command.input;
-using GFrameworkTemplate.scripts.cqrs.story.command;
+using GFrameworkTemplate.scripts.cqrs.branch.command;
+using GFrameworkTemplate.scripts.cqrs.@goto.command;
 using GFrameworkTemplate.scripts.cqrs.story.query;
 using GFrameworkTemplate.scripts.cqrs.story.query.result;
 using GFrameworkTemplate.scripts.cqrs.visualnovel.command;
@@ -13,9 +15,6 @@ using GFrameworkTemplate.scripts.data.story;
 
 namespace GFrameworkTemplate.scripts.system.visualnovel;
 
-/// <summary>
-///     故事引擎系统——JSON 驱动视觉小说解释器
-/// </summary>
 [Log]
 [ContextAware]
 public sealed partial class StoryEngineSystem : ISystem
@@ -25,26 +24,21 @@ public sealed partial class StoryEngineSystem : ISystem
 
     public StoryEngineSystem() => _ctx = new EngineContext(this);
 
-    public void OnArchitecturePhase(ArchitecturePhase phase)
-    {
+    public void OnArchitecturePhase(ArchitecturePhase phase) =>
         _log.Debug("System initialized: StoryEngineSystem");
-    }
 
     public void Init()
     {
         foreach (var sys in new IStoryExecutionSystem[]
         {
             this.GetSystem<SoundSystem>()!,
-            this.GetSystem<BranchSystem>()!,
-            this.GetSystem<GotoSystem>()!,
             this.GetSystem<EventSystem>()!
         })
         _executors[sys.CommandType] = sys;
     }
-    public void Destroy()
-    {
+
+    public void Destroy() =>
         _log.Debug("System destroyed: StoryEngineSystem");
-    }
 
     private StoryStateResult State => this.SendQuery(new GetStoryStateQuery());
 
@@ -52,16 +46,16 @@ public sealed partial class StoryEngineSystem : ISystem
     {
         var jsonPath = StoryResourceMapper.ResolveJsonPath(logicName);
         if (string.IsNullOrEmpty(jsonPath))
-        { 
+        {
             _log.Error($"json script not found: {logicName}");
-            return; 
+            return;
         }
 
         var json = await StoryResourceMapper.LoadJsonAsync(jsonPath);
-        if (string.IsNullOrEmpty(json)) 
-        { 
+        if (string.IsNullOrEmpty(json))
+        {
             _log.Error($"failed to load json script: {jsonPath}");
-            return; 
+            return;
         }
 
         var script = StoryParser.ParseStory(json);
@@ -84,9 +78,8 @@ public sealed partial class StoryEngineSystem : ISystem
         while (state.IsPlaying && state.CurrentIndex < state.CommandCount)
         {
             var cmds = this.SendQuery(new GetStoryCommandsQuery());
-            var cmdsList = cmds.Commands;
             var idx = state.CurrentIndex;
-            var cmd = cmdsList[idx];
+            var cmd = cmds.Commands[idx];
             this.SendCommand(new UpdateStoryStateCommand { CurrentIndex = idx + 1 });
 
             if (!ShouldExecute(cmd)) { state = State; continue; }
@@ -115,17 +108,24 @@ public sealed partial class StoryEngineSystem : ISystem
             else if (cmd.Type == "talk")
             {
                 var t = (TalkCommand)cmd;
-                var model = this.SendQuery(new GetStoryStateQuery());
                 await this.SendCommandAsync(new ChangeTalkCommand(
                     new ChangeTalkCommandInput
                     {
                         Talker = t.Talker ?? "",
                         Content = t.TalkContent,
                         IsCenter = t.IsCenter,
-                        AvatarPath = t.AvatarPath ?? "",
-                        WordSpeed = model.WordSpeed,
-                        AutoPlayDelay = model.AutoPlayDelay ?? 0f
+                        AvatarPath = t.AvatarPath ?? ""
                     }));
+            }
+            else if (cmd.Type == "branch")
+            {
+                var b = (BranchCommand)cmd;
+                await this.SendCommandAsync(new ChangeBranchCommand { Options = b.Options });
+            }
+            else if (cmd.Type == "goto")
+            {
+                var g = (GotoCommand)cmd;
+                await this.SendCommandAsync(new ChangeGotoCommand { TargetPath = g.FilePath ?? "" });
             }
 
             if (cmd.Wait.HasValue)
@@ -152,7 +152,7 @@ public sealed partial class StoryEngineSystem : ISystem
 
     private bool ShouldExecute(StoryCommand cmd)
     {
-        if (string.IsNullOrEmpty(cmd.Branch)) 
+        if (string.IsNullOrEmpty(cmd.Branch))
             return true;
         var s = State;
         return s.TalkBranch.Contains(cmd.Branch) && !s.CanNotChoose.Contains(cmd.Branch);
@@ -166,14 +166,11 @@ public sealed partial class StoryEngineSystem : ISystem
         this.SendEvent<VisualNovelAdvanceRequestedEvent>();
     }
 
-    /// <summary>供 TalkSystem 调用：等待玩家点击或自动播放计时</summary>
-    public async Task WaitForAdvance(float minDuration, float? autoPlayDelay)
+    /// <summary>供 TalkSystem 调用：等待玩家点击推进</summary>
+    public async Task WaitForAdvance()
     {
-        await _ctx.AdvanceAsync(minDuration, autoPlayDelay);
+        await _ctx.WaitClickAsync();
     }
-
-    public void ChooseBranch(string optionId) =>
-        this.SendEvent(new VisualNovelBranchChosenEvent { OptionId = optionId });
 
     public bool IsPlaying => State.IsPlaying;
     public string CurrentJsonPath => State.PlayingJson;

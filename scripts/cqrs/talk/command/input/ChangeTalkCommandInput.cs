@@ -11,6 +11,4 @@ public sealed class ChangeTalkCommandInput : ICommandInput
     public string Content { get; set; } = "";
     public bool IsCenter { get; set; }
     public string AvatarPath { get; set; } = "";
-    public float WordSpeed { get; set; }
-    public float AutoPlayDelay { get; set; }
 }

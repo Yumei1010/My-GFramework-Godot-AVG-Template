@@ -14,7 +14,6 @@ public sealed class ChangeTalkCommand(ChangeTalkCommandInput input)
     protected override async Task OnExecuteAsync(ChangeTalkCommandInput input)
     {
         await this.GetSystem<TalkSystem>()!.PlayAsync(
-            input.Talker, input.Content, input.IsCenter, input.AvatarPath,
-            input.WordSpeed, input.AutoPlayDelay);
+            input.Talker, input.Content, input.IsCenter, input.AvatarPath);
     }
 }

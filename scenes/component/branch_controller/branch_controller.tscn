@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://8bnqdblg3myu"]
 
-[ext_resource type="Script" uid="uid://d3uw5klk43a24" path="res://scripts/component/branch_controller/BranchController.cs" id="1_ctrl"]
+[ext_resource type="Script" uid="uid://bwxxrfb5ymwst" path="res://scripts/component/branch_controller/BranchController.cs" id="1_ctrl"]
 
 [node name="BranchSystem" type="CanvasLayer" unique_id=206957926]
 layer = 100

@@ -24,35 +24,15 @@ public sealed partial class TalkSystem : ISystem
         _log.Debug("System destroyed: TalkSystem");
     }
 
-    public void Toggle() =>
-        this.SendCommand(new SetTalkVisibleCommand
-            { Visible = !this.SendQuery(new GetTalkVisibleQuery()).Visible });
-
-    public void Show()
-    {
-        this.SendCommand(new SetTalkVisibleCommand { Visible = true });
-    }
-
-    public void Hide()
-    {
-        this.SendCommand(new SetTalkVisibleCommand { Visible = false });
-    }
-
+    public void Toggle() => this.SendCommand(new SetTalkVisibleCommand { Visible = !this.SendQuery(new GetTalkVisibleQuery()).Visible });
+    public void Show() => this.SendCommand(new SetTalkVisibleCommand { Visible = true });
+    public void Hide() => this.SendCommand(new SetTalkVisibleCommand { Visible = false });
     public bool Visible => this.SendQuery(new GetTalkVisibleQuery()).Visible;
 
-    /// <summary>
-    ///     播放对话：发送事件触发 UI → 等待玩家点击或自动播放
-    /// </summary>
-    public async Task PlayAsync(string talker, string content, bool isCenter, string avatarPath, float wordSpeed, float autoPlayDelay)
+    public async Task PlayAsync(string talker, string content, bool isCenter, string avatarPath)
     {
-        this.SendEvent(new VisualNovelTalkPlayedEvent
-        {
-            Talker = talker,
-            Content = content,
-            IsCenter = isCenter,
-            AvatarPath = avatarPath
-        });
+        this.SendEvent(new VisualNovelTalkPlayedEvent{Talker = talker, Content = content, IsCenter = isCenter, AvatarPath = avatarPath});
 
-        await this.GetSystem<StoryEngineSystem>()!.WaitForAdvance(content.Length * wordSpeed, autoPlayDelay);
+        await this.GetSystem<StoryEngineSystem>()!.WaitForAdvance();
     }
 }
