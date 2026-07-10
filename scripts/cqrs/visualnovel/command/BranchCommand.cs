@@ -7,6 +7,9 @@ namespace GFrameworkTemplate.scripts.cqrs.visualnovel.command;
 /// <summary>
 ///     分支命令——显示选项并等待玩家选择
 /// </summary>
+/// <summary>
+///     BranchCommand —— JSON 分支指令数据
+/// </summary>
 public sealed class BranchCommand : StoryCommand
 {
     public Dictionary<string, BranchOption> Options { get; set; } = new();

@@ -4,6 +4,9 @@ namespace GFrameworkTemplate.scripts.system.background_system;
 
 [Log]
 [ContextAware]
+/// <summary>
+///     背景系统 —— 背景切换延迟与事件发送
+/// </summary>
 public sealed partial class BackgroundSystem : ISystem
 {
     public void OnArchitecturePhase(ArchitecturePhase phase)

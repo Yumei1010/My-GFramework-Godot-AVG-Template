@@ -7,6 +7,9 @@ namespace GFrameworkTemplate.scripts.cqrs.setting.command;
 ///     保存游戏设置命令类
 ///     负责将当前游戏设置数据保存到存储中
 /// </summary>
+/// <summary>
+///     SettingSaveCommand —— 保存所有设置
+/// </summary>
 public sealed class SettingSaveCommand : AbstractAsyncCommand
 {
     /// <summary>

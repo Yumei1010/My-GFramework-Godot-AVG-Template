@@ -6,6 +6,9 @@ namespace GFrameworkTemplate.scripts.utility;
 /// <summary>
 ///     音频资源注册表接口
 /// </summary>
+/// <summary>
+///     音频资源注册表接口
+/// </summary>
 public interface IGodotAudioRegistry : IUtility
 {
     void Registry(SoundConfig config);

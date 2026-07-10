@@ -6,6 +6,9 @@ namespace GFrameworkTemplate.scripts.cqrs.visualnovel.command;
 /// <summary>
 ///     对话命令——显示角色对话或旁白
 /// </summary>
+/// <summary>
+///     TalkCommand —— JSON 对话指令数据
+/// </summary>
 public sealed class TalkCommand : StoryCommand
 {
     public string? Talker { get; set; }

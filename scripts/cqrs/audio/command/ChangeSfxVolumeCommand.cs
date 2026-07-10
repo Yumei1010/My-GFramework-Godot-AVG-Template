@@ -10,6 +10,9 @@ namespace GFrameworkTemplate.scripts.cqrs.audio.command;
 ///     更改音效音量命令类，用于处理SFX音量更改操作
 /// </summary>
 /// <param name="input">音效音量更改命令输入参数</param>
+/// <summary>
+///     ChangeSfxVolumeCommand —— 修改音效音量
+/// </summary>
 public sealed class ChangeSfxVolumeCommand(ChangeSfxVolumeCommandInput input)
     : AbstractAsyncCommand<ChangeSfxVolumeCommandInput>(input)
 {

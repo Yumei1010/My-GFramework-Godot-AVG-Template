@@ -6,6 +6,9 @@ using GFrameworkTemplate.scripts.cqrs.graphics.input;
 
 namespace GFrameworkTemplate.scripts.cqrs.graphics.command;
 
+/// <summary>
+///     GraphicsToggleFullscreenCommand —— 切换全屏
+/// </summary>
 public sealed class GraphicsToggleFullscreenCommand(GraphicsToggleFullscreenInput input)
     : AbstractAsyncCommand<GraphicsToggleFullscreenInput>(input)
 {

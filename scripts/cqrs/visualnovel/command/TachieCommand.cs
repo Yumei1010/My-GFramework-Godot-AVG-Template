@@ -8,6 +8,9 @@ namespace GFrameworkTemplate.scripts.cqrs.visualnovel.command;
 /// <summary>
 ///     立绘命令——管理角色立绘的显示/切换/隐藏
 /// </summary>
+/// <summary>
+///     TachieCommand —— JSON 立绘指令数据
+/// </summary>
 public sealed class TachieCommand : StoryCommand
 {
     public Dictionary<string, TachieSlot> Tachies { get; set; } = new();

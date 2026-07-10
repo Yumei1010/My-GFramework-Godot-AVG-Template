@@ -4,6 +4,9 @@ namespace GFrameworkTemplate.scripts.entities.tachie_view;
 
 [Log]
 [ContextAware]
+/// <summary>
+///     立绘 View —— 立绘槽位渲染与交叉淡入淡出
+/// </summary>
 public partial class TachieView : CanvasLayer
 {
     public override void _Ready()

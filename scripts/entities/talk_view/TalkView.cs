@@ -4,6 +4,9 @@ namespace GFrameworkTemplate.scripts.entities.talk_view;
 
 [Log]
 [ContextAware]
+/// <summary>
+///     对话 View —— 打字机效果与对话 UI 渲染
+/// </summary>
 public partial class TalkView : CanvasLayer
 {
     public override void _Ready()

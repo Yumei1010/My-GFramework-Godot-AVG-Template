@@ -9,6 +9,9 @@ namespace GFrameworkTemplate.scripts.system.sound_system;
 /// </summary>
 [Log]
 [ContextAware]
+/// <summary>
+///     音频系统 —— BGM 防重复与音乐播放
+/// </summary>
 public sealed partial class SoundSystem : ISystem
 {
     public void OnArchitecturePhase(ArchitecturePhase phase)

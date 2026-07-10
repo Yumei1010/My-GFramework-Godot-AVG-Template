@@ -4,6 +4,9 @@ namespace GFrameworkTemplate.scripts.entities.camera_view;
 
 [Log]
 [ContextAware]
+/// <summary>
+///     相机 View —— 每帧读取并应用 CameraSystem 数据
+/// </summary>
 public partial class CameraView : CanvasLayer
 {
     public override void _Ready()

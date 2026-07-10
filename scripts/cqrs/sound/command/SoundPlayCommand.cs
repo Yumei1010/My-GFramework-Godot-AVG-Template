@@ -2,6 +2,9 @@ using GFrameworkTemplate.scripts.system.sound_system;
 
 namespace GFrameworkTemplate.scripts.cqrs.sound.command;
 
+/// <summary>
+///     SoundPlayCommand —— 播放 BGM 或音效
+/// </summary>
 public sealed class SoundPlayCommand : AbstractCommand
 {
     public required string SoundType { get; set; }

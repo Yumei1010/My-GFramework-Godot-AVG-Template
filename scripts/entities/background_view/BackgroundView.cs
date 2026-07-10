@@ -4,6 +4,9 @@ namespace GFrameworkTemplate.scripts.entities.background_view;
 
 [Log]
 [ContextAware]
+/// <summary>
+///     背景 View —— 双 TextureRect 交叉淡入淡出
+/// </summary>
 public partial class BackgroundView : CanvasLayer
 {
     public override void _Ready()

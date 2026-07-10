@@ -10,6 +10,9 @@ namespace GFrameworkTemplate.scripts.system.camera_system;
 /// </summary>
 [Log]
 [ContextAware]
+/// <summary>
+///     相机系统 —— 效果叠加与逐帧更新
+/// </summary>
 public sealed partial class CameraSystem : ISystem
 {
     public void OnArchitecturePhase(ArchitecturePhase phase)

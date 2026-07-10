@@ -6,6 +6,9 @@ namespace GFrameworkTemplate.scripts.cqrs.visualnovel.command;
 /// <summary>
 ///     背景命令——切换场景背景
 /// </summary>
+/// <summary>
+///     BackgroundCommand —— JSON 背景指令数据
+/// </summary>
 public sealed class BackgroundCommand : StoryCommand
 {
     public bool WaitTweenEnd { get; set; }

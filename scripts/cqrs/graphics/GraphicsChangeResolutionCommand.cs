@@ -6,6 +6,9 @@ using GFrameworkTemplate.scripts.cqrs.graphics.input;
 
 namespace GFrameworkTemplate.scripts.cqrs.graphics.command;
 
+/// <summary>
+///     GraphicsChangeResolutionCommand —— 更改分辨率
+/// </summary>
 public sealed class GraphicsChangeResolutionCommand(GraphicsChangeResolutionInput input)
     : AbstractAsyncCommand<GraphicsChangeResolutionInput>(input)
 {

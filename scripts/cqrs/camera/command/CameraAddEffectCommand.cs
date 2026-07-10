@@ -6,6 +6,9 @@ namespace GFrameworkTemplate.scripts.cqrs.camera.command;
 /// <summary>
 ///     添加相机效果
 /// </summary>
+/// <summary>
+///     CameraAddEffectCommand —— 添加相机效果
+/// </summary>
 public sealed class CameraAddEffectCommand : AbstractCommand
 {
     public required CameraEffect Effect { get; set; }

@@ -10,6 +10,9 @@ namespace GFrameworkTemplate.scripts.system.branch_system;
 /// </summary>
 [Log]
 [ContextAware]
+/// <summary>
+///     分支系统 —— 选项显示与玩家选择等待
+/// </summary>
 public sealed partial class BranchSystem : ISystem
 {
     public void OnArchitecturePhase(ArchitecturePhase phase)

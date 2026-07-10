@@ -7,6 +7,9 @@ namespace GFrameworkTemplate.scripts.system.goto_system;
 /// </summary>
 [Log]
 [ContextAware]
+/// <summary>
+///     跳转系统 —— 跳转导航事件发送
+/// </summary>
 public sealed partial class GotoSystem : ISystem
 {
     public void OnArchitecturePhase(ArchitecturePhase phase)

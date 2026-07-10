@@ -6,6 +6,9 @@ namespace GFrameworkTemplate.scripts.cqrs.visualnovel.command;
 /// <summary>
 ///     自定义事件命令——触发章节特定逻辑
 /// </summary>
+/// <summary>
+///     EventCommand —— JSON 自定义事件指令数据
+/// </summary>
 public sealed class EventCommand : StoryCommand
 {
     public string EventName { get; set; } = string.Empty;

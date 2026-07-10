@@ -6,6 +6,9 @@ namespace GFrameworkTemplate.scripts.core.story;
 /// <summary>
 ///     故事解析器——JSON 文本 → List&lt;StoryCommand&gt;
 /// </summary>
+/// <summary>
+///     故事解析器 —— JSON 文本转 StoryCommand 列表
+/// </summary>
 public static class StoryParser
 {
     /// <summary>从 JSON 字符串解析</summary>

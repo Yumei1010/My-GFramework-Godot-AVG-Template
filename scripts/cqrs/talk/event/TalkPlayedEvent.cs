@@ -1,5 +1,8 @@
 namespace GFrameworkTemplate.scripts.cqrs.talk.@event;
 
+/// <summary>
+///     TalkPlayedEvent —— 对话播放事件
+/// </summary>
 public sealed class TalkPlayedEvent
 {
     public string? Talker { get; init; }

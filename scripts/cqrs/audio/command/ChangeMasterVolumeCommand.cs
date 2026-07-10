@@ -10,6 +10,9 @@ namespace GFrameworkTemplate.scripts.cqrs.audio.command;
 ///     更改主音量命令类，用于处理主音量更改操作
 /// </summary>
 /// <param name="input">主音量更改命令输入参数</param>
+/// <summary>
+///     ChangeMasterVolumeCommand —— 修改主音量
+/// </summary>
 public sealed class ChangeMasterVolumeCommand(ChangeMasterVolumeCommandInput input)
     : AbstractAsyncCommand<ChangeMasterVolumeCommandInput>(input)
 {

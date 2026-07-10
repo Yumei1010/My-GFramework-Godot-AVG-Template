@@ -10,6 +10,9 @@ namespace GFrameworkTemplate.scripts.system.talk_system;
 /// </summary>
 [Log]
 [ContextAware]
+/// <summary>
+///     对话系统 —— 打字机状态管理与播放控制
+/// </summary>
 public sealed partial class TalkSystem : ISystem
 {
     public bool Visible => this.GetModel<TalkModel>()!.Visible;

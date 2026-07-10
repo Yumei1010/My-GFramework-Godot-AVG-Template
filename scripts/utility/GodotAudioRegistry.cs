@@ -5,6 +5,9 @@ namespace GFrameworkTemplate.scripts.utility;
 /// <summary>
 ///     音频资源注册表
 /// </summary>
+/// <summary>
+///     音频资源注册表实现
+/// </summary>
 public class GodotAudioRegistry : IGodotAudioRegistry
 {
     private readonly Dictionary<string, AudioStream> _map = new();

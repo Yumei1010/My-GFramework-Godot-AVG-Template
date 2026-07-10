@@ -6,6 +6,9 @@ namespace GFrameworkTemplate.scripts.cqrs.game.command;
 /// <summary>
 ///     退出游戏命令类，用于处理游戏退出逻辑
 /// </summary>
+/// <summary>
+///     GameExitCommand —— 退出游戏
+/// </summary>
 public sealed class GameExitCommand : AbstractCommand
 {
     /// <summary>

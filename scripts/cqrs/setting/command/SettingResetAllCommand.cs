@@ -7,6 +7,9 @@ namespace GFrameworkTemplate.scripts.cqrs.setting.command;
 ///     重置设置命令类
 /// </summary>
 /// <param name="input">重置设置命令的输入参数</param>
+/// <summary>
+///     SettingResetAllCommand —— 重置所有设置
+/// </summary>
 public sealed class SettingResetAllCommand(EmptyCommandInput input)
     : AbstractAsyncCommand<EmptyCommandInput>(input)
 {

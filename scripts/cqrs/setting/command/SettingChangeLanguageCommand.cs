@@ -6,6 +6,9 @@ using GFrameworkTemplate.scripts.cqrs.setting.command.input;
 
 namespace GFrameworkTemplate.scripts.cqrs.setting.command;
 
+/// <summary>
+///     SettingChangeLanguageCommand —— 更改语言设置
+/// </summary>
 public sealed class SettingChangeLanguageCommand(SettingChangeLanguageInput input)
     : AbstractAsyncCommand<SettingChangeLanguageInput>(input)
 {

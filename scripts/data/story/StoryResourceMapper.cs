@@ -3,6 +3,9 @@ namespace GFrameworkTemplate.scripts.data.story;
 /// <summary>
 ///     故事资源映射器——管理 JSON 脚本逻辑名到文件路径的映射
 /// </summary>
+/// <summary>
+///     故事资源映射器 —— JSON 路径映射与加载
+/// </summary>
 public static class StoryResourceMapper
 {
     private static readonly Dictionary<string, string> JsonPathMap = new(StringComparer.Ordinal);

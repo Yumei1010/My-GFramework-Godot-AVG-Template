@@ -3,6 +3,9 @@ using GFrameworkTemplate.scripts.system.goto_system;
 
 namespace GFrameworkTemplate.scripts.cqrs.@goto.command;
 
+/// <summary>
+///     GotoNavigateCommand —— 跳转到另一个 JSON 脚本
+/// </summary>
 public sealed class GotoNavigateCommand : AbstractAsyncCommand
 {
     public required string TargetPath { get; set; }

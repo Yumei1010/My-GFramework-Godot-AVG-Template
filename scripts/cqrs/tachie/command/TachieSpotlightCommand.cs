@@ -2,6 +2,9 @@ using GFrameworkTemplate.scripts.system.tachie_system;
 
 namespace GFrameworkTemplate.scripts.cqrs.tachie.command;
 
+/// <summary>
+///     TachieSpotlightCommand —— 聚光灯独立显示角色
+/// </summary>
 public sealed class TachieSpotlightCommand : AbstractCommand
 {
     public required string CharName { get; set; }

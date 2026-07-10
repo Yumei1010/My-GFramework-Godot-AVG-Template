@@ -4,6 +4,9 @@ namespace GFrameworkTemplate.scripts.entities.sound_view;
 
 [Log]
 [ContextAware]
+/// <summary>
+///     音频 View —— BGM 与 SFX 对象池播放
+/// </summary>
 public partial class SoundView : CanvasLayer
 {
     public override void _Ready()
