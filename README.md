@@ -1,6 +1,6 @@
-# My GFramework Godot Template
+# My-GFramework-Godot-AVG-Template
 
-基于 [GFramework](https://github.com/GeWuYou/GFramework) (v0.0.177) 的 Godot 4.6 项目起手模板，**经 [Twenty-four](https://github.com/Yumei1010/Twenty-four) 项目重度实战魔改后反向提炼**，贴合个人使用习惯。
+基于 [GFramework](https://github.com/GeWuYou/GFramework) (v0.0.177) 的 Godot 4.6 视觉小说游戏框架模板。
 
 ## 项目渊源
 
@@ -10,90 +10,106 @@ GFramework（上游 CQRS/ECS 框架）
 Twenty-four（24 点游戏，重度魔改 GFramework 用法）
     ↓
 My-GFramework-Godot-Template（从 Twenty-four 剥离业务逻辑，保留骨架）
+    ↓
+My-GFramework-Godot-AVG-Template（基于骨架特化的视觉小说框架）
 ```
-
-本模板并非 GFramework 官方模板，与上游 [GFramework-Godot-Template](https://github.com/GeWuYou/GFramework-Godot-Template) 出发点相似但走向不同。Twenty-four 项目在大量实战中沉淀下来的**个人偏好**——DI 模块划分、partial class 拆分粒度、CQRS 事件/命令的 `sealed` + `init` 约束、XML 注释规范、Godot 节点注入模式等——都保留在了这套骨架里。
 
 ## 技术栈
 
 - **引擎：** Godot 4.6 (.NET)
 - **运行时：** .NET 10
-- **框架：** GFramework 0.0.177（NuGet: `GeWuYou.GFramework`）
-- **语言：** C# (LangVersion preview)
+- **框架：** GFramework 0.0.177
+- **语言：** C#
 
-## 命名规范
+## 快速上手
 
-1. 变量名：首字母小写，驼峰命名法
-2. 常量名：全大写，下划线分隔
-3. 文件夹和文件名：全小写，下划线分隔（snake_case）
-4. 命名空间：与目录层次一一对应，`namespace X.Y.Z;`（文件范围声明，无花括号）
-5. 提交：`<type>(<scope>): <中文描述>`
+### 编剧（不需要写代码）
 
-详见 [CONVENTIONS.md](CONVENTIONS.md)。
+1. 在 `assets/story/` 下创建 `.json` 文件
+2. 用 7 种命令类型编写脚本（`talk` / `background` / `tachie` / `sound` / `branch` / `goto` / `event`）
+3. 在 `StoryPage.Dependencies.cs` 注册脚本
+4. 运行即看效果
+
+详见 [GETTING_STARTED.md](GETTING_STARTED.md)。
+
+### 开发者
+
+```bash
+git clone https://github.com/Yumei1010/My-GFramework-Godot-AVG-Template.git MyVNProject
+cd MyVNProject
+dotnet build
+# 用 Godot 打开 project.godot
+```
+
+## 架构
+
+四层 MVC：
+
+```
+Scene (StoryPage) → Command → System (ISystem) → Model + Event → View (CanvasLayer)
+```
+
+| 层 | 目录 | 职责 |
+|---|---|---|
+| Scene | `scripts/menu/` | 持有 View，信号→Command 桥接 |
+| System | `scripts/system/` | 业务逻辑，ISystem 实现 |
+| View | `scripts/entities/` | CanvasLayer，订阅 Event 渲染 UI |
+| Model | `scripts/model/` | 纯数据结构 |
+
+详见 [ARCHITECTURE.md](ARCHITECTURE.md)。
 
 ## 文件夹结构
 
-| 目录 | 用途 |
-|---|---|
-| `assets/` | 游戏资源：字体、Shader、音频/数据占位目录 |
-| `global/` | Godot 自动加载单例（GameEntryPoint、UiRoot、SceneRoot 等） |
-| `resource/` | Godot 资源文件（音频总线布局、主题） |
-| `scenes/` | 主场景 `main.tscn` 及组件场景 |
-| `script_templates/` | Godot 自定义脚本模板（Controller / Page / Model） |
-| `scripts/core/` | 框架核心：架构引导、状态机、UI/场景路由、配置资源 |
-| `scripts/module/` | DI 模块安装（Model / System / Utility / State） |
-| `scripts/cqrs/` | CQRS 命令/事件/查询，按域分目录 |
-| `scripts/component/` | 可复用组件（VolumeContainer、IState 等） |
-| `scripts/enums/` | 枚举定义（UiKey、SceneKey、TextureKey、InputPhase） |
-| `scripts/constants/` | 全局常量（GameConstants、UiLayers） |
-| `scripts/utility/` | 工具类（纹理注册表、存储接口） |
-| `scripts/data/` | 数据层（设置位置提供者） |
-
-## 骨架包含
-
-| 层级 | 内容 |
-|---|---|
-| DI 引导 | `GameArchitecture` + 4 模块（Model / System / Utility / State） |
-| 路由 | `UiRouter`、`SceneRouter`、`UiFactory` |
-| 状态机 | `GameStateMachineSystem` + `AppState` 示例 |
-| 全局节点 | `GameEntryPoint`、`UiRoot`、`SceneRoot`、`SceneTransitionManager` |
-| CQRS 示例 | 音量控制、分辨率/全屏切换、设置存取、退出游戏 |
-| 通用组件 | `VolumeContainer`、`IState` |
-| 编码模板 | `script_templates/` 下 3 个 Godot 脚本模板 |
-| 编码规范 | `CONVENTIONS.md` — 命名空间、CQRS、partial class、XML 注释等全套约束 |
-| CI 审查 | TruffleHog 密钥扫描 + CodeQL 静态分析 + .NET 构建 + 自动版本标签 |
-
-## 快速开始
-
-点击仓库首页 **"Use this template"** 按钮即可从本模板创建新仓库，或：
-
-```bash
-git clone https://github.com/Yumei1010/My-GFramework-Godot-Template.git MyNewProject
-cd MyNewProject
-dotnet build
-# 用 Godot 打开 project.godot 即可开始开发
+```
+assets/story/           JSON 故事脚本
+assets/texture/         纹理素材（背景、立绘）
+assets/sound/           音频素材（bgm、sfx）
+global/                 Godot 单例（GameEntryPoint、StoryEngine、UiRoot 等）
+scripts/core/           框架核心（GameArchitecture、UiRouter、StoryParser）
+scripts/cqrs/           CQRS 命令/事件/查询（按 talk、tachie、sound 等域分目录）
+scripts/system/         10 个 ISystem（TalkSystem、BackgroundSystem 等）
+scripts/model/          6 个 Model（StoryState、Talk、Tachie、Camera、Sound）
+scripts/entities/       6 个 View（TalkView、TachieView 等 CanvasLayer 渲染节点）
+scripts/module/         DI 模块安装
+scripts/menu/           UI 页面（StoryPage）
+scripts/enums/          枚举（TextureKey、SoundKey、TachieOperation 等）
+scripts/utility/        工具接口与实现（IGodotTextureRegistry、IGodotAudioRegistry）
+scripts/data/           数据映射（StoryResourceMapper）
+scripts/component/      可复用组件（BranchOption、TachieSlot、CameraEffect）
+docs/                   文档
 ```
 
-## 与新项目对接
+## 核心系统
 
-1. 全局替换命名空间 `GFrameworkTemplate` → 你的项目名
-2. 重命名 `.csproj`、`.sln` 文件
-3. 在 `scripts/enums/ui/UiKey.cs` 中添加你的 UI 页面键
-4. 在 `scripts/enums/scene/SceneKey.cs` 中添加你的场景键
-5. 在 `scripts/core/state/impls/` 下创建你的状态
-6. 在 `scripts/module/StateModule.cs` 中注册新状态
-7. 开始在 `scripts/cqrs/`、`scripts/entities/`、`scripts/menu/` 下添加业务代码
-
-## CI/CD 工作流
-
-| 工作流 | 触发条件 | 用途 |
+| 系统 | 命令 | 说明 |
 |---|---|---|
-| `ci.yml` | push / PR 到 main | TruffleHog 密钥扫描 + .NET 10 构建 |
-| `codeql.yml` | push / PR / 每日 2:00 | CodeQL C# 静态安全分析 |
-| `auto-tag.yml` | push 到 main | 自动递增修订号并打 tag（需配置 `PAT_TOKEN`） |
-| `release.yml` | 手动触发 | Godot 导出 Win/Linux/macOS + 创建 GitHub Release |
+| TalkSystem | `TalkPlayCommand` | 对话播放 + 打字机效果 + 点击推进 |
+| BackgroundSystem | `BackgroundChangeCommand` | 背景交叉淡入淡出 |
+| TachieSystem | `TachieApplyCommand` | 立绘 show/change/close/onlyShow |
+| SoundSystem | `SoundPlayCommand` | BGM 防重复 + SFX 对象池 |
+| BranchSystem | `BranchShowCommand` | 分支选项 + 等待选择 |
+| GotoSystem | `GotoNavigateCommand` | JSON 脚本跳转 |
+| CameraSystem | `CameraAddEffectCommand` | 相机效果叠加 |
+| SaveSystem | — | 5 槽位 JSON 存档 |
 
-启用自动标签：在仓库 Settings → Secrets and variables → Actions 中添加 `PAT_TOKEN`（`contents: write` 权限的 Personal Access Token）。
+## 文档
+
+| 文档 | 内容 |
+|---|---|
+| [GETTING_STARTED.md](GETTING_STARTED.md) | 快速上手（编剧 + 开发者） |
+| [ARCHITECTURE.md](ARCHITECTURE.md) | 框架运行流程、类速查表、事件通信表 |
+| [CONVENTIONS.md](CONVENTIONS.md) | 编码规范（命名、分层约束、partial 规则） |
+| [docs/PLAN.md](docs/PLAN.md) | 下一阶段计划 |
+| [docs/tutorial/overview.md](docs/tutorial/overview.md) | 7 章可播放教程大纲 |
+
+## 编码规范
+
+- 命名空间与目录一一对应，`namespace X.Y.Z;` 文件范围声明
+- `Command: {System}{操作}Command`（现在时）、`Event: {域}{过去时}Event`
+- View 的 partial 拆分：`.cs` / `.Dependencies.cs` / `.Events.cs` / `.Signals.cs`
+- 提交格式：`<type>(<scope>): <中文描述>`
+
+详见 [CONVENTIONS.md](CONVENTIONS.md)。
 
 ## 框架文档
 
