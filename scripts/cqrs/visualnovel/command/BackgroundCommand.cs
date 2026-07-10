@@ -16,10 +16,9 @@ public sealed class BackgroundCommand : StoryCommand
     {
         var cmd = new BackgroundCommand
         {
-            WaitTweenEnd = GetString(element, "wait_tween_end") == "1",
-            Delay = GetFloat(element, "delay") ?? 0f
+            WaitTweenEnd = StoryParser.GetString(element, "wait_tween_end") == "1",
+            Delay = StoryParser.GetFloat(element, "delay") ?? 0f
         };
-        cmd.FillCommon(element);
         return cmd;
     }
 }

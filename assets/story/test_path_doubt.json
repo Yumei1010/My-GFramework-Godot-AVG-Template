@@ -1,0 +1,18 @@
+{
+  "content": [
+    {"type": "talk", "talker": "小夜", "talk_content": "我没有累！我是认真的。"},
+    {"type": "tachie", "tachies": {"saya": {"file_path": "TachiTest0", "type": "show", "slot": "Center"}}},
+    {"type": "talk", "talker": "小夜", "talk_content": "你等一下。"},
+    {"type": "sound", "sound_type": "bgm", "file_path": "BgmTest0"},
+    {"type": "talk", "talker": "小夜", "talk_content": "我有证据！你看这个——", "wait": "1"},
+    {"type": "tachie", "tachies": {"saya": {"file_path": "TachiTest0", "type": "onlyShow", "slot": "Center"}}},
+    {"type": "event", "event_name": "evidence_shown"},
+    {"type": "talk", "talker": "小夜", "talk_content": "这是我在后门拍到的。看到了吗？这条发光的尾巴。"},
+    {"type": "talk", "talker": "我", "talk_content": "这……这好像是真的。"},
+    {"type": "talk", "talker": "小夜", "talk_content": "是吧！现在你信了吧。"},
+    {"type": "talk", "talker": "我", "talk_content": "……好吧。我道歉。你说对了我该怎么做？"},
+    {"type": "talk", "talker": "小夜", "talk_content": "午夜之后，在这里汇合。别告诉任何人。"},
+    {"type": "talk", "is_center": "1", "talk_content": "（窗外雨停了，月光透过模糊的玻璃照进来。）"},
+    {"type": "talk", "is_center": "1", "talk_content": "—— TO BE CONTINUED ——", "wait": "3"}
+  ]
+}

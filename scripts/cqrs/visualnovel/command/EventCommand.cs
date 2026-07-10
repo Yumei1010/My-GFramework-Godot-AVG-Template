@@ -15,9 +15,8 @@ public sealed class EventCommand : StoryCommand
     {
         var cmd = new EventCommand
         {
-            EventName = GetString(element, "event_name") ?? string.Empty
+            EventName = StoryParser.GetString(element, "event_name") ?? string.Empty
         };
-        cmd.FillCommon(element);
         return cmd;
     }
 }

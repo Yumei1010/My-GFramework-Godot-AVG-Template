@@ -20,6 +20,7 @@ public class UtilityModule : AbstractModule
         architecture.RegisterUtility(new GodotUiRegistry());
         architecture.RegisterUtility(new GodotSceneRegistry());
         architecture.RegisterUtility(new GodotTextureRegistry());
+        architecture.RegisterUtility(new GodotAudioRegistry());
         architecture.RegisterUtility(new GodotUiFactory());
 
         var jsonSerializer = new JsonSerializer();

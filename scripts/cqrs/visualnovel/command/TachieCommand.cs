@@ -21,21 +21,20 @@ public sealed class TachieCommand : StoryCommand
             {
                 tachies[entry.Name] = new TachieSlot
                 {
-                    FilePath = GetString(entry.Value, "file_path") ?? string.Empty,
-                    Type = GetString(entry.Value, "type") switch
+                    FilePath = StoryParser.GetString(entry.Value, "file_path") ?? string.Empty,
+                    Type = StoryParser.GetString(entry.Value, "type") switch
                     {
                         "change" => TachieOperation.Change,
                         "close" => TachieOperation.Close,
                         "onlyShow" => TachieOperation.OnlyShow,
                         _ => TachieOperation.Show
                     },
-                    Slot = GetString(entry.Value, "slot")
+                    Slot = StoryParser.GetString(entry.Value, "slot")
                 };
             }
         }
 
         var cmd = new TachieCommand { Tachies = tachies };
-        cmd.FillCommon(element);
         return cmd;
     }
 }

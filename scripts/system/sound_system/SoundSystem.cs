@@ -1,5 +1,5 @@
 using GFrameworkTemplate.scripts.cqrs.sound.command;
-using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
+using GFrameworkTemplate.scripts.cqrs.sound.@event;
 using GFrameworkTemplate.scripts.model.sound;
 
 namespace GFrameworkTemplate.scripts.system.sound_system;
@@ -11,9 +11,20 @@ namespace GFrameworkTemplate.scripts.system.sound_system;
 [ContextAware]
 public sealed partial class SoundSystem : ISystem
 {
-    public void OnArchitecturePhase(ArchitecturePhase phase) { }
-    public void Init() { }
-    public void Destroy() { }
+    public void OnArchitecturePhase(ArchitecturePhase phase)
+    {
+        _log.Debug("System initialized: SoundSystem");
+    }
+
+    public void Init()
+    {
+        
+    }
+
+    public void Destroy()
+    {
+        _log.Debug("System destroyed: SoundSystem");
+    }
 
     /// <summary>
     ///     播放 BGM（防重复播放）
@@ -24,7 +35,7 @@ public sealed partial class SoundSystem : ISystem
         if (model.CurrentBgm == filePath) return;
 
         model.CurrentBgm = filePath;
-        this.SendEvent(new VisualNovelSoundPlayedEvent { SoundType = "bgm", FilePath = filePath });
+        this.SendEvent(new SoundPlayedEvent { SoundType = "bgm", FilePath = filePath });
     }
 
     /// <summary>
@@ -32,6 +43,6 @@ public sealed partial class SoundSystem : ISystem
     /// </summary>
     public void PlaySfx(string filePath)
     {
-        this.SendEvent(new VisualNovelSoundPlayedEvent { SoundType = "oneSound", FilePath = filePath });
+        this.SendEvent(new SoundPlayedEvent { SoundType = "oneSound", FilePath = filePath });
     }
 }

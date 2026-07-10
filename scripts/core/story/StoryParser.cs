@@ -4,36 +4,32 @@ using GFrameworkTemplate.scripts.cqrs.visualnovel.command;
 namespace GFrameworkTemplate.scripts.core.story;
 
 /// <summary>
-///     故事脚本解析器——将 JSON 文本转换为 StoryCommand 数组
-///     每个命令类型自行解析自身字段（FromJson），Parser 仅负责 type 分发
+///     故事解析器——JSON 文本 → List&lt;StoryCommand&gt;
 /// </summary>
 public static class StoryParser
 {
-    /// <summary>从 JSON 字符串解析故事脚本</summary>
-    public static StoryScript ParseStory(string json)
+    /// <summary>从 JSON 字符串解析</summary>
+    public static List<StoryCommand> Parse(string json)
     {
         var commands = new List<StoryCommand>();
         using var doc = JsonDocument.Parse(json);
-
         if (!doc.RootElement.TryGetProperty("content", out var contentArray))
-            return new StoryScript { Content = commands };
+            return commands;
 
         foreach (var element in contentArray.EnumerateArray())
         {
             var cmd = ParseCommand(element);
-            if (cmd != null)
-                commands.Add(cmd);
+            if (cmd != null) commands.Add(cmd);
         }
-
-        return new StoryScript { Content = commands };
+        return commands;
     }
 
-    /// <summary>根据 type 字段分发到各命令的 FromJson 工厂</summary>
+    /// <summary>type 分发到各子类的 FromJson 工厂</summary>
     public static StoryCommand? ParseCommand(JsonElement element)
     {
         var type = element.TryGetProperty("type", out var t) ? t.GetString() : null;
 
-        return type switch
+        StoryCommand? cmd = type switch
         {
             "talk" => TalkCommand.FromJson(element),
             "background" => BackgroundCommand.FromJson(element),
@@ -44,5 +40,28 @@ public static class StoryParser
             "event" => EventCommand.FromJson(element),
             _ => null
         };
+
+        if (cmd != null) FillCommon(cmd, element);
+        return cmd;
+    }
+
+    private static void FillCommon(StoryCommand cmd, JsonElement element)
+    {
+        cmd.Type = GetString(element, "type") ?? string.Empty;
+        cmd.Branch = GetString(element, "branch");
+        cmd.HideLabels = GetString(element, "hide_labels") == "1";
+        cmd.Wait = GetFloat(element, "wait");
+        cmd.FilePath = GetString(element, "file_path");
+    }
+
+    public static string? GetString(JsonElement element, string name) =>
+        element.TryGetProperty(name, out var p) && p.ValueKind != JsonValueKind.Null ? p.GetString() : null;
+
+    public static float? GetFloat(JsonElement element, string name)
+    {
+        if (!element.TryGetProperty(name, out var p) || p.ValueKind == JsonValueKind.Null) return null;
+        return p.ValueKind == JsonValueKind.String
+            ? float.TryParse(p.GetString(), out var f) ? f : null
+            : p.GetSingle();
     }
 }

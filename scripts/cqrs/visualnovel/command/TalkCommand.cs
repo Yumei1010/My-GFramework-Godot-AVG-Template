@@ -18,12 +18,11 @@ public sealed class TalkCommand : StoryCommand
     {
         var cmd = new TalkCommand
         {
-            Talker = GetString(element, "talker"),
-            IsCenter = GetString(element, "is_center") == "1",
-            TalkContent = GetString(element, "talk_content") ?? string.Empty,
-            AvatarPath = GetString(element, "avatar_path")
+            Talker = StoryParser.GetString(element, "talker"),
+            IsCenter = StoryParser.GetString(element, "is_center") == "1",
+            TalkContent = StoryParser.GetString(element, "talk_content") ?? string.Empty,
+            AvatarPath = StoryParser.GetString(element, "avatar_path")
         };
-        cmd.FillCommon(element);
         return cmd;
     }
 }

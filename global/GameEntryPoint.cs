@@ -16,7 +16,7 @@ using GFrameworkTemplate.scripts.core.state.impls;
 using GFrameworkTemplate.scripts.enums.scene;
 using GFrameworkTemplate.scripts.utility;
 using GFrameworkTemplate.scripts.cqrs.setting.command;
-using GFrameworkTemplate.scripts.system.story_engine_system;
+using GFrameworkTemplate.global;
 using Godot.Collections;
 
 namespace GFrameworkTemplate.global;
@@ -35,6 +35,8 @@ public partial class GameEntryPoint : Node
     [Export] public Array<SceneConfig> GameSceneConfigs { get; set; } = null!;
 
     [Export] public Array<TextureConfig> TextureConfigs { get; set; } = null!;
+
+    [Export] public Array<SoundConfig> SoundConfigs { get; set; } = null!;
 
     private IGodotSceneRegistry _sceneRegistry = null!;
     private ISettingsModel _settingsModel = null!;
@@ -75,10 +77,11 @@ public partial class GameEntryPoint : Node
         _sceneRegistry = this.GetUtility<IGodotSceneRegistry>()!;
         _uiRegistry = this.GetUtility<IGodotUiRegistry>()!;
         _textureRegistry = this.GetUtility<IGodotTextureRegistry>()!;
+        var audioRegistry = this.GetUtility<IGodotAudioRegistry>()!;
 
         foreach (var gameSceneConfig in GameSceneConfigs) _sceneRegistry.Registry(gameSceneConfig);
         foreach (var uiPageConfig in UiPageConfigs) _uiRegistry.Registry(uiPageConfig);
-        foreach (var textureConfig in TextureConfigs) _textureRegistry.Registry(textureConfig);
+        foreach (var soundConfig in SoundConfigs) audioRegistry.Registry(soundConfig);
 
         if (ShouldEnterAppState())
             this.RegisterEvent<UiRoot.UiRootReadyEvent>(_ =>
@@ -108,6 +111,6 @@ public partial class GameEntryPoint : Node
 
     public override void _ExitTree()
     {
-        _ = this.SendCommandAsync(new SaveSettingsCommand());
+        _ = this.SendCommandAsync(new SettingSaveCommand());
     }
 }

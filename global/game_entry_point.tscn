@@ -3,14 +3,44 @@
 [ext_resource type="Script" uid="uid://7tmuhvthtrnh" path="res://global/GameEntryPoint.cs" id="1_a14y6"]
 [ext_resource type="PackedScene" uid="uid://6s2urcdmkpbt" path="res://scenes/main.tscn" id="2_main"]
 [ext_resource type="Script" uid="uid://5mfgbvaive07" path="res://scripts/core/resource/SceneConfig.cs" id="3_scfg"]
+[ext_resource type="Texture2D" uid="uid://ci3uylrhsj5g0" path="res://assets/texture/background/background_test_0.png" id="4_7mti7"]
+[ext_resource type="Script" uid="uid://ls8nkxn3gipd" path="res://scripts/core/resource/TextureConfig.cs" id="5_3xsct"]
+[ext_resource type="Texture2D" uid="uid://d1nxqpp2x0oyy" path="res://assets/texture/background/background_test_1.png" id="6_f22d5"]
+[ext_resource type="Texture2D" uid="uid://c2n5q3oaya4ek" path="res://assets/texture/tachie/tachi_test_0.png" id="7_inr81"]
+[ext_resource type="Script" uid="uid://eidvor3klgaq" path="res://scripts/core/resource/SoundConfig.cs" id="8_f22d5"]
+[ext_resource type="AudioStream" uid="uid://bfe465xybngys" path="res://assets/sound/bgm/bgm_test_0.mp3" id="8_inr81"]
 
 [sub_resource type="Resource" id="Resource_main_scene"]
 script = ExtResource("3_scfg")
 Scene = ExtResource("2_main")
 metadata/_custom_type_script = "uid://5mfgbvaive07"
 
+[sub_resource type="Resource" id="Resource_iiepj"]
+script = ExtResource("5_3xsct")
+TextureKey = 1
+Texture = ExtResource("4_7mti7")
+metadata/_custom_type_script = "uid://ls8nkxn3gipd"
+
+[sub_resource type="Resource" id="Resource_rtbxk"]
+script = ExtResource("5_3xsct")
+TextureKey = 2
+Texture = ExtResource("6_f22d5")
+metadata/_custom_type_script = "uid://ls8nkxn3gipd"
+
+[sub_resource type="Resource" id="Resource_iumd8"]
+script = ExtResource("5_3xsct")
+TextureKey = 3
+Texture = ExtResource("7_inr81")
+metadata/_custom_type_script = "uid://ls8nkxn3gipd"
+
+[sub_resource type="Resource" id="Resource_inr81"]
+script = ExtResource("8_f22d5")
+SoundKey = 1
+Stream = ExtResource("8_inr81")
+
 [node name="GameEntryPoint" type="Node" unique_id=729277825]
 script = ExtResource("1_a14y6")
 UiPageConfigs = Array[Object]([])
 GameSceneConfigs = Array[Object]([SubResource("Resource_main_scene")])
-TextureConfigs = Array[Object]([])
+TextureConfigs = Array[Object]([SubResource("Resource_iiepj"), SubResource("Resource_rtbxk"), SubResource("Resource_iumd8")])
+SoundConfigs = Array[Object]([SubResource("Resource_inr81")])

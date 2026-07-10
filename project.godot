@@ -34,6 +34,7 @@ SceneRoot="*uid://bxquqjahyr8v2"
 UiRoot="*res://global/ui_root.tscn"
 GlobalInputController="*res://global/GlobalInputController.cs"
 SceneTransitionManager="*uid://c5sxf7tcun6yq"
+StoryEngine="*uid://4ytublaupf1o"
 
 [display]
 

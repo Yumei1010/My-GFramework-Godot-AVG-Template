@@ -1,4 +1,4 @@
-using GFrameworkTemplate.scripts.cqrs.player.command;
+using GFrameworkTemplate.scripts.cqrs.story.command;
 
 namespace GFrameworkTemplate.scripts.menu.story_page;
 
@@ -11,6 +11,6 @@ public partial class StoryPage
 
     private void OnInputDetectorPressed()
     {
-        this.SendCommand(new PlayerClickCommand());
+        this.SendCommand(new StoryAdvanceCommand());
     }
 }

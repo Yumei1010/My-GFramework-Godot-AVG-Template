@@ -15,9 +15,8 @@ public sealed class SoundCommand : StoryCommand
     {
         var cmd = new SoundCommand
         {
-            SoundType = GetString(element, "sound_type") ?? "oneSound"
+            SoundType = StoryParser.GetString(element, "sound_type") ?? "oneSound"
         };
-        cmd.FillCommon(element);
         return cmd;
     }
 }

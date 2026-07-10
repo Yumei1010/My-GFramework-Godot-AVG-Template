@@ -1,5 +1,5 @@
 using System.Text.Json;
-using GFrameworkTemplate.scripts.system.story_engine_system;
+using GFrameworkTemplate.global;
 
 namespace GFrameworkTemplate.scripts.system.save_system;
 
@@ -10,18 +10,24 @@ namespace GFrameworkTemplate.scripts.system.save_system;
 [ContextAware]
 public sealed partial class SaveSystem : ISystem
 {
-    private StoryEngineSystem _engine = null!;
+    private StoryEngine _engine = null!;
     private const string SaveDir = "user://saves";
     private const int MaxSlots = 5;
 
-    public void OnArchitecturePhase(ArchitecturePhase phase) { }
+    public void OnArchitecturePhase(ArchitecturePhase phase)
+    {
+        _log.Debug("System initialized: SaveSystem");
+    }
+
     public void Init()
     {
-        _engine = this.GetSystem<StoryEngineSystem>()!;
+        _engine = this.GetSystem<StoryEngine>()!;
         DirAccess.MakeDirAbsolute(SaveDir);
-        _log.Debug("SaveSystem 初始化");
     }
-    public void Destroy() { }
+    public void Destroy()
+    {
+        _log.Debug("System destroyed: SaveSystem");
+    }
 
     /// <summary>存档到指定槽位</summary>
     public void Save(int slot)

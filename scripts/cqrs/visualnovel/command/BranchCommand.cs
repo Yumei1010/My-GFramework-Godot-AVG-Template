@@ -20,14 +20,13 @@ public sealed class BranchCommand : StoryCommand
             {
                 options[entry.Name] = new BranchOption
                 {
-                    Text = GetString(entry.Value, "text") ?? string.Empty,
-                    Wait = GetFloat(entry.Value, "wait")
+                    Text = StoryParser.GetString(entry.Value, "text") ?? string.Empty,
+                    Wait = StoryParser.GetFloat(entry.Value, "wait")
                 };
             }
         }
 
         var cmd = new BranchCommand { Options = options };
-        cmd.FillCommon(element);
         return cmd;
     }
 }

@@ -1,7 +1,6 @@
 namespace GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 
-public sealed class VisualNovelTextRevealedEvent
-{
-    public required int RevealedChars { get; init; }
-    public required int TotalChars { get; init; }
-}
+/// <summary>
+///     打字机效果被跳过，文本已完全显示的事件
+/// </summary>
+public sealed class VisualNovelTextRevealedEvent;

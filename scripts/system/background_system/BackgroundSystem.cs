@@ -1,4 +1,4 @@
-using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
+using GFrameworkTemplate.scripts.cqrs.background.@event;
 
 namespace GFrameworkTemplate.scripts.system.background_system;
 
@@ -25,7 +25,7 @@ public sealed partial class BackgroundSystem : ISystem
     {
         if (delay > 0) await Task.Delay(TimeSpan.FromSeconds(delay));
 
-        this.SendEvent(new VisualNovelBackgroundChangedEvent{ FilePath = filePath, WaitTweenEnd = waitTweenEnd, Delay = delay});
+        this.SendEvent(new BackgroundChangedEvent{ FilePath = filePath, WaitTweenEnd = waitTweenEnd, Delay = delay});
 
         if (waitTweenEnd) await Task.Delay(TimeSpan.FromSeconds(0.5f));
     }

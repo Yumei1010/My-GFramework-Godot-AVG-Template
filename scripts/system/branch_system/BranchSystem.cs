@@ -1,30 +1,38 @@
 using GFrameworkTemplate.scripts.component.branch_option;
+using GFrameworkTemplate.scripts.cqrs.branch.@event;
 using GFrameworkTemplate.scripts.cqrs.story.command;
 using GFrameworkTemplate.scripts.cqrs.story.query;
-using GFrameworkTemplate.scripts.cqrs.visualnovel.@event;
 
 namespace GFrameworkTemplate.scripts.system.branch_system;
 
 /// <summary>
-///     分支系统——独立 ISystem，通过 ChangeBranchCommand 驱动
+///     分支系统——显示选项，等待玩家选择，更新分支状态
 /// </summary>
 [Log]
 [ContextAware]
 public sealed partial class BranchSystem : ISystem
 {
-    public void OnArchitecturePhase(ArchitecturePhase phase) { }
-    public void Init() { }
-    public void Destroy() { }
+    public void OnArchitecturePhase(ArchitecturePhase phase)
+    {
+        _log.Debug("System initialized: BranchSystem");
+    }
 
-    /// <summary>
-    ///     显示分支选项，等待玩家选择，返回后自动更新 Model 的 TalkBranch
-    /// </summary>
+    public void Init()
+    {
+        
+    }
+
+    public void Destroy()
+    {
+        _log.Debug("System destroyed: BranchSystem");
+    }
+
     public async Task ShowAsync(Dictionary<string, BranchOption> options)
     {
-        this.SendEvent(new VisualNovelBranchShownEvent { Options = options });
+        this.SendEvent(new BranchShownEvent { Options = options });
 
         var tcs = new TaskCompletionSource<string?>();
-        var sub = this.RegisterEvent<VisualNovelBranchChosenEvent>(e => tcs.TrySetResult(e.OptionId));
+        var sub = this.RegisterEvent<BranchChosenEvent>(e => tcs.TrySetResult(e.OptionId));
         var chosenId = await tcs.Task;
         sub.UnRegister();
 
@@ -32,7 +40,7 @@ public sealed partial class BranchSystem : ISystem
         {
             var state = this.SendQuery(new GetStoryStateQuery());
             var list = new List<string>(state.TalkBranch) { chosenId };
-            this.SendCommand(new UpdateStoryStateCommand { TalkBranch = list });
+            this.SendCommand(new StorySetBranchCommand { Branches = list });
         }
     }
 }

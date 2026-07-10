@@ -12,7 +12,6 @@ public sealed class GotoCommand : StoryCommand
     public static GotoCommand FromJson(JsonElement element)
     {
         var cmd = new GotoCommand();
-        cmd.FillCommon(element);
         return cmd;
     }
 }
