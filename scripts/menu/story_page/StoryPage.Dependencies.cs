@@ -19,5 +19,8 @@ public partial class StoryPage
     private async Task ReadyAsync()
     {
         await GameEntryPoint.Architecture.WaitUntilReadyAsync().ConfigureAwait(false);
+
+        StoryEngine.RegisterJson("night_store", "res://assets/story/test_night_store.json");
+        _ = this.GetSystem<StoryEngine>().LoadAndPlay("night_store");
     }
 }

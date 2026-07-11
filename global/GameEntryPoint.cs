@@ -81,6 +81,7 @@ public partial class GameEntryPoint : Node
 
         foreach (var gameSceneConfig in GameSceneConfigs) _sceneRegistry.Registry(gameSceneConfig);
         foreach (var uiPageConfig in UiPageConfigs) _uiRegistry.Registry(uiPageConfig);
+        foreach (var textureConfig in TextureConfigs) _textureRegistry.Registry(textureConfig);
         foreach (var soundConfig in SoundConfigs) audioRegistry.Registry(soundConfig);
 
         if (ShouldEnterAppState())
