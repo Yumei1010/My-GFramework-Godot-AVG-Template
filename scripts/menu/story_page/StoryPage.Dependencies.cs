@@ -20,7 +20,7 @@ public partial class StoryPage
     {
         await GameEntryPoint.Architecture.WaitUntilReadyAsync().ConfigureAwait(false);
 
-        StoryEngine.RegisterJson("night_store", "res://assets/story/test_night_store.json");
-        _ = this.GetSystem<StoryEngine>().LoadAndPlay("night_store");
+        StoryEngine.RegisterJson("chapter_1", "res://assets/story/tutorial/chapter_1/common_route/Begin.json");
+        _ = this.GetSystem<StoryEngine>().LoadAndPlay("chapter_1");
     }
 }

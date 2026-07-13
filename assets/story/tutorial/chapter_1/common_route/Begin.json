@@ -1,0 +1,94 @@
+{
+  "content": [
+    {
+        "type": "talk",
+        "is_center": "1",
+        "talk_content": "[font_size=22]第一章[/font_size]\n\n[color=#888]—— 对话与旁白 ——[/color]"
+    },
+    {
+        "type": "talk",
+        "talker": "???",
+        "talk_content": "[wave][rainbow]哈啰？[/rainbow][/wave] 你能听到我说话吗"
+    },
+    {
+        "type": "talk",
+        "talker": "???",
+        "talk_content": "[wave][font_size=32]喂喂？[/font_size][/wave] 听得见吗"
+    },
+    {
+        "type": "talk",
+        "talker": "???",
+        "talk_content": "什么，这是第一章，只讲[font_size=32][color=#FFFFFF] 对话与旁白 [/color][/font_size]的内容吗"
+    },
+    {
+        "type":"talk",
+        "talker":"???",
+        "talk_content":"咳咳..."
+    },
+    {
+        "type":"talk",
+        "talker":"???",
+        "talk_content":"啊咧？你们看不到我吗"
+    },
+    {
+        "type":"talk",
+        "talker":"???",
+        "talk_content":"因为这是第一章，只讲[font_size=32][color=#FFFFFF] 对话与旁白 [/color][/font_size]的内容啊"
+    },
+    {
+        "type":"talk",
+        "talker":"???",
+        "talk_content":"咳咳..."
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"我是Yu，本框架教程的引导者和讲解员"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"呃...我知道你们看不到我，但我还是要自我介绍一下"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"把我当旁白就行了"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"首先，我们从[font_size=32] 写一个 JSON 故事 [/font_size]开始把"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"在本框架中，故事剧本的内容是通过 JSON 文件来定义的"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"JSON 文件中包含了一个 content 数组，数组中的每一项都是一个故事事件"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"每个故事事件都有一个 type 字段，用于指定事件的类型"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"比如说，type 为 talk 的事件就是一个对话事件"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"而 type 为 background 的事件就是一个背景事件"
+    },
+    {
+        "type":"talk",
+        "talk_content":"[code] 'type':'talk' [/code]",
+        "center": "1"
+    }
+  ]
+}
