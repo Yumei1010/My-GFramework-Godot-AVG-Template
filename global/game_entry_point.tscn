@@ -3,34 +3,90 @@
 [ext_resource type="Script" uid="uid://7tmuhvthtrnh" path="res://global/GameEntryPoint.cs" id="1_a14y6"]
 [ext_resource type="PackedScene" uid="uid://6s2urcdmkpbt" path="res://scenes/main.tscn" id="2_main"]
 [ext_resource type="Script" uid="uid://5mfgbvaive07" path="res://scripts/core/resource/SceneConfig.cs" id="3_scfg"]
-[ext_resource type="Texture2D" uid="uid://ci3uylrhsj5g0" path="res://assets/texture/background/background_test_0.png" id="4_7mti7"]
+[ext_resource type="Texture2D" uid="uid://d30blgkvbco6l" path="res://assets/texture/tachie/yu/tachi_yu_normal_silence.png" id="4_inr81"]
 [ext_resource type="Script" uid="uid://ls8nkxn3gipd" path="res://scripts/core/resource/TextureConfig.cs" id="5_3xsct"]
-[ext_resource type="Texture2D" uid="uid://d1nxqpp2x0oyy" path="res://assets/texture/background/background_test_1.png" id="6_f22d5"]
-[ext_resource type="Texture2D" uid="uid://c2n5q3oaya4ek" path="res://assets/texture/tachie/tachi_test_0.png" id="7_inr81"]
+[ext_resource type="Texture2D" uid="uid://lc8tv7yt2to6" path="res://assets/texture/tachie/yu/tachi_yu_normal_awkward.png" id="6_iiepj"]
+[ext_resource type="Texture2D" uid="uid://bo42h0ghsuago" path="res://assets/texture/tachie/yu/tachi_yu_normal_confused.png" id="7_rtbxk"]
 [ext_resource type="Script" uid="uid://eidvor3klgaq" path="res://scripts/core/resource/SoundConfig.cs" id="8_f22d5"]
+[ext_resource type="Texture2D" uid="uid://0xcpaxmaassi" path="res://assets/texture/tachie/yu/tachi_yu_normal_contempt.png" id="8_iiepj"]
 [ext_resource type="AudioStream" uid="uid://bfe465xybngys" path="res://assets/sound/bgm/bgm_test_0.mp3" id="8_inr81"]
+[ext_resource type="Texture2D" uid="uid://rto8j1k8xs2i" path="res://assets/texture/tachie/yu/tachi_yu_normal_cry.png" id="9_rtbxk"]
+[ext_resource type="Texture2D" uid="uid://llw0jolt1giq" path="res://assets/texture/tachie/yu/tachi_yu_normal_mock.png" id="10_iumd8"]
+[ext_resource type="Texture2D" uid="uid://ft0mk657p7ml" path="res://assets/texture/tachie/yu/tachi_yu_normal_panicked.png" id="11_1yddw"]
+[ext_resource type="Texture2D" uid="uid://dshavrd0ytwni" path="res://assets/texture/tachie/yu/tachi_yu_normal_shy.png" id="12_d4hg6"]
+[ext_resource type="Texture2D" uid="uid://bdk6qvgblchwm" path="res://assets/texture/tachie/yu/tachi_yu_normal_talk.png" id="13_k055p"]
+[ext_resource type="Texture2D" uid="uid://du55avqpujfm3" path="res://assets/texture/tachie/yu/tachi_yu_normal_worry.png" id="14_qdo7l"]
+[ext_resource type="Texture2D" uid="uid://d4miaic4aglvn" path="res://assets/texture/background/classroom/background_classroom_normal_morning.jpg" id="15_k055p"]
 
 [sub_resource type="Resource" id="Resource_main_scene"]
 script = ExtResource("3_scfg")
 Scene = ExtResource("2_main")
 metadata/_custom_type_script = "uid://5mfgbvaive07"
 
-[sub_resource type="Resource" id="Resource_iiepj"]
+[sub_resource type="Resource" id="Resource_iumd8"]
 script = ExtResource("5_3xsct")
-TextureKey = 1
-Texture = ExtResource("4_7mti7")
+TextureKey = 10
+Texture = ExtResource("4_inr81")
+metadata/_custom_type_script = "uid://ls8nkxn3gipd"
+
+[sub_resource type="Resource" id="Resource_1yddw"]
+script = ExtResource("5_3xsct")
+TextureKey = 3
+Texture = ExtResource("6_iiepj")
+metadata/_custom_type_script = "uid://ls8nkxn3gipd"
+
+[sub_resource type="Resource" id="Resource_fgqit"]
+script = ExtResource("5_3xsct")
+TextureKey = 4
+Texture = ExtResource("7_rtbxk")
 metadata/_custom_type_script = "uid://ls8nkxn3gipd"
 
 [sub_resource type="Resource" id="Resource_rtbxk"]
 script = ExtResource("5_3xsct")
-TextureKey = 2
-Texture = ExtResource("6_f22d5")
+TextureKey = 5
+Texture = ExtResource("8_iiepj")
 metadata/_custom_type_script = "uid://ls8nkxn3gipd"
 
-[sub_resource type="Resource" id="Resource_iumd8"]
+[sub_resource type="Resource" id="Resource_hjx06"]
 script = ExtResource("5_3xsct")
-TextureKey = 3
-Texture = ExtResource("7_inr81")
+TextureKey = 6
+Texture = ExtResource("9_rtbxk")
+metadata/_custom_type_script = "uid://ls8nkxn3gipd"
+
+[sub_resource type="Resource" id="Resource_d4hg6"]
+script = ExtResource("5_3xsct")
+TextureKey = 7
+Texture = ExtResource("10_iumd8")
+metadata/_custom_type_script = "uid://ls8nkxn3gipd"
+
+[sub_resource type="Resource" id="Resource_k055p"]
+script = ExtResource("5_3xsct")
+TextureKey = 8
+Texture = ExtResource("11_1yddw")
+metadata/_custom_type_script = "uid://ls8nkxn3gipd"
+
+[sub_resource type="Resource" id="Resource_1y7ah"]
+script = ExtResource("5_3xsct")
+TextureKey = 9
+Texture = ExtResource("12_d4hg6")
+metadata/_custom_type_script = "uid://ls8nkxn3gipd"
+
+[sub_resource type="Resource" id="Resource_gktnk"]
+script = ExtResource("5_3xsct")
+TextureKey = 11
+Texture = ExtResource("13_k055p")
+metadata/_custom_type_script = "uid://ls8nkxn3gipd"
+
+[sub_resource type="Resource" id="Resource_cia4t"]
+script = ExtResource("5_3xsct")
+TextureKey = 12
+Texture = ExtResource("14_qdo7l")
+metadata/_custom_type_script = "uid://ls8nkxn3gipd"
+
+[sub_resource type="Resource" id="Resource_qdo7l"]
+script = ExtResource("5_3xsct")
+TextureKey = 1
+Texture = ExtResource("15_k055p")
 metadata/_custom_type_script = "uid://ls8nkxn3gipd"
 
 [sub_resource type="Resource" id="Resource_inr81"]
@@ -42,5 +98,5 @@ Stream = ExtResource("8_inr81")
 script = ExtResource("1_a14y6")
 UiPageConfigs = Array[Object]([])
 GameSceneConfigs = Array[Object]([SubResource("Resource_main_scene")])
-TextureConfigs = Array[Object]([SubResource("Resource_iiepj"), SubResource("Resource_rtbxk"), SubResource("Resource_iumd8")])
+TextureConfigs = Array[Object]([SubResource("Resource_iumd8"), SubResource("Resource_1yddw"), SubResource("Resource_fgqit"), SubResource("Resource_rtbxk"), SubResource("Resource_hjx06"), SubResource("Resource_d4hg6"), SubResource("Resource_k055p"), SubResource("Resource_1y7ah"), SubResource("Resource_gktnk"), SubResource("Resource_cia4t"), SubResource("Resource_qdo7l")])
 SoundConfigs = Array[Object]([SubResource("Resource_inr81")])

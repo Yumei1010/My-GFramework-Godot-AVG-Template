@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2n5q3oaya4ek"
-path="res://.godot/imported/tachi_test_0.png-2291adb321e4751df58ab6127bcf2b1d.ctex"
+uid="uid://du55avqpujfm3"
+path="res://.godot/imported/tachi_yu_normal_worry.png-6d7bb1c4ad8dc03f796ff8e656cd4995.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/texture/tachie/tachi_test_0.png"
-dest_files=["res://.godot/imported/tachi_test_0.png-2291adb321e4751df58ab6127bcf2b1d.ctex"]
+source_file="res://assets/texture/tachie/yu/tachi_yu_normal_worry.png"
+dest_files=["res://.godot/imported/tachi_yu_normal_worry.png-6d7bb1c4ad8dc03f796ff8e656cd4995.ctex"]
 
 [params]
 

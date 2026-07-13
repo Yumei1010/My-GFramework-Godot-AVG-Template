@@ -6,7 +6,15 @@ namespace GFrameworkTemplate.scripts.enums.resources;
 public enum TextureKey
 {
     None,
-    BgTest0,
-    BgTest1,
-    TachiTest0,
+    BgClassroomNormalMorning,
+    TachiYuNormalAwkward,
+    TachiYuNormalConfused,
+    TachiYuNormalContempt,
+    TachiYuNormalCry,
+    TachiYuNormalMock,
+    TachiYuNormalPanicked,
+    TachiYuNormalShy,
+    TachiYuNormalSilence,
+    TachiYuNormalTalk,
+    TachiYuNormalWorry,
 }
