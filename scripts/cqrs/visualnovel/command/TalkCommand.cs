@@ -13,6 +13,8 @@ public sealed class TalkCommand : StoryCommand
 {
     public string? Talker { get; set; }
     public bool IsCenter { get; set; }
+    public bool Center { get; set; }
+    public bool Code { get; set; }
     public string TalkContent { get; set; } = string.Empty;
     public string? AvatarPath { get; set; }
 
@@ -23,6 +25,8 @@ public sealed class TalkCommand : StoryCommand
         {
             Talker = StoryParser.GetString(element, "talker"),
             IsCenter = StoryParser.GetString(element, "is_center") == "1",
+            Center = StoryParser.GetString(element, "center") == "1",
+            Code = StoryParser.GetString(element, "code") == "1",
             TalkContent = StoryParser.GetString(element, "talk_content") ?? string.Empty,
             AvatarPath = StoryParser.GetString(element, "avatar_path")
         };

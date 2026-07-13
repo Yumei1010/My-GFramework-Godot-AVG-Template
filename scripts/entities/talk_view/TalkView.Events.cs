@@ -20,7 +20,27 @@ public partial class TalkView
     private void OnTalkPlayedEvent(TalkPlayedEvent e)
     {
         TalkBarContainer.Visible = true;
+        CenterTextContainer.Visible = false;
         KillTypewriter();
+
+        if (e.Code)
+        {
+            var codeContent = $"[center][bgcolor=#1a1a2e][code][color=#7ec8e3]{e.Content}[/color][/code][/bgcolor][/center]";
+            TalkBarContainer.Visible = false;
+            CenterTextContainer.Visible = true;
+            CenterTextLabel.Text = codeContent;
+            StartTypewriter(CenterTextLabel, e.Content.Length * e.RevealSpeed, e.Content.Length);
+            return;
+        }
+
+        if (e.Center)
+        {
+            TalkBarContainer.Visible = false;
+            CenterTextContainer.Visible = true;
+            CenterTextLabel.Text = e.Content;
+            StartTypewriter(CenterTextLabel, e.Content.Length * e.RevealSpeed, e.Content.Length);
+            return;
+        }
 
         var content = e.IsCenter ? $"[center]{e.Content}[/center]" : e.Content;
 
@@ -37,12 +57,13 @@ public partial class TalkView
         }
 
         TalkContentLabel.Text = content;
-        StartTypewriter(content.Length * e.RevealSpeed, content.Length);
+        StartTypewriter(TalkContentLabel, content.Length * e.RevealSpeed, content.Length);
     }
 
     private void OnTextRevealedEvent()
     {
         KillTypewriter();
         TalkContentLabel.VisibleCharacters = -1;
+        CenterTextLabel.VisibleCharacters = -1;
     }
 }

@@ -10,6 +10,6 @@ public sealed class TalkPlayCommand(TalkPlayInput input) : AbstractAsyncCommand<
 {
     protected override async Task OnExecuteAsync(TalkPlayInput input)
     {
-        await this.GetSystem<TalkSystem>()!.PlayAsync(input.Talker, input.Content, input.IsCenter, input.RevealSpeed);
+        await this.GetSystem<TalkSystem>()!.PlayAsync(input.Talker, input.Content, input.IsCenter, input.Center, input.Code, input.RevealSpeed);
     }
 }

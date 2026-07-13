@@ -83,7 +83,7 @@ public partial class StoryEngine : CanvasLayer, ISystem
                 case "talk":
                     var t = (TalkCommand)cmd;
                     await this.SendCommandAsync(new TalkPlayCommand(
-                        new TalkPlayInput { Talker = t.Talker ?? "", Content = t.TalkContent, IsCenter = t.IsCenter, RevealSpeed = 0.04f }));
+                        new TalkPlayInput { Talker = t.Talker ?? "", Content = t.TalkContent, IsCenter = t.IsCenter, Center = t.Center, Code = t.Code, RevealSpeed = 0.04f }));
                     break;
                 case "branch":
                     await this.SendCommandAsync(new BranchShowCommand { Options = ((BranchCommand)cmd).Options });

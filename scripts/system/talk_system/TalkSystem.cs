@@ -49,12 +49,12 @@ public sealed partial class TalkSystem : ISystem
     }
 
     /// <summary>播放对话，启动打字机并等待玩家点击推进</summary>
-    public async Task PlayAsync(string talker, string content, bool isCenter, float revealSpeed)
+    public async Task PlayAsync(string talker, string content, bool isCenter, bool center, bool code, float revealSpeed)
     {
         this.GetModel<TalkModel>()!.Revealed = false;
         this.SendEvent(new TalkPlayedEvent
         {
-            Talker = talker, Content = content, IsCenter = isCenter, RevealSpeed = revealSpeed
+            Talker = talker, Content = content, IsCenter = isCenter, Center = center, Code = code, RevealSpeed = revealSpeed
         });
 
         await this.GetSystem<StoryEngine>()!.WaitForAdvance();

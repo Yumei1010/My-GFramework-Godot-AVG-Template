@@ -15,11 +15,11 @@ public partial class TalkView : CanvasLayer
         RegisterEvent();
     }
 
-    private void StartTypewriter(float duration, int totalChars)
+    private void StartTypewriter(RichTextLabel label, float duration, int totalChars)
     {
-        TalkContentLabel.VisibleCharacters = 0;
+        label.VisibleCharacters = 0;
         _typewriter = CreateTween();
-        _typewriter.TweenProperty(TalkContentLabel, "visible_characters", totalChars, duration);
+        _typewriter.TweenProperty(label, "visible_characters", totalChars, duration);
         _typewriter.TweenCallback(Callable.From(() =>
         {
             this.SendCommand(new TalkSetRevealedCommand { Revealed = true });

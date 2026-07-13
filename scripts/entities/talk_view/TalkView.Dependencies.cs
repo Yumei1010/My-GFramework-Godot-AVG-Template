@@ -6,6 +6,8 @@ public partial class TalkView
 {
     private RichTextLabel TalkerNameLabel => GetNode<RichTextLabel>("%TalkerNameLabel");
     private RichTextLabel TalkContentLabel => GetNode<RichTextLabel>("%TalkContentLabel");
+    private RichTextLabel CenterTextLabel => GetNode<RichTextLabel>("%CenterTextContentLabel");
+    private MarginContainer CenterTextContainer => GetNode<MarginContainer>("%CenterTextContainer");
     private TextureRect TalkNameBackgroundTex => GetNode<TextureRect>("%TalkNameBackgroundTextureRect");
     private MarginContainer TalkBarContainer => GetNode<MarginContainer>("%TalkBarContainer");
     private Tween? _typewriter;
