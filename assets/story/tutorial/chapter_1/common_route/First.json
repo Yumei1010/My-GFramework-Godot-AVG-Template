@@ -1,0 +1,93 @@
+{
+  "content": [
+ {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"首先，我们从[font_size=22] 写一个 JSON 故事 [/font_size]开始"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"在本框架中，故事剧本的内容是通过 JSON 文件来定义的"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"JSON 文件中包含了一个 content 数组，数组中的每一项都是一个故事事件"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"每个故事事件都有一个 type 字段，用于指定事件的类型"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"比如说，type 为 talk 的事件就是一个对话事件"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"而 type 为 background 的事件就是一个背景事件"
+    },
+    {
+        "type":"talk",
+        "talk_content":"[code]{\n\n\t\"content\": [\n\n\t{\n\n\t\t\t\"type\": \"talk\", \n\n\t\t\t\"talker\": \"小夜\", \n\n\t\t\t\"talk_content\": \"你好，欢迎光临\"\n\n\t}，\n\n\t{\n\n\t\t\t\"type\": \"talk\", \n\n\t\t\t\"talker\": \"小夜\", \n\n\t\t\t\"talk_content\": \"请问要买些什么\"\n\n\t}\n\n\t]\n\n}[/code]",
+        "center": "1"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"在上面的例子中，我们定义了一个 content 数组，数组中有两个事件"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"第一个事件是一个对话事件，讲述了小夜的问候"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"第二个事件也是一个对话事件，讲述了小夜的询问"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"通过这种方式，我们可以定义各种各样的故事事件"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"比如说，背景事件、音效事件、分支事件等等"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"在本框架中，我们提供了丰富的事件类型和属性，方便你们创作自己的故事"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"如果嫌文字样式太单调，可以加上[BBCode]标签来改变文字的颜色、大小、字体等等"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"像我先前的对话就使用了[font_size]和[lb]wave[rb]标签来改变文字的大小和样式"
+    },
+    {
+        "type":"talk",
+        "talk_content":"[code]{\n\n\t\"content\": [\n\n\t{\n\n\t\t\t\"type\": \"talk\", \n\n\t\t\t\"talker\": \"Yu\", \n\n\t\t\t\"talk_content\": \"[lb]wave[rb]哈啰？[lb]/wave[rb] 你能听到我说话吗\"\n\n\t}，\n\n\t{\n\n\t\t\t\"type\": \"talk\", \n\n\t\t\t\"talker\": \"Yu\", \n\n\t\t\t\"talk_content\": \"[lb]wave[rb][lb]font_size=22[rb]喂喂？[lb]/font_size[rb][lb]/wave[rb] 听得见吗\"\n\n\t}\n\n\t]\n\n}[/code]",
+        "center": "1"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"接下来讲json剧本创建后该怎么注册到游戏里和使用"
+    },
+    {
+        "type":"goto",
+        "file_path": "chapter_1_second"
+    }
+  ]
+}

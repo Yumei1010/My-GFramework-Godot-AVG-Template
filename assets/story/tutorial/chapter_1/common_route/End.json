@@ -1,0 +1,73 @@
+{
+  "content": [
+    {
+        "type":"talk",
+        "talk_content":"[center][font_size=22] 刻下的话语，浮现心头，将这旁白，弃置于此 [/font_size][/center]",
+        "center": "1"
+    },
+    {
+        "type":"talk",
+        "talk_content":"[center] 我...我想起来了😨我不是旁白😰我是...我是...... [/center]"
+    },
+    {
+        "type":"talk",
+        "talk_content":"原来你一直与我同在...",
+        "is_center": "1"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"咳咳..."
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"串场了"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"旁白一共可以有三种使用方式"
+    },
+    {
+        "type":"talk",
+        "talk_content":"[code]{\n\n\t\"content\": [\n\n\t{\n\n\t\t\t\"type\": \"talk\",\n\n\t\t\t\"talk_content\": \"[lb]center[rb][lb]font_size=22[rb] 刻下的话语，浮现心头，将这旁白，弃置于此 [lb]/font_size[rb][lb]/center[rb]\",\n\n\t\t\t\"center\": \"1\"\n\n\t}\n\n\t]\n\n}[/code]",
+        "center": "1"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"这是第一种使用方式，使用\"center\"字段来让旁白居中显示"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"\"center\"字段的值为\"1\"时，旁白会居中显示,否则会默认为零，即不居中显示"
+    },
+    {
+        "type":"talk",
+        "talk_content":"[code]{\n\n\t\"content\": [\n\n\t{\n\n\t\t\t\"type\": \"talk\",\n\n\t\t\t\"talk_content\": \"[lb]center[rb] 我...我想起来了😨我不是旁白😰我是...我是...... [lb]/center[rb]\n\n\t}\n\n\t]\n\n}[/code]",
+        "center": "1"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"第二种使用方式，使用[BBCode]标签的[lb]center[rb]标签来让旁白在对话栏居中显示"
+    },
+    {
+        "type":"talk",
+        "talk_content":"[code]{\n\n\t\"content\": [\n\n\t{\n\n\t\t\t\"type\": \"talk\",\n\n\t\t\t\"talk_content\": \"[lb]center[rb] 原来你一直与我同在... [lb]/center[rb]\",\n\n\t\t\t\"is_center\": \"1\"\n\n\t}\n\n\t]\n\n}[/code]",
+        "center": "1"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"第三种使用方式，也是使用\"is_center\"字段的值为\"1\"来让旁白在对话栏居中显示,否则也会默认为零，不居中显示"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"第一章的内容就到这里了"
+    }
+  ]
+}

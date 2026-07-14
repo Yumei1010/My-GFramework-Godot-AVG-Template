@@ -1,0 +1,68 @@
+{
+  "content": [
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"在[code] StoryPage.Dependencies.cs [/code]中，我们需要先注册 JSON 文件，才能在框架中使用"
+    },
+    {
+        "type":"talk",
+        "talk_content":"[code]public partial class StoryPage\n\n{\n\n\tprivate async Task ReadyAsync()\n\n\t{\n\n\t\tStoryEngine.RegisterJson(\"你的 JSON 文件名\", \"res://assets/story/tutorial/chapter_1/common_route/你的 JSON 文件名.json\");\n\n\t}\n\n}[/code]",
+        "center": "1"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"在上面的例子中，我们注册了一个 JSON 文件，文件名为[code] 你的 JSON 文件名 [/code]"
+    },
+        {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"在本教程中，我们已经注册了几个 JSON 文件"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"你们可以在[code] StoryPage.Dependencies.cs [/code]中看到这几行代码"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"注册完成后，我们就可以在框架中通过上下文获取并使用这个 JSON 文件了"
+    },
+    {
+        "type":"talk",
+        "talk_content":"[code]public partial class StoryPage\n\n{\n\n\tprivate async Task ReadyAsync()\n\n\t{\n\n\t\tStoryEngine.RegisterJson(\"你的 JSON 文件名\", \"res://assets/story/tutorial/chapter_1/common_route/你的 JSON 文件名.json\");\n\n\t\t[color=green]_ = this.GetSystem<StoryEngine>().LoadAndPlay(\"你的 JSON 文件名\");[/color]\n\n\t}\n\n}[/code]",
+        "center": "1"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"在上面的例子中，我们通过[code] this.GetSystem<StoryEngine>().LoadAndPlay(\"你的 JSON 文件名\") [/code]来加载并播放 JSON 文件"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"在本教程中，我们就已经加载并播放了几个 JSON 文件"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"完成了注册和使用代码后"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"想要运行测试，可以直接在Godot编辑器中打开场景[color=red] StoryPage.tscn [/color]，然后点击[color=red] 运行当前场景（F6） [/color]按钮"
+    },
+    {
+        "type":"talk",
+        "talker":"Yu",
+        "talk_content":"最后，讲下旁白的使用方法"
+    },
+    {
+        "type":"goto",
+        "file_path": "chapter_1_end"
+    }
+  ]
+}
