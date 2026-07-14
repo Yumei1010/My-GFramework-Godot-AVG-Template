@@ -58,7 +58,7 @@
     {
         "type":"talk",
         "talker":"Yu",
-        "talk_content":"最后，讲下旁白的使用方法"
+        "talk_content":"最后，讲下[color=red] 旁白 [/color]的使用方法"
     },
     {
         "type":"goto",

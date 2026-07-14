@@ -37,12 +37,12 @@
     {
         "type":"talk",
         "talker":"Yu",
-        "talk_content":"这是第一种使用方式，使用\"center\"字段来让旁白居中显示"
+        "talk_content":"这是第一种使用方式，使用[color=red] \"center\"字段 [/color]来让旁白居中显示"
     },
     {
         "type":"talk",
         "talker":"Yu",
-        "talk_content":"\"center\"字段的值为\"1\"时，旁白会居中显示,否则会默认为零，即不居中显示"
+        "talk_content":"\"center\"字段的值为[color=red] \"1\" [/color]时，旁白会居中显示,否则会[color=red] 默认为零，即不居中显示 [/color]"
     },
     {
         "type":"talk",
@@ -52,7 +52,7 @@
     {
         "type":"talk",
         "talker":"Yu",
-        "talk_content":"第二种使用方式，使用[BBCode]标签的[lb]center[rb]标签来让旁白在对话栏居中显示"
+        "talk_content":"第二种使用方式，使用[color=red] [BBCode]标签的[lb]center[rb]标签 [/color]来让旁白在对话栏居中显示"
     },
     {
         "type":"talk",
@@ -62,7 +62,7 @@
     {
         "type":"talk",
         "talker":"Yu",
-        "talk_content":"第三种使用方式，也是使用\"is_center\"字段的值为\"1\"来让旁白在对话栏居中显示,否则也会默认为零，不居中显示"
+        "talk_content":"第三种使用方式，也是使用[color=red] \"is_center\"字段 [/color]的值为[color=red] \"1\" [/color]来让旁白在对话栏居中显示,否则也会默认为零，不居中显示"
     },
     {
         "type":"talk",

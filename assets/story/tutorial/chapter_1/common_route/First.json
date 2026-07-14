@@ -13,22 +13,22 @@
     {
         "type":"talk",
         "talker":"Yu",
-        "talk_content":"JSON 文件中包含了一个 content 数组，数组中的每一项都是一个故事事件"
+        "talk_content":"JSON 文件中包含了一个 content 数组，数组中的每一项都是一个[color=red] 故事事件 [/color]"
     },
     {
         "type":"talk",
         "talker":"Yu",
-        "talk_content":"每个故事事件都有一个 type 字段，用于指定事件的类型"
+        "talk_content":"每个故事事件都有一个[color=red] type [/color]字段，用于指定事件的类型"
     },
     {
         "type":"talk",
         "talker":"Yu",
-        "talk_content":"比如说，type 为 talk 的事件就是一个对话事件"
+        "talk_content":"比如说，type为[color=red] talk [/color]的事件就是一个[color=red] 对话事件 [/color]"
     },
     {
         "type":"talk",
         "talker":"Yu",
-        "talk_content":"而 type 为 background 的事件就是一个背景事件"
+        "talk_content":"而 type 为[color=red] background [/color]的事件就是一个[color=red] 背景事件 [/color]"
     },
     {
         "type":"talk",
@@ -58,7 +58,7 @@
     {
         "type":"talk",
         "talker":"Yu",
-        "talk_content":"比如说，背景事件、音效事件、分支事件等等"
+        "talk_content":"比如说，[color=red] 背景事件 [/color]、[color=red] 音效事件 [/color]、[color=red] 分支事件 [/color]等等"
     },
     {
         "type":"talk",
@@ -68,7 +68,7 @@
     {
         "type":"talk",
         "talker":"Yu",
-        "talk_content":"如果嫌文字样式太单调，可以加上[BBCode]标签来改变文字的颜色、大小、字体等等"
+        "talk_content":"如果嫌文字样式太单调，可以加上[color=red] [BBCode]标签 [/color]来改变文字的[rainbow] 颜色、大小、字体 [/rainbow]等等"
     },
     {
         "type":"talk",
@@ -83,7 +83,7 @@
     {
         "type":"talk",
         "talker":"Yu",
-        "talk_content":"接下来讲json剧本创建后该怎么注册到游戏里和使用"
+        "talk_content":"接下来讲json剧本创建后该怎么[color=red] 注册 [/color]到游戏里和[color=red] 使用 [/color]呢"
     },
     {
         "type":"goto",
