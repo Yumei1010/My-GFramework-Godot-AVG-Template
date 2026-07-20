@@ -16,7 +16,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="My-GFramework-Godot-Template"
 config/tags=PackedStringArray("gamelab")
-run/main_scene="uid://6s2urcdmkpbt"
+run/main_scene="uid://bffhi578ucemk"
 config/features=PackedStringArray("4.6", "C#", "GL Compatibility")
 config/save/setting_path="user://"
 config/save/save_path="user://saves"
