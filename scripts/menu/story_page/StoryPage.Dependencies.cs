@@ -20,10 +20,7 @@ public partial class StoryPage
     {
         await GameEntryPoint.Architecture.WaitUntilReadyAsync().ConfigureAwait(false);
 
-        StoryEngine.RegisterJson("chapter_1_begin", "res://assets/story/tutorial/chapter_1/common_route/Begin.json");
-        StoryEngine.RegisterJson("chapter_1_first", "res://assets/story/tutorial/chapter_1/common_route/First.json");
-        StoryEngine.RegisterJson("chapter_1_second", "res://assets/story/tutorial/chapter_1/common_route/Second.json");
-        StoryEngine.RegisterJson("chapter_1_end", "res://assets/story/tutorial/chapter_1/common_route/End.json");
-        _ = this.GetSystem<StoryEngine>().LoadAndPlay("chapter_1_begin");
+        StoryEngine.RegisterJson("chapter_2_begin", "res://assets/story/tutorial/chapter_2/common_route/Begin.json");
+        _ = this.GetSystem<StoryEngine>().LoadAndPlay("chapter_2_begin");
     }
 }

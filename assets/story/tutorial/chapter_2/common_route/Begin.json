@@ -1,0 +1,149 @@
+{
+  "content": [
+    {
+        "type": "talk",
+        "is_center": "1",
+        "talk_content": "[font_size=22]第二章[/font_size]\n\n[color=#888]—— 背景切换 ——[/color]"
+    },
+    {
+        "type": "talk",
+        "talker": "Yu",
+        "talk_content": "欢迎来到第二章"
+    },
+    {
+        "type": "talk",
+        "talker": "Yu",
+        "talk_content": "今天，我们要聊聊背景"
+    },
+    {
+        "type": "talk",
+        "talker": "Yu",
+        "talk_content": "想想看，一个视觉小说游戏，没有背景的话，那得多单调啊"
+    },
+    {
+        "type": "talk",
+        "talker": "Yu",
+        "talk_content": "背景系统的[color=red] type [/color]为[color=red] background [/color]"
+    },
+    {
+        "type": "talk",
+        "talk_content": "[code]{\n\n\t\"content\": [\n\n\t{\n\n\t\t\t\"type\": \"background\",\n\n\t\t\t\"file_path\": \"BgClassroomNormalMorning\",\n\n\t\t\t\"wait_tween_end\": \"1\"\n\n\t}\n\n\t]\n\n}[/code]",
+        "center": "1"
+    },
+    {
+        "type": "talk",
+        "talker": "Yu",
+        "talk_content": "上面的例子中，我们定义了一个背景事件"
+    },
+    {
+        "type": "talk",
+        "talker": "Yu",
+        "talk_content": "[color=red] file_path [/color]字段是背景的文件名"
+    },
+    {
+        "type": "talk",
+        "talker": "Yu",
+        "talk_content": "需要先在[code] TextureKey [/code]枚举中注册，然后在[code] GameEntryPoint [/code]节点中配置[code] TextureConfig [/code]资源"
+    },
+    {
+        "type": "talk",
+        "talker": "Yu",
+        "talk_content": "现在，就让我们来实际演示一下吧"
+    },
+    {
+        "type": "background",
+        "file_path": "BgClassroomNormalMorning",
+        "wait_tween_end": "1"
+    },
+    {
+        "type": "talk",
+        "talker": "Yu",
+        "talk_content": "怎么样，是不是看到了背景？"
+    },
+    {
+        "type": "talk",
+        "talker": "Yu",
+        "talk_content": "这就是我们注册的教室背景"
+    },
+    {
+        "type": "talk",
+        "talker": "Yu",
+        "talk_content": "注意，为了让背景切换更加流畅，我们使用了[color=red] wait_tween_end [/color]字段"
+    },
+    {
+        "type": "talk",
+        "talker": "Yu",
+        "talk_content": "[color=red] wait_tween_end [/color]字段的值为[color=red] \"1\" [/color]时，会等待背景切换动画完成后再继续"
+    },
+    {
+        "type": "talk",
+        "talker": "Yu",
+        "talk_content": "这能让淡入淡出动画完整播放，而不是生硬地瞬间切换"
+    },
+    {
+        "type": "talk",
+        "talker": "Yu",
+        "talk_content": "另外，还有[color=red] delay [/color]字段，可以用来设置延迟秒数"
+    },
+    {
+        "type": "talk",
+        "talk_content": "[code][color=black]{\n\n\t\"content\": [\n\n\t{\n\n\t\t\t\"type\": \"background\",\n\n\t\t\t\"file_path\": \"BgClassroomNormalMorning\",\n\n\t\t\t\"wait_tween_end\": \"1\",\n\n\t\t\t\"delay\": \"0.5\"\n\n\t}\n\n\t]\n\n}[/color][/code]",
+        "center": "1"
+    },
+    {
+        "type": "talk",
+        "talker": "Yu",
+        "talk_content": "[color=red] delay [/color]字段会在执行背景切换前等待指定的秒数，让前后的对话有节奏感"
+    },
+    {
+        "type": "talk",
+        "talker": "Yu",
+        "talk_content": "接下来讲讲怎么注册背景资源"
+    },
+    {
+        "type": "talk",
+        "talker": "Yu",
+        "talk_content": "首先在[code] TextureKey [/code]枚举中定义键值"
+    },
+    {
+        "type": "talk",
+        "talk_content": "[code][color=black]public enum TextureKey\n\n{\n\n\tNone,\n\n\tBgClassroomNormalMorning,\n\n\t// ...更多纹理键\n\n}[/color][/code]",
+        "center": "1"
+    },
+    {
+        "type": "talk",
+        "talker": "Yu",
+        "talk_content": "然后在 Godot 编辑器中，打开[code] game_entry_point.tscn [/code]"
+    },
+    {
+        "type": "talk",
+        "talker": "Yu",
+        "talk_content": "选中[code] GameEntryPoint [/code]节点，在[color=red] 检查器 [/color]中找到[code] TextureConfigs [/code]数组"
+    },
+    {
+        "type": "talk",
+        "talker": "Yu",
+        "talk_content": "新建一个[code] TextureConfig [/code]资源，设置[code] TextureKey [/code]为刚才的枚举值，[code] Texture [/code]拖入你的背景图片"
+    },
+    {
+        "type": "talk",
+        "talker": "Yu",
+        "talk_content": "保存后，框架运行时就会自动加载并注册到纹理注册表中"
+    },
+    {
+        "type": "talk",
+        "talker": "Yu",
+        "talk_content": "在 JSON 剧本中，[code] file_path [/code]写上枚举名，[code] BackgroundView [/code]就会自动从注册表中获取正确的纹理"
+    },
+    {
+        "type": "talk",
+        "talker": "Yu",
+        "talk_content": "第二章的内容虽然简短，但目前的背景系统就这么简单"
+    },
+    {
+        "type": "talk",
+        "talker": "Yu",
+        "talk_content": "掌握了基础用法后，你可以添加更多背景，在剧情中任意切换"
+    }
+  ]
+}
